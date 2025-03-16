@@ -10,7 +10,11 @@
         padding: 4px;
         border-radius: 50%;
         box-shadow: 0 0 10px rgba(#000,0.0);
+        height: 200px;
         transition: all 0.3s ease-in-out;
+        @media (max-width: 768px)  {
+          height: 320px;
+        }
       }
       img {
         border-radius: 50%;
