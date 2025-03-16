@@ -1,0 +1,26 @@
+@use "sass:math";
+
+$html-font-size: 16px;
+
+// Function to remove the unit from a value
+@function stripUnit($value) {
+  @if type-of($value) == 'number' and unit($value) != '' {
+    @return math.div($value, ($value * 0 + 1)); // Use math.div() for division
+  }
+  @return $value; // If already unitless, return it as is
+}
+
+// Function to convert px to rem
+@function rem($pxValue) {
+  @return math.div(stripUnit($pxValue), stripUnit($html-font-size)) * 1rem; // Use math.div()
+}
+
+@for $i from 1 through 5 {
+  .line-clamp-#{$i}{
+      display: -webkit-box;
+      -webkit-line-clamp: #{$i};
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: calc(20px * $i);
+  }
+}

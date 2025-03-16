@@ -1,0 +1,67 @@
+/*  #0d345e 0%, #34bf57 */
+
+$main-color :#34bf57;
+$secondary-color: #0d345e ;
+
+$border-radius-sm: rem(8px);
+$border-radius: rem(6px);
+$border-radius-lg: rem(20px);
+
+$radius-sm: rem(8px);
+$radius: rem(6px);
+$radius-lg: rem(20px);
+
+
+.text-primary {
+  color: $main-color !important;
+}
+.bg-primary {
+  background-color: $main-color !important;;
+}
+.border-primary {
+  border-color: $main-color !important;;
+}
+.btn-primary {
+  background-color: $main-color !important;
+  &:hover {
+    background-color: darken(#34bf57, 5%) !important;
+  }
+}
+
+.btn-outline-primary {
+  border-color: $main-color !important;
+  color: $main-color !important;
+  &:hover {
+    background-color: $main-color !important;
+    color: #fff !important;
+  }
+}
+
+
+
+
+
+.text-secondary {
+  color: $secondary-color !important;
+}
+.bg-secondary {
+  background-color: $secondary-color !important;;
+}
+.border-secondary {
+  border-color: $secondary-color !important;;
+}
+.btn-secondary {
+  background-color: $secondary-color !important;
+  &:hover {
+    background-color: darken(#0d345e, 5%) !important;
+  }
+}
+
+.btn-outline-secondary {
+  border-color: $secondary-color !important;
+  color: $secondary-color !important;
+  &:hover {
+    background-color: $secondary-color !important;
+    color: #fff !important;
+  }
+}

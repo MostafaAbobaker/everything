@@ -1,0 +1,17 @@
+input.form-control {
+  border-radius: $border-radius-sm;
+}
+
+.form-floating {
+  label {
+    color: #A1A4A9;
+  }
+  input.form-control {
+    box-shadow: 0 rem(18px) rem(30px) #4461F20D;
+    &:focus {
+      border-color: $main-color;
+      border-width: rem(2px);
+      box-shadow: 0 rem(10px) rem(20px) #4461F20D;
+    }
+  }
+}

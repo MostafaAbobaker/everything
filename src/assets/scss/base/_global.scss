@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
+
+
+html, body {
+  font-family: 'Almarai', sans-serif;
+
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.main-title {
+  background: linear-gradient(to right, #0d345e 0%, #34bf57 100%);
+  width: fit-content;
+  border-radius: 100px;
+  padding: .5rem 4rem;
+  color: #fff;
+}
+
+.dir-ltr {
+  direction: ltr;
+}
+.dir-rtl {
+  direction: rtl;
+}

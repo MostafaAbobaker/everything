@@ -1,0 +1,15 @@
+.card {
+  overflow: hidden;
+  .image-item {
+    img {
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  &:hover {
+    .image-item {
+      img {
+        scale: 1.1;
+      }
+    }
+  }
+}

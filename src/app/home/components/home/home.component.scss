@@ -1,0 +1,18 @@
+.carousel  {
+  .carousel-inner {
+    height: calc(320px / 16px) + rem;
+    .carousel-item {
+      height: 100%;
+    }
+  }
+  .carousel-indicators {
+    button {
+      transform: skewX(-30deg);
+      height: 10px;
+      width: 20px;
+      &.active {
+        width: 30px;
+      }
+    }
+  }
+}
