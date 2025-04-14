@@ -5,6 +5,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotFound404Component } from './components/not-found404/not-found404.component';
 import { HeaderComponent } from './components/header/header.component';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -17,7 +18,8 @@ import { HeaderComponent } from './components/header/header.component';
     HeaderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
   ],exports: [
     NavbarComponent,
     FooterComponent,

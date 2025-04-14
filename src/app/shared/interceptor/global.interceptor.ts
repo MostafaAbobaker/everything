@@ -27,7 +27,7 @@ export class GlobalInterceptor implements HttpInterceptor {
 
     // Check if we're in the browser before accessing localStorage
     if (isPlatformBrowser(this.platformId)) {
-      token = localStorage.getItem('authToken');
+      token = localStorage.getItem('token');
     }
 
     // Clone the request with the base URL
@@ -39,7 +39,8 @@ export class GlobalInterceptor implements HttpInterceptor {
     if (token) {
       modifiedReq = modifiedReq.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
+          token: token
         },
       });
     }

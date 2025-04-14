@@ -7,7 +7,7 @@
       <ng-container *ngFor="let productItem of productsData">
         @if(productItem.category.name === "Electronics") {
 
-          <ng-template carouselSlide [id]="productItem.id">
+          <ng-template carouselSlide [id]="productItem._id">
             <app-product [product]="productItem"></app-product>
 
           </ng-template>
@@ -29,7 +29,7 @@
       <ng-container *ngFor="let productItem of productsData">
         @if(productItem.category.name === "Men's Fashion") {
 
-          <ng-template carouselSlide [id]="productItem.id">
+          <ng-template carouselSlide [id]="productItem._id">
             <app-product [product]="productItem"></app-product>
 
           </ng-template>

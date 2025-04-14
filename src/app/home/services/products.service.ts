@@ -12,4 +12,7 @@ export class ProductsService {
   getProducts():Observable<any> {
     return this._http.get('products');
   }
+  getProductDetails(id:string):Observable<any> {
+    return this._http.get(`products/${id}`)
+  }
 }

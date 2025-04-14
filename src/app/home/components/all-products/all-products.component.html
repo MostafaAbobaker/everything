@@ -1,0 +1,13 @@
+<section class="categories-page  py-5 bg-light">
+  <div class="container">
+    <h5 class="fw-bold mb-5 main-title ">كل منتجات  </h5>
+    <div class="row g-3">
+      @for (item of allProducts; track item._id) {
+      <div class="col-lg-2">
+        <app-product [product]="item"></app-product>
+
+      </div>
+    }
+    </div>
+    </div>
+</section>

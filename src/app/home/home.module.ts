@@ -9,11 +9,14 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { ShopingCartComponent } from './components/shoping-cart/shoping-cart.component';
+import { ShapingCartComponent } from './components/shaping-cart/shaping-cart.component';
 import { ProductsFavoriteComponent } from './components/products-favorite/products-favorite.component';
 import { SharedModule } from '../shared/shared.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { AllProductsComponent } from './components/all-products/all-products.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
 
 
 @NgModule({
@@ -25,8 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
     ProductsComponent,
     ProductComponent,
     ProductDetailsComponent,
-    ShopingCartComponent,
+    ShapingCartComponent,
     ProductsFavoriteComponent,
+    AllProductsComponent,
+    WishListComponent,
 
   ],
   imports: [
@@ -34,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeRoutingModule,
     SharedModule,
     CarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

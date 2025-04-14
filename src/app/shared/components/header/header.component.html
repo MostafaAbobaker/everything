@@ -59,7 +59,7 @@
             <li class="nav-item" >
               <a
                 class="nav-link text-body-tertiary btn-sm"
-                routerLink="Login"
+                routerLink="/auth"
                 title="Login">
                 <!-- <i class="fa-regular fa-user fs-4"></i> -->
                 <!-- <i class="fa-solid fa-right-to-bracket fs-4"></i> -->
@@ -90,6 +90,22 @@
             <li class="nav-item" >
               <a
                 class="nav-link position-relative text-body-tertiary btn-sm"
+                routerLink="/shaping-cart"
+                >
+                <!-- <i data-feather="shopping-bag"></i> -->
+                <!-- <i class="fa-solid fa-basket-shopping fs-4"></i> -->
+                <span class="material-symbols-outlined">
+                  shopping_cart
+                  </span>
+                <!-- <i class="fa-regular fa-cart-shopping fs-4"></i> -->
+                <!-- <i class="fa-solid fa-bag-shopping fs-4"></i> -->
+                <span
+                  class="badge bg-secondary position-absolute top-0 end-0 rounded-circle">3</span>
+              </a>
+            </li>
+            <li class="nav-item" >
+              <a
+                class="nav-link position-relative text-body-tertiary btn-sm"
                 title="favorites"
                 routerLink="wish-list">
                 <!-- <i data-feather="heart"></i> -->
@@ -102,24 +118,7 @@
                   class="badge bg-secondary position-absolute top-0 end-0 rounded-circle">3</span>
               </a>
             </li>
-            <li class="nav-item" >
-              <a
-                class="nav-link position-relative text-body-tertiary btn-sm"
-                title="card"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasRight"
-                aria-controls="offcanvasRight">
-                <!-- <i data-feather="shopping-bag"></i> -->
-                <!-- <i class="fa-solid fa-basket-shopping fs-4"></i> -->
-                <span class="material-symbols-outlined">
-                  shopping_cart
-                  </span>
-                <!-- <i class="fa-regular fa-cart-shopping fs-4"></i> -->
-                <!-- <i class="fa-solid fa-bag-shopping fs-4"></i> -->
-                <span
-                  class="badge bg-secondary position-absolute top-0 end-0 rounded-circle">3</span>
-              </a>
-            </li>
+
             <li class="nav-item d-block d-lg-none">
               <a
                 class="nav-link text-secondary btn-sm"

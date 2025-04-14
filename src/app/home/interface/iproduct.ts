@@ -1,11 +1,19 @@
+import { IBrand } from "./ibrand";
+import { ICategory } from "./icategory";
+import { ISubcategory } from "./isubcategory";
+
 export interface IProduct {
-  id:string,
-  title:string,
-  price:number,
-  imageCover:string,
-  description:string,
-  categoryId: string,
-  category:any,
-  ratingsAverage:number,
-  ratingsQuantity:number,
+  _id: string,
+  title: string,
+  description: string,
+  quantity: number,
+  price: number,
+  imageCover: string,
+  category :ICategory,
+  brand:IBrand,
+  subcategory:ISubcategory,
+  images:string[],
+  ratingsAverage: number,
+  ratingsQuantity: number,
+
 }

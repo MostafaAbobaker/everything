@@ -1,1 +1,37 @@
-<p>login works!</p>
+<section class="login-page">
+  <div class="login-container">
+    <div class="image">
+      <img src="../../../../assets/imgs/login.png" alt="">
+    </div>
+    <h3 class="text-center mb-4">تسجيل الدخول</h3>
+    <form  class="form p-0 w-100" (ngSubmit)="login()" [formGroup]="loginForm">
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" formControlName="email" id="floatingInput" placeholder="البريد الالكتروني">
+        <label for="floatingInput"> البريد الالكتروني</label>
+
+      </div>
+      <div class="form-floating mb-3">
+        <input [type]="typePassword? 'password': 'text'" formControlName="password" class="form-control" id="floatingPassword" placeholder="For example : Test123"
+        suggested="current-password"  autocomplete="off">
+        <label for="floatingPassword">الرقم السري</label>
+        <a class="text-dark position-absolute start-0 top-50 translate-middle-y px-2"
+        (click)="typePassword = !typePassword">
+          <i class="fa-regular" [class]="typePassword? 'fa-eye-slash':'fa-eye'"></i>
+        </a>
+      </div>
+      <p class="text-end mb-3">
+        نسيت كلمة المرور؟
+        <a class="text-success fw-bold" routerLink="/auth/forget-password">  إعادة تعيينها
+        </a>
+      </p>
+      <button class="btn btn-success btn-lg w-100 mb-3" [disabled]="loginForm.invalid">تسجيل الدخول</button>
+      <div class="d-flex align-items-center justify-content-between" >
+        <p class="mb-0">ليس لديك حساب؟
+          <a class="text-success fw-bold" routerLink="/auth/register">اشتراك</a>
+        </p>
+        <a routerLink="/" class="text-success">رجوع <i class="fa-solid fa-arrow-left me-2"></i> </a>
+      </div>
+    </form>
+  </div>
+
+</section>

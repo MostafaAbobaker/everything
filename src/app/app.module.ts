@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } fro
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./shared/shared.module";
 import { GlobalInterceptor } from './shared/interceptor/global.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { GlobalInterceptor } from './shared/interceptor/global.interceptor';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    ToastrModule.forRoot(), // ToastrModule added
+
 ],
   providers: [
     provideHttpClient(withFetch()), // Enable fetch APIs

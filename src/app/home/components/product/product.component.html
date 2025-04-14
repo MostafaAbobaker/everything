@@ -1,13 +1,13 @@
 <div class="card position-relative" >
-  <div class="favorite  cursor-pointer position-absolute top-0 start-0 m-2 z-1" (click)="addWish(product.id ) ">
-    <i class=" fa-heart fs-4 " [class]="compareItemWishlistInProduct(product.id)? 'fa-solid text-danger': 'fa-regular text-secondary' "></i>
+  <div class="favorite  cursor-pointer position-absolute top-0 start-0 m-2 z-1" >
+    <i class=" fa-heart fs-4 fa-solid text-danger" ></i>
   </div>
-  <a >
+  <a [routerLink]="['/product/', product._id ]">
   <div class="image-item ">
   <img [src]="product.imageCover" class="w-100 object-fit-contain rounded-0" alt="..."  height="200px">
 
 </div>
-  <div class="card-body">
+  <div class="card-body pb-1">
     <small class=" text-secondary">{{ product.category.name }}</small>
 
     <h6 class="card-title line-clamp-2">{{ product.title }}</h6>
@@ -26,12 +26,13 @@
 
       {{ product.ratingsAverage }}
     </div>
-
-    <div class="price fw-bold">
-      <span >{{ product.price | number:'1.0-0'}}
-        <svg id="prefix__Layer_1" data-name="Layer 1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39"><defs></defs><path class="prefix__cls-1" d="M699.62 1113.02c-20.06 44.48-33.32 92.75-38.4 143.37l424.51-90.24c20.06-44.47 33.31-92.75 38.4-143.37l-424.51 90.24zM1085.73 895.8c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.33v-135.2l292.27-62.11c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.27V66.13c-50.67 28.45-95.67 66.32-132.25 110.99v403.35l-132.25 28.11V0c-50.67 28.44-95.67 66.32-132.25 110.99v525.69l-295.91 62.88c-20.06 44.47-33.33 92.75-38.42 143.37l334.33-71.05v170.26l-358.3 76.14c-20.06 44.47-33.32 92.75-38.4 143.37l375.04-79.7c30.53-6.35 56.77-24.4 73.83-49.24l68.78-101.97v-.02c7.14-10.55 11.3-23.27 11.3-36.97V743.77l132.25-28.11v270.4l424.53-90.28z"/></svg>
-      </span>
-    </div>
+      <div class="price fw-bold text-end">
+        <span >{{ product.price | number:'1.0-0'}}
+          <svg id="prefix__Layer_1" data-name="Layer 1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39"><defs></defs><path class="prefix__cls-1" d="M699.62 1113.02c-20.06 44.48-33.32 92.75-38.4 143.37l424.51-90.24c20.06-44.47 33.31-92.75 38.4-143.37l-424.51 90.24zM1085.73 895.8c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.33v-135.2l292.27-62.11c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.27V66.13c-50.67 28.45-95.67 66.32-132.25 110.99v403.35l-132.25 28.11V0c-50.67 28.44-95.67 66.32-132.25 110.99v525.69l-295.91 62.88c-20.06 44.47-33.33 92.75-38.42 143.37l334.33-71.05v170.26l-358.3 76.14c-20.06 44.47-33.32 92.75-38.4 143.37l375.04-79.7c30.53-6.35 56.77-24.4 73.83-49.24l68.78-101.97v-.02c7.14-10.55 11.3-23.27 11.3-36.97V743.77l132.25-28.11v270.4l424.53-90.28z"/></svg>
+        </span>
+      </div>
   </div>
 </a>
+<a class="btn btn-success btn-sm m-2"><i class="fa-solid fa-plus me-1"></i> إشترى الان</a>
+
 </div>

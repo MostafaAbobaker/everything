@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { VerifyCodeComponent } from './components/verify-code/verify-code.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { SetPasswordComponent } from './components/set-password/set-password.com
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AuthModule { }
