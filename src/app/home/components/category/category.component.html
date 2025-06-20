@@ -9,4 +9,18 @@
     />
   </div>
   <h6 class="text-center fw-bold py-3">{{ category.name }}</h6>
-</a> -->
+</a>
+ -->
+
+<a class="category-item" [routerLink]="['/categories', category.id]">
+  <div class="image">
+    <img
+      [src]="imagePath + category.imageUrl"
+      [alt]="category.nameAr"
+      [title]="category.nameAr"
+      class="w-100 h-100 object-fit-cover"
+      height="200px"
+    />
+  </div>
+  <h6 class="text-center fw-bold py-3">{{ category.nameAr }}</h6>
+</a>

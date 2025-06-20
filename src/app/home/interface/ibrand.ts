@@ -1,5 +1,6 @@
 export interface IBrand {
-  _id: string,
-  name: string,
-  image: string
+id: number
+name: string
+nameAr: string
+image: string
 }

@@ -14,7 +14,7 @@ constructor(private _productsService:ProductsService){}
     this.getAllProducts();
   }
   getAllProducts() {
-    this._productsService.getProducts().subscribe({
+    this._productsService.getBestSeller().subscribe({
       next:(res)=>{this.allProducts =res.data},
       error:(err)=>{alert(err)}
     })

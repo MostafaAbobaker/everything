@@ -1,0 +1,32 @@
+<section class="categories-page brands-page py-5">
+  <div class="container">
+    <h5 class="fw-bold mb-5 main-title">الماركات</h5>
+    <div class="row g-3 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 ">
+      @for(BrandItem of BrandsData; track BrandItem.id) {
+        <div class="">
+          <a class="category-item brand-item" [routerLink]="['/brand', BrandItem.id]">
+                <div class="image">
+                  <img
+                    [src]="imagePath + BrandItem.image"
+                    [alt]="BrandItem.nameAr"
+                    [title]="BrandItem.nameAr"
+                    class="w-100 h-100 object-fit-cover"
+                    height="200px"
+                  />
+                </div>
+                <h6 class="text-center fw-bold py-3">{{ BrandItem.nameAr }}</h6>
+              </a>
+        </div>
+      }
+
+    </div>
+    <!-- <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let brand of BrandsData">
+        <ng-template carouselSlide [id]="brand.id.toString()">
+          <app-brand [brand]="brand"></app-brand>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+ -->
+  </div>
+</section>

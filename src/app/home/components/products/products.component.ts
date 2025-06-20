@@ -9,18 +9,55 @@ import { IProduct } from '../../interface/iproduct';
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent implements OnInit{
-  productsData :IProduct[] = []
-
+  NewProductsData :IProduct[] = []
+  MostPopularData :IProduct[] = []
+  BestSellerData :IProduct[] = []
+  FeaturedData :IProduct[] = []
    constructor(private _productsService:ProductsService) { }
   ngOnInit(): void {
-
-    this.getProducts()
+    this.getNewProducts()
+    this.getMostPopular()
+    this.getBestSeller()
+    this.getFeatured()
   }
 
-  getProducts() {
-    this._productsService.getProducts().subscribe({
+  getNewProducts() {
+    this._productsService.getNewProducts().subscribe({
       next: (data) => {
-        this.productsData = data.data
+        this.NewProductsData = data
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+  getMostPopular() {
+    this._productsService.getMostPopular().subscribe({
+      next: (data) => {
+        this.MostPopularData = data
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+  getBestSeller() {
+    this._productsService.getBestSeller().subscribe({
+      next: (data) => {
+        this.BestSellerData = data
+        console.log(this.BestSellerData);
+        console.log(data);
+
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+  getFeatured() {
+    this._productsService.getFeatured().subscribe({
+      next: (data) => {
+        this.FeaturedData = data
       },
       error: (error) => {
         console.log(error);

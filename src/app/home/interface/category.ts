@@ -1,5 +1,11 @@
 export interface Category {
-  _id: string,
+  id: number,
   name: string,
-  image:string
+  nameAr: string,
+  levelNumber: number,
+  parentId: number,
+  subCount: number,
+  imageUrl:string,
+  iconUrl: string,
+  hassub:number
 }

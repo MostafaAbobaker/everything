@@ -1,80 +1,87 @@
 <section class="login-page">
-  <div class="login-container">
-    <div class="image">
-      <img src="../../../../assets/imgs/add.png" alt="">
+  @if(registered) {
+    <div class="login-container" >
+      <div class="image">
+        <img src="../../../../assets/imgs/add.png" alt="">
+      </div>
+      <h3 class="text-center mb-4"> اشتراك</h3>
+      <form  class="form w-100 p-0" (ngSubmit)="register()" [formGroup]="RegisterForm">
+
+        <!-- <div class="form-floating mb-3">
+          <input type="text" class="form-control" formControlName="name" id="uName" placeholder="">
+          <label for="uName"> اسم المستخدم</label>
+          <div class="text-danger"
+          *ngIf="RegisterForm.get('name')?.invalid && RegisterForm.get('name')?.touched">
+            <div *ngIf="RegisterForm.get('name')?.getError('required')">This Input Is Required</div>
+            <div *ngIf="RegisterForm.get('name')?.getError('minlength')">Min length for letter is 3</div>
+            <div *ngIf="RegisterForm.get('name')?.getError('maxlength')">Max length for letter is 20</div>
+          </div>
+        </div> -->
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" formControlName="email" id="uEmail" placeholder="">
+          <label for="uEmail"> البريد الالكتروني</label>
+          <div class="text-danger" *ngIf="RegisterForm.get('email')?.invalid && RegisterForm.get('email')?.touched">
+            <div *ngIf="RegisterForm.get('email')?.getError('required')">This Input Is Required</div>
+            <div *ngIf="RegisterForm.get('email')?.getError('email')">please enter valid email</div>
+          </div>
+        </div>
+        <div class="row g-2 mb-3">
+          <div class="col-md">
+            <div class="form-floating">
+              <input [type]="typePassword? 'password' : 'text'" class="form-control" formControlName="password" id="uPassword" placeholder="" autocomplete="false">
+              <label for="uPassword">الرقم السري</label>
+              <a
+              class="icon text-dark position-absolute start-0 top-50 translate-middle-y px-2"
+              (click)="typePassword = !typePassword"
+              >
+              <!-- <i [attr.data-feather]="typePassword ? 'eye-off': 'eye'"></i> -->
+              <i class="fa-regular " [class]="typePassword ? 'fa-eye-slash': 'fa-eye'"></i>
+            </a>
+            </div>
+            <div class="text-danger" *ngIf="RegisterForm.get('password')?.invalid && RegisterForm.get('password')?.touched">
+              <div *ngIf="RegisterForm.get('password')?.getError('required')">This Input Is Required</div>
+              <div *ngIf="RegisterForm.get('password')?.getError('pattern')">Please Enter First Letter Capital And any 5 Letter</div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-floating">
+              <input [type]="typeRePassword? 'password' : 'text'" class="form-control" formControlName="rePassword" id="uRePassword" placeholder="" autocomplete="false">
+              <label for="uRePassword">اعد الرقم السري </label>
+              <a
+              class="icon text-dark position-absolute start-0 top-50 translate-middle-y px-2"
+              (click)="typeRePassword = !typeRePassword"
+              >
+              <!-- <i [attr.data-feather]="typePassword ? 'eye-off': 'eye'"></i> -->
+              <i class="fa-regular " [class]="typePassword ? 'fa-eye-slash': 'fa-eye'"></i>
+            </a>
+            </div>
+            <div class="text-danger" *ngIf="RegisterForm.get('rePassword')?.invalid && RegisterForm.get('rePassword')?.touched">
+              <div *ngIf="RegisterForm.get('rePassword')?.getError('required')">This Input Is Required</div>
+              <div *ngIf="RegisterForm.get('rePassword')?.getError('pattern')">Please Enter First Letter Capital And any 5 Letter</div>
+            </div>
+
+          </div>
+          <div class="text-danger" *ngIf="RegisterForm.getError('passwordMismatch') && RegisterForm.get('password')?.dirty && RegisterForm.get('rePassword')?.dirty">rePassword doesn't match Password</div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="tel" class="form-control" formControlName="PhoneNumber" id="uPhone" placeholder="">
+          <label for="uPhone">رقم الجوال</label>
+          <div class="text-danger" *ngIf="RegisterForm.get('phone')?.invalid && RegisterForm.get('phone')?.touched">
+            <div *ngIf="RegisterForm.get('phone')?.getError('required')">This Input Is Required</div>
+            <div *ngIf="RegisterForm.get('phone')?.getError('pattern')">please enter valid Phone</div>
+          </div>
+
+        </div>
+        <button type="submit" class="btn btn-success btn-lg w-100 mb-2" [disabled]="RegisterForm.invalid">اشتراك</button>
+        <a class="text-success fw-bold" routerLink="/auth">تسجيل دخول</a>
+
+      </form>
     </div>
-    <h3 class="text-center mb-4"> اشتراك</h3>
-    <form  class="form w-100 p-0" (ngSubmit)="register()" [formGroup]="RegisterFrom">
 
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" formControlName="name" id="uName" placeholder="">
-        <label for="uName"> اسم المستخدم</label>
-        <div class="text-danger"
-        *ngIf="RegisterFrom.get('name')?.invalid && RegisterFrom.get('name')?.touched">
-          <div *ngIf="RegisterFrom.get('name')?.getError('required')">This Input Is Required</div>
-          <div *ngIf="RegisterFrom.get('name')?.getError('minlength')">Min length for letter is 3</div>
-          <div *ngIf="RegisterFrom.get('name')?.getError('maxlength')">Max length for letter is 20</div>
-        </div>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="email" class="form-control" formControlName="email" id="uEmail" placeholder="">
-        <label for="uEmail"> البريد الالكتروني</label>
-        <div class="text-danger" *ngIf="RegisterFrom.get('email')?.invalid && RegisterFrom.get('email')?.touched">
-          <div *ngIf="RegisterFrom.get('email')?.getError('required')">This Input Is Required</div>
-          <div *ngIf="RegisterFrom.get('email')?.getError('email')">please enter valid email</div>
-        </div>
-      </div>
-      <div class="row g-2 mb-3">
-        <div class="col-md">
-          <div class="form-floating">
-            <input [type]="typePassword? 'password' : 'text'" class="form-control" formControlName="password" id="uPassword" placeholder="" autocomplete="false">
-            <label for="uPassword">الرقم السري</label>
-            <a
-            class="icon text-dark position-absolute start-0 top-50 translate-middle-y px-2"
-            (click)="typePassword = !typePassword"
-            >
-            <!-- <i [attr.data-feather]="typePassword ? 'eye-off': 'eye'"></i> -->
-            <i class="fa-regular " [class]="typePassword ? 'fa-eye-slash': 'fa-eye'"></i>
-          </a>
-          </div>
-          <div class="text-danger" *ngIf="RegisterFrom.get('password')?.invalid && RegisterFrom.get('password')?.touched">
-            <div *ngIf="RegisterFrom.get('password')?.getError('required')">This Input Is Required</div>
-            <div *ngIf="RegisterFrom.get('password')?.getError('pattern')">Please Enter First Letter Capital And any 5 Letter</div>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="form-floating">
-            <input [type]="typeRePassword? 'password' : 'text'" class="form-control" formControlName="rePassword" id="uRePassword" placeholder="" autocomplete="false">
-            <label for="uRePassword">اعد الرقم السري </label>
-            <a
-            class="icon text-dark position-absolute start-0 top-50 translate-middle-y px-2"
-            (click)="typeRePassword = !typeRePassword"
-            >
-            <!-- <i [attr.data-feather]="typePassword ? 'eye-off': 'eye'"></i> -->
-            <i class="fa-regular " [class]="typePassword ? 'fa-eye-slash': 'fa-eye'"></i>
-          </a>
-          </div>
-          <div class="text-danger" *ngIf="RegisterFrom.get('rePassword')?.invalid && RegisterFrom.get('rePassword')?.touched">
-            <div *ngIf="RegisterFrom.get('rePassword')?.getError('required')">This Input Is Required</div>
-            <div *ngIf="RegisterFrom.get('rePassword')?.getError('pattern')">Please Enter First Letter Capital And any 5 Letter</div>
-          </div>
-
-        </div>
-        <div class="text-danger" *ngIf="RegisterFrom.getError('passwordMismatch') && RegisterFrom.get('password')?.dirty && RegisterFrom.get('rePassword')?.dirty">rePassword doesn't match Password</div>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="tel" class="form-control" formControlName="phone" id="uPhone" placeholder="">
-        <label for="uPhone">رقم الجوال</label>
-        <div class="text-danger" *ngIf="RegisterFrom.get('phone')?.invalid && RegisterFrom.get('phone')?.touched">
-          <div *ngIf="RegisterFrom.get('phone')?.getError('required')">This Input Is Required</div>
-          <div *ngIf="RegisterFrom.get('phone')?.getError('pattern')">please enter valid Phone</div>
-        </div>
-
-      </div>
-      <button type="submit" class="btn btn-success btn-lg w-100 mb-2">اشتراك</button>
-      <a class="text-success fw-bold" routerLink="/auth">تسجيل دخول</a>
-
-    </form>
-  </div>
+  } @else if (otpEmail) {
+    <app-otp-email [idUser]="userId"></app-otp-email>
+  } @else if(otpMobile){
+    <app-otp-mobile></app-otp-mobile>
+  }
 
 </section>

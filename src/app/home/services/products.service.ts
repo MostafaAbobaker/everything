@@ -9,8 +9,17 @@ export class ProductsService {
 
   constructor(private _http: HttpClient) { }
 
-  getProducts():Observable<any> {
-    return this._http.get('products');
+  getNewProducts():Observable<any> {
+    return this._http.get('Product/GetNewProduct');
+  }
+  getMostPopular():Observable<any> {
+    return this._http.get('Product/GetMostPopular');
+  }
+  getBestSeller():Observable<any> {
+    return this._http.get('Product/GetBestSeller');
+  }
+  getFeatured():Observable<any> {
+    return this._http.get('Product/GetFeaterd');
   }
   getProductDetails(id:string):Observable<any> {
     return this._http.get(`products/${id}`)

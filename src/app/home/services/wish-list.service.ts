@@ -18,7 +18,7 @@ export class WishListService {
   showWishlist() {
     this.getWishlistItems().subscribe({
       next:(result: any) => {
-        this.WishlistProducts.next((result.data as IProduct []).map((product)=>product._id));
+        // this.WishlistProducts.next((result.data as IProduct []).map((product)=>product.id));
         this.WishlistNumber.next((result.data as IProduct []).length);
       }
     })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../interface/category';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-categories',
@@ -9,7 +10,7 @@ import { Category } from '../../interface/category';
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent implements OnInit {
-
+  imagePath= environment.imagePath;
   CategoriesData:Category []=[]
   constructor(private _categoriesService:CategoriesService){}
   ngOnInit(): void {
@@ -18,7 +19,8 @@ export class CategoriesComponent implements OnInit {
   getCategories() {
     this._categoriesService.getCategories().subscribe({
       next: (data) => {
-        this.CategoriesData = data.data;
+        this.CategoriesData = data;
+
       },
       error: (error) => {
         console.error(error);

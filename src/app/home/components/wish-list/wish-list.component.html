@@ -1,4 +1,4 @@
-<section class="wish-list-page py-5">
+<!-- <section class="wish-list-page py-5">
   <div class="container">
     <h3 class="fw-bold">قائمة المفضلة
     </h3>
@@ -28,20 +28,20 @@
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             </div>
           </td>
-          <td class="align-middle"><img [src]="wishItem.imageCover" alt="" width="64" height="64"  class="object-fit-cover img-thumbnail" style="max-height: 64px;"></td>
-          <td class="align-middle"><div class="">{{wishItem.title}}</div>
+          <td class="align-middle"><img [src]="wishItem.image" alt="" width="64" height="64"  class="object-fit-cover img-thumbnail" style="max-height: 64px;"></td>
+          <td class="align-middle"><div class="">{{wishItem.nameAr}}</div>
           <div class="">{{wishItem.description }}</div></td>
           <td class="align-middle">{{wishItem.price}}</td>
           <td class="align-middle">{{wishItem.category.name}}</td>
           <td class="align-middle">
-            <button (click)="addToCart(wishItem._id)"
+            <button (click)="addToCart(wishItem.id.toString())"
               class="btn btn-success btn-sm"
               ><i class="fa-solid fa-plus me-1"></i> إضف الى السله</button>
 
         </td>
-          <td class="align-middle"><button class="btn btn-danger" (click)="deleteItemWishList(wishItem._id)"><i class="fa-solid fa-trash-can"></i></button></td>
+          <td class="align-middle"><button class="btn btn-danger" (click)="deleteItemWishList(wishItem.id.toString())"><i class="fa-solid fa-trash-can"></i></button></td>
         </tr>
       </tbody>
     </table>
   </div>
-</section>
+</section> -->

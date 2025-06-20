@@ -1,5 +1,3 @@
-
-
 <app-header></app-header>
 
 <nav class="navbar navbar-expand-lg bg-secondary navbar-dark ">
@@ -8,13 +6,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ps-0 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active  py-3"  routerLink="/home" routerLinkActive="active">الصفحة الرئيسية</a>
+          <a class="nav-link  py-3"  routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">الصفحة الرئيسية</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link py-3" routerLink="/allProducts" routerLinkActive="active">جميع المنتجات</a>
+          <a class="nav-link py-3" routerLink="allProducts" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">جميع المنتجات</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link py-3" href="#"> فئات</a>
+          <a class="nav-link py-3" routerLink="categories" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> فئات</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link py-3" routerLink="brands" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> العلامات التجارية</a>
         </li>
         <li class="nav-item">
           <a class="nav-link py-3" href="#"> العروض</a>

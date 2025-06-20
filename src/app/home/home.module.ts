@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AllProductsComponent } from './components/all-products/all-products.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+import { CategoriesPageComponent } from './components/categories-page/categories-page.component';
+import { BrandsComponent } from './components/brands/brands.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
     ProductsFavoriteComponent,
     AllProductsComponent,
     WishListComponent,
+    CategoriesPageComponent,
+    BrandsComponent,
 
   ],
   imports: [

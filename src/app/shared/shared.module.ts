@@ -5,7 +5,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotFound404Component } from './components/not-found404/not-found404.component';
 import { HeaderComponent } from './components/header/header.component';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,12 +19,13 @@ import { RouterLink } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterLink
+    RouterModule
   ],exports: [
     NavbarComponent,
     FooterComponent,
     LoadingComponent,
-    NotFound404Component
+    NotFound404Component,
+    RouterModule
   ],
 })
 export class SharedModule { }

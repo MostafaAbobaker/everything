@@ -9,6 +9,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { VerifyCodeComponent } from './components/verify-code/verify-code.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OtpMobileComponent } from './components/otp-mobile/otp-mobile.component';
+import { OtpEmailComponent } from './components/otp-email/otp-email.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     ForgetPasswordComponent,
     VerifyCodeComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
+    OtpMobileComponent,
+    OtpEmailComponent
   ],
   imports: [
     CommonModule,

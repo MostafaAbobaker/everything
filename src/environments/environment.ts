@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://ecommerce.routemisr.com/api/v1/',
+  apiUrl: 'http://everything.runasp.net/',
+  imagePath: 'http://everythingsite-001-site1.qtempurl.com/',
 };
 

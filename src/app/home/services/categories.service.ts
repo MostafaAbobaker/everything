@@ -10,6 +10,6 @@ export class CategoriesService {
   constructor(private _http:HttpClient) { }
 
   getCategories():Observable<any> {
-    return this._http.get('categories');
+    return this._http.get('Category/GetAllCategoryForWeb');
   }
 }
