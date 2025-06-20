@@ -16,6 +16,7 @@ export class RegisterComponent {
   typePassword : boolean=true;
   typeRePassword : boolean=true;
   apiErrorMessage:string='';
+  errorMessage:string='';
   constructor(private _authService:AuthService, private _router:Router ) { }
 
   RegisterForm:FormGroup = new FormGroup({
@@ -42,7 +43,9 @@ export class RegisterComponent {
         },
         error: (err) => {
           // this.apiErrorMessage = err.error.message;
-          console.error('Registration failed', err.error.message);
+
+          console.error('Registration failed', err);
+          this.errorMessage = err.error
         }
       });
     }

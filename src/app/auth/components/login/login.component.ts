@@ -24,7 +24,7 @@ export class LoginComponent {
 
 
   loginForm:FormGroup = new FormGroup({
-    email:new FormControl(null,[Validators.required]),
+    emailOrPhone:new FormControl(null,[Validators.required]),
     password: new FormControl(null,[Validators.required]),
   })
 
@@ -35,7 +35,11 @@ export class LoginComponent {
         next:(data) => {console.log(data);
           this._router.navigate(['/home']);
           // this._authService.isLogged.next(true);
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('everything-token', data.token);
+          localStorage.setItem('everything-email', data.email);
+          localStorage.setItem('everything-userId', data.userId);
+
+
           // console.log('Done Login' , localStorage.getItem('token'));
 
         },

@@ -76,6 +76,10 @@
         <a class="text-success fw-bold" routerLink="/auth">تسجيل دخول</a>
 
       </form>
+      @if(errorMessage) {
+
+      <div  class="text-danger mt-2">{{ errorMessage }}</div>
+    }
     </div>
 
   } @else if (otpEmail) {

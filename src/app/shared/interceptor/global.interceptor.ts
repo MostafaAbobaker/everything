@@ -12,7 +12,8 @@ export const globalInterceptor: HttpInterceptorFn = (req, next) => {
   loadingService.show();
 
   // Get token from localStorage
-  const token = localStorage.getItem('userToken');
+  // const token = localStorage.getItem('userToken');
+  const token = typeof window !== 'undefined' ? window.localStorage.getItem('userToken') : null;
 
   // Clone the request and add token if it exists
   if (token) {
