@@ -21,13 +21,17 @@ export const globalInterceptor: HttpInterceptorFn = (req, next) => {
     req = req.clone({
       url: `${baseUrl}${req.url}`,
       setHeaders: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'accept-language': 'ar', // Default language
       }
     });
   } else {
 
     req = req.clone({
       url: `${baseUrl}${req.url}`,
+      setHeaders: {
+        'accept-language': 'ar', // Default language
+      }
     });
   }
 
