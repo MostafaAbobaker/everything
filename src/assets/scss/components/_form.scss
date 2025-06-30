@@ -15,3 +15,12 @@ input.form-control {
     }
   }
 }
+.form-check-input:checked {
+    background-color: $main-color;
+    border-color: $main-color;
+}
+.form-check-input:focus {
+    border-color: $main-color;
+    outline: 0px;
+    box-shadow: rgba($main-color, 0.25) 0px 0px 0px 0.25rem;
+}

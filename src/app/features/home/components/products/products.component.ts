@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit{
   getNewProducts() {
     this._productsService.getNewProducts().subscribe({
       next: (data) => {
-        this.NewProductsData = data
+        this.NewProductsData = data;
       },
       error: (error) => {
         console.log(error);
@@ -45,8 +45,8 @@ export class ProductsComponent implements OnInit{
     this._productsService.getBestSeller().subscribe({
       next: (data) => {
         this.BestSellerData = data
-        console.log(this.BestSellerData);
-        console.log(data);
+        /* console.log(this.BestSellerData);
+        console.log(data); */
 
       },
       error: (error) => {

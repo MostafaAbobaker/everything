@@ -1,0 +1,32 @@
+.pagination {
+  gap: 10px;
+  .page-item {
+    border-radius: 5px;
+    a.page-link  {
+      color: $secondary-color;
+    }
+    &:first-child , &:last-child {
+      a.page-link {
+        border-radius: 50px;
+      }
+    }
+    &:not(:first-child):not(:last-child) {
+      a.page-link {
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+
+      }
+
+    }
+    &.active {
+      a.page-link {
+        background-color: $secondary-color;
+        color: #fff;
+        border-color: $secondary-color;
+      }
+    }
+  }
+}

@@ -12,4 +12,7 @@ export class CategoriesService {
   getCategories():Observable<any> {
     return this._http.get('Category/GetsMenu');
   }
+  getLastCategories():Observable<any> {
+    return this._http.get('Category/GetsMenu');
+  }
 }

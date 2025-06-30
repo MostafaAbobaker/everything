@@ -11,7 +11,6 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ShapingCartComponent } from './components/shaping-cart/shaping-cart.component';
 import { ProductsFavoriteComponent } from './components/products-favorite/products-favorite.component';
-import { SharedModule } from '../shared/shared.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +18,8 @@ import { AllProductsComponent } from './components/all-products/all-products.com
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { CategoriesPageComponent } from './components/categories-page/categories-page.component';
 import { BrandsComponent } from './components/brands/brands.component';
+import { SharedModule } from '../../shared/shared.module';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { BrandsComponent } from './components/brands/brands.component';
     WishListComponent,
     CategoriesPageComponent,
     BrandsComponent,
+    FilterComponent,
 
   ],
   imports: [

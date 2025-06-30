@@ -1,9 +1,9 @@
 <!-- Start Categories -->
-<section class="categories-page  py-5 bg-light">
+ <section class="categories-page  py-5 bg-light">
   <div class="container">
     <h5 class="fw-bold mb-5 main-title ">منتجات جديدة </h5>
-
-    <owl-carousel-o [options]="customOptions">
+    @if (NewProductsData.length > 0) {
+       <owl-carousel-o [options]="customOptions">
 
     <ng-container *ngFor="let slide of NewProductsData">
       <ng-template carouselSlide [id]="slide.id.toString()">
@@ -12,6 +12,12 @@
     </ng-container>
 
   </owl-carousel-o>
+    }
+    @else {
+            <h1 class="text-center bg-light py-3 border-2 shadow-sm">لا توجد منتجات في هذه الفئة</h1>
+
+    }
+
 
   </div>
 
@@ -22,8 +28,8 @@
 <section class="categories-page  py-5 ">
   <div class="container">
     <h5 class="fw-bold mb-5 main-title "> الاكثر شهرة </h5>
-
-    <owl-carousel-o [options]="customOptions">
+    @if(MostPopularData.length > 0) {
+      <owl-carousel-o [options]="customOptions">
       <ng-container *ngFor="let productItem of MostPopularData">
 
           <ng-template carouselSlide [id]="productItem.id.toString()">
@@ -33,6 +39,10 @@
 
       </ng-container>
     </owl-carousel-o>
+    }@else {
+      <h1 class="text-center bg-light py-3 border-2 shadow-sm">لا توجد منتجات في هذه الفئة</h1>
+    }
+
 
   </div>
 
@@ -43,19 +53,23 @@
 <section class="categories-page  py-5 ">
   <div class="container">
     <h5 class="fw-bold mb-5 main-title "> الاكثر مبيعاً </h5>
-        <h1 class="text-center bg-light py-5 border-2 shadow-sm">لا توجد منتجات في هذه الفئة</h1>
+    @if(BestSellerData.length > 0) {
+      <owl-carousel-o [options]="customOptions">
+        @for(productItem of BestSellerData ; track productItem.id) {
+          <ng-container >
+              <ng-template carouselSlide [id]="productItem.id.toString()">
+                <app-product [product]="productItem"></app-product>
+              </ng-template>
+          </ng-container>
 
-    <!-- <owl-carousel-o [options]="customOptions">
-      @for(productItem of BestSellerData ; track productItem.id) {
-        <ng-container >
-            <ng-template carouselSlide [id]="productItem.id.toString()">
-              <app-product [product]="productItem"></app-product>
-            </ng-template>
-        </ng-container>
+        } @empty {
+        }
+      </owl-carousel-o>
 
-      } @empty {
-      }
-    </owl-carousel-o> -->
+    } @else {
+            <h1 class="text-center bg-light py-3 border-2 shadow-sm">لا توجد منتجات في هذه الفئة</h1>
+
+    }
 
   </div>
 
@@ -66,8 +80,8 @@
 <section class="categories-page  py-5 ">
   <div class="container">
     <h5 class="fw-bold mb-5 main-title ">  المنتجات المميزة </h5>
-
-    <owl-carousel-o [options]="customOptions">
+    @if(FeaturedData.length > 0) {
+       <owl-carousel-o [options]="customOptions">
       <ng-container *ngFor="let productItem of FeaturedData">
 
           <ng-template carouselSlide [id]="productItem.id.toString()">
@@ -77,6 +91,12 @@
 
       </ng-container>
     </owl-carousel-o>
+
+    } @else {
+            <h1 class="text-center bg-light py-3 border-2 shadow-sm">لا توجد منتجات في هذه الفئة</h1>
+
+    }
+
 
   </div>
 

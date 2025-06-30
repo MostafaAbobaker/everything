@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
+import { IProduct } from '../../interface/iproduct';
+
+@Component({
+  selector: 'app-all-products',
+  templateUrl: './all-products.component.html',
+  styleUrl: './all-products.component.scss'
+})
+export class AllProductsComponent implements OnInit{
+  allProducts:IProduct[] = [];
+  originalProductList: IProduct[] = [];
+  stateSorting: string = 'الأكثر رواجاً'; // Default sorting state
+constructor(private _productsService:ProductsService){}
+  ngOnInit(): void {
+    this.getAllProducts();
+  }
+  getAllProducts() {
+
+    this._productsService.getNewProducts().subscribe({
+      next:(res)=>{
+        this.allProducts =res
+        this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+      },
+      error:(err)=>{alert(err)}
+    })
+  }
+
+
+  sortProducts(type: string) {
+    if (type === 'highLow') {
+      this.allProducts.sort((a, b) => b.price - a.price);
+      this.stateSorting = 'الأعلى إلى الأقل';
+    } else if (type === 'lowHigh') {
+      this.allProducts.sort((a, b) => a.price - b.price);
+      this.stateSorting = 'الأقل إلى الأعلى';
+    } else {
+      // Implement recommended or default sorting if needed
+      // Reset to original order
+      this.allProducts = [...this.originalProductList];
+      this.stateSorting = 'الأكثر رواجاً';
+    }
+  }
+
+
+}

@@ -1,0 +1,11 @@
+.filter {
+  .card-body {
+    max-height: 250px;
+    overflow-y: auto;
+    ul {
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

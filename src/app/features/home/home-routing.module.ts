@@ -5,10 +5,10 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { HomeComponent } from './components/home/home.component';
 import { AllProductsComponent } from './components/all-products/all-products.component';
 import { ShapingCartComponent } from './components/shaping-cart/shaping-cart.component';
-import { authGuard } from '../auth/Guards/auth.guard';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { CategoriesPageComponent } from './components/categories-page/categories-page.component';
 import { BrandsComponent } from './components/brands/brands.component';
+import { authGuard } from '../../auth/Guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent, children:[

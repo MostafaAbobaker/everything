@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Category } from '../../interface/category';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-category',

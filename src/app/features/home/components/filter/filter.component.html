@@ -1,0 +1,46 @@
+<aside class="filter">
+   <div class="card">
+          <div class="card-header">
+            <h5 class="fw-bold">التصنيفات</h5>
+          </div>
+          <div class="card-body">
+            <ul class="p-0 m-0 list-unstyled">
+              @for(category of categoriesList; track category.id) {
+                <li class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" [id]="category.id">
+                  <label class="form-check-label" [for]="category.id">
+                    {{category.nameAr}}
+                  </label>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-header">
+            <h5 class="fw-bold">الماركات</h5>
+          </div>
+          <div class="card-body">
+
+          </div>
+      </div>
+      <div class="card mt-3">
+          <div class="card-header">
+            <h5 class="fw-bold">التصنيفات</h5>
+          </div>
+          <div class="card-body">
+            @for(rating of [5,4,3,2,1]; track $index) {
+                <li class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" [id]="$index">
+                  <label class="form-check-label" [for]="$index">
+                    @for (star of [].constructor(rating); track $index) {
+                      <i class="fa-solid fa-star text-primary"></i>
+                      } @for (star of [].constructor(5 - rating); track $index) {
+                      <i class="fa-regular fa-star text-primary"></i>
+                      }
+                  </label>
+                </li>
+              }
+          </div>
+        </div>
+</aside>

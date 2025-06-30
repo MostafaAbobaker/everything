@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BrandsService } from '../../services/brands.service';
 import { IBrand } from '../../interface/ibrand';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-brands',
