@@ -1,46 +1,60 @@
-<section class="categories-page  py-5 bg-light">
+<section class="categories-page py-5 bg-light">
   <div class="container">
-
     <div class="row g-3">
       <div class="col-lg-3">
         <app-filter></app-filter>
-
-        </div>
+      </div>
       <div class="col-lg-9">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="">{{allProducts.length}}  إجمالي المنتجات</h4>
+          <h4 class="">{{ allProducts.length }} إجمالي المنتجات</h4>
           <div class="dropdown">
-            <div class=" dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-arrow-right-arrow-left fa-rotate-90 me-2"></i> ترتيب حسب :
-              <span class="fw-bold me-2 px-1">{{stateSorting}}</span>
+            <div
+              class="dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i
+                class="fa-solid fa-arrow-right-arrow-left fa-rotate-90 me-2"
+              ></i>
+              ترتيب حسب :
+              <span class="fw-bold me-2 px-1">{{ stateSorting }}</span>
             </div>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" (click)="sortProducts('Recommended')">الأكثر رواجاً</a></li>
-              <li><a class="dropdown-item" (click)="sortProducts('highLow')">السعر: من الأعلى إلى الأقل</a></li>
-              <li><a class="dropdown-item" (click)="sortProducts('lowHigh')">السعر: من الأقل إلى الأعلى</a></li>
+              <li>
+                <a class="dropdown-item" (click)="sortProducts('Recommended')"
+                  >الأكثر رواجاً</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="sortProducts('highLow')"
+                  >السعر: من الأعلى إلى الأقل</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="sortProducts('lowHigh')"
+                  >السعر: من الأقل إلى الأعلى</a
+                >
+              </li>
             </ul>
           </div>
         </div>
         <div class="row g-3">
-      @for (item of allProducts; track item.id) {
-      <div class="col-lg-4">
-        <app-product [product]="item"></app-product>
-
+          @for (item of allProducts; track item.id) {
+          <div class="col-lg-4">
+            <app-product [product]="item"></app-product>
+          </div>
+          }
+          <div class="d-flex justify-content-center pt-5">
+            <p-paginator
+              (onPageChange)="onPageChange($event)"
+              [first]="first"
+              [rows]="rows"
+              [totalRecords]="120"
+              [rowsPerPageOptions]="[10, 20, 30]"
+            />
+          </div>
+        </div>
       </div>
-    }
-    <div class="d-flex justify-content-center pt-5">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">السابق</a></li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">التالى</a></li>
-        </ul>
-      </nav>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
+  </div>
 </section>

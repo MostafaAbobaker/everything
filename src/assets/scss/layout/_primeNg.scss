@@ -1,0 +1,15 @@
+html[dir=rtl] {
+  .p-paginator {
+  .p-icon-wrapper {
+    svg {
+      transform: scaleX(-1);
+    }
+  }
+}
+.p-paginator .p-dropdown .p-dropdown-label {
+  padding: 0.75rem 0.75rem !important;
+  padding-right: unset !important;
+  padding-inline-start: 0.75rem;
+  padding-inline-end: 0 !important;
+}
+}

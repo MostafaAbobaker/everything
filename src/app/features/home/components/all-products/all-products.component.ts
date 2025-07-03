@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { IProduct } from '../../interface/iproduct';
 
+interface PageEvent {
+    first: number;
+    rows: number;
+    page: number;
+    pageCount: number;
+}
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
@@ -11,6 +17,15 @@ export class AllProductsComponent implements OnInit{
   allProducts:IProduct[] = [];
   originalProductList: IProduct[] = [];
   stateSorting: string = 'الأكثر رواجاً'; // Default sorting state
+
+
+first: number = 0;
+
+rows: number = 10;
+
+
+
+
 constructor(private _productsService:ProductsService){}
   ngOnInit(): void {
     this.getAllProducts();
@@ -42,5 +57,8 @@ constructor(private _productsService:ProductsService){}
     }
   }
 
-
+onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+}
 }

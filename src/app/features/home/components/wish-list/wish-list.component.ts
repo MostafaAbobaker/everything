@@ -3,6 +3,7 @@ import { IProduct } from '../../interface/iproduct';
 import { WishListService } from '../../services/wish-list.service';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -15,20 +16,30 @@ export class WishListComponent {
     private _wishlistService: WishListService,
     private _cartService: ShapingCartService,
     private toastr: ToastrService,
+    private _productsService:ProductsService
   ) {}
 
   ngOnInit(): void {
     this.showWishlist();
   }
   showWishlist(): void {
-    this._wishlistService.getWishlistItems().subscribe({
+
+    this._productsService.getMostPopular().subscribe({
+      next: (result) => {
+        this.WishListItems = result;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    /* this._wishlistService.getWishlistItems().subscribe({
       next: (result) => {
         this.WishListItems = result.data;
       },
       error: (err) => {
         console.log(err);
       },
-    });
+    }); */
   }
 
   addToCart(product_id: string) {

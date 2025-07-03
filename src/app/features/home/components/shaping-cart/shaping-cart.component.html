@@ -1,5 +1,5 @@
 <section class="cart-page py-5">
-  <ng-container *ngIf="cartItems?.products.length == 0 || cartItems == null; else elseTemplate">
+  <ng-container *ngIf="cartItems?.length == 0 || cartItems == null; else elseTemplate">
     <div class="container" >
       <h1 class="text-center">لا يوجد بيانات => {{apiErrorMassage}}</h1>
     </div>
@@ -16,7 +16,7 @@
         <div class="col-md-8 col-sm-12">
           <div class="overflow" style="max-height: 500px; overflow-y: auto;" >
 
-            <div class="row-card d-flex border-bottom py-3 align-items-center" *ngFor="let cartItem of cartItems?.products">
+            <div class="row-card d-flex border-bottom py-3 align-items-center" *ngFor="let cartItem of cartItems">
               <div class="image me-2">
                 <img [src]="cartItem.product.imageCover" [alt]="cartItem.product.title" class="img-thumbnail" width="75" height="75">
               </div>

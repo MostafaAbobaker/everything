@@ -1,4 +1,4 @@
-<!-- <section class="wish-list-page py-5">
+<section class="wish-list-page py-5">
   <div class="container">
     <h3 class="fw-bold">قائمة المفضلة
     </h3>
@@ -30,9 +30,9 @@
           </td>
           <td class="align-middle"><img [src]="wishItem.image" alt="" width="64" height="64"  class="object-fit-cover img-thumbnail" style="max-height: 64px;"></td>
           <td class="align-middle"><div class="">{{wishItem.nameAr}}</div>
-          <div class="">{{wishItem.description }}</div></td>
+          <div class="">{{wishItem }}</div></td>
           <td class="align-middle">{{wishItem.price}}</td>
-          <td class="align-middle">{{wishItem.category.name}}</td>
+          <td class="align-middle">{{wishItem}}</td>
           <td class="align-middle">
             <button (click)="addToCart(wishItem.id.toString())"
               class="btn btn-success btn-sm"
@@ -44,4 +44,4 @@
       </tbody>
     </table>
   </div>
-</section> -->
+</section>

@@ -20,6 +20,7 @@ import { CategoriesPageComponent } from './components/categories-page/categories
 import { BrandsComponent } from './components/brands/brands.component';
 import { SharedModule } from '../../shared/shared.module';
 import { FilterComponent } from './components/filter/filter.component';
+import { PaginatorModule } from 'primeng/paginator';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FilterComponent } from './components/filter/filter.component';
     SharedModule,
     CarouselModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    PaginatorModule
   ]
 })
 export class HomeModule { }
