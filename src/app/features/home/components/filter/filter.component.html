@@ -21,7 +21,16 @@
             <h5 class="fw-bold">الماركات</h5>
           </div>
           <div class="card-body">
-
+            <ul class="p-0 m-0 list-unstyled">
+              @for(Brand of BrandsData; track Brand.id) {
+                <li class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" [id]="Brand.id">
+                  <label class="form-check-label" [for]="Brand.id">
+                    {{Brand.nameAr}}
+                  </label>
+                </li>
+              }
+            </ul>
           </div>
       </div>
       <div class="card mt-3">

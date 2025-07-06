@@ -10,9 +10,9 @@ export class CategoriesService {
   constructor(private _http:HttpClient) { }
 
   getCategories():Observable<any> {
-    return this._http.get('Category/GetsMenu');
+    return this._http.get('Category/GetCategory');
   }
-  getLastCategories():Observable<any> {
-    return this._http.get('Category/GetsMenu');
-  }
+  /* getLastCategories():Observable<any> {
+    return this._http.get('Category/GetCategory');
+  } */
 }

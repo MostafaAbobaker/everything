@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { ICategory, ILastCategory } from '../../interface/icategory';
+import { BrandsService } from '../../services/brands.service';
+import { IBrand } from '../../interface/ibrand';
 
 @Component({
   selector: 'app-filter',
@@ -9,20 +11,36 @@ import { ICategory, ILastCategory } from '../../interface/icategory';
 })
 export class FilterComponent implements OnInit {
   categoriesList:ILastCategory[] = [];
-  constructor(private _categoriesService:CategoriesService) { }
+  BrandsData:IBrand []=[]
+  constructor(private _categoriesService:CategoriesService,
+    private _brandsService:BrandsService
+  ) { }
   ngOnInit(): void {
         this.getCategories();
+        this.getBrands();
   }
 
   getCategories() {
-    this._categoriesService.getLastCategories().subscribe({
+    this._categoriesService.getCategories().subscribe({
       next: (data) => {
-        this.categoriesList = data;
+        this.categoriesList = data.data;
+        console.log(data);
+
 
       },
       error: (error) => {
         alert(error);
       }
     });
+  }
+  getBrands() {
+    this._brandsService.getBrands().subscribe({
+      next:(res)=>{
+        this.BrandsData = res.data
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 }

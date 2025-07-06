@@ -9,7 +9,7 @@ import { environment } from '../../../../../environments/environment';
   styleUrl: './brands.component.scss'
 })
 export class BrandsComponent {
-      imagePath= environment.imagePath;
+  imagePath= environment.imagePath;
 
   BrandsData:IBrand []=[]
   constructor(private _brandsService:BrandsService){}
@@ -18,13 +18,12 @@ export class BrandsComponent {
   }
   getBrands() {
     this._brandsService.getBrands().subscribe({
-      next: (data) => {
-        this.BrandsData = data;
-
+      next:(res)=>{
+        this.BrandsData = res.data
       },
-      error: (error) => {
-        console.error(error);
+      error:(err)=>{
+        console.log(err);
       }
-    });
+    })
   }
 }

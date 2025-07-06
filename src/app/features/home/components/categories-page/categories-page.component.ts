@@ -16,7 +16,7 @@ export class CategoriesPageComponent {
   getCategories() {
     this._categoriesService.getCategories().subscribe({
       next: (data) => {
-        this.CategoriesData = data;
+        this.CategoriesData = data.data;
 
       },
       error: (error) => {
