@@ -20,6 +20,8 @@ const routes: Routes = [
     { path: 'product/:id', component:ProductDetailsComponent},
     { path: 'shaping-cart',canActivate:[authGuard], component:ShapingCartComponent},
     { path: 'wish-list',canActivate:[authGuard], component:WishListComponent},
+    { path: 'account',loadChildren:() => import ('../account/account.module').then((m) => m.AccountModule)},
+
 
   ] }, // Default route
 
