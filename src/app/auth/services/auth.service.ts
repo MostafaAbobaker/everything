@@ -9,7 +9,9 @@ export class AuthService {
 
 
   // isLogged = new BehaviorSubject<boolean>(localStorage.getItem('token')? true: false);
-  constructor(private _http:HttpClient) {}
+  constructor(private _http: HttpClient) {
+
+  }
 
   registerFrom(from:any):Observable<any> {
     return this._http.post('Accounts/Register',from)
@@ -29,8 +31,16 @@ export class AuthService {
     return this._http.post('Accounts/CheckOTP', id)
   }
 
+  updatePassword(form: object): Observable<any> {
+    return this._http.post('Accounts/update-password', form)
+  }
+  getAllUserAddress(userId: string): Observable<any> {
+    return this._http.get('Accounts/get-all-address/' + userId);
+  }
 
-
+  UpdateUserAddress(form: object): Observable<any> {
+    return this._http.put('Accounts/Update-User-Address', form)
+  }
   logout() {
     // localStorage.removeItem('token');
     // this.isLogged.next(false);
