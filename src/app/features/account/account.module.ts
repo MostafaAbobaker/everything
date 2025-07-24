@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AccountRoutingModule } from './account-routing.module';
 import { AddressComponent } from './components/address/address.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -21,7 +21,8 @@ import { QuotationComponent } from './components/quotation/quotation.component';
   ],
   imports: [
     CommonModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AccountModule { }

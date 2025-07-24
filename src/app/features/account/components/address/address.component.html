@@ -9,20 +9,23 @@
     العنوان الافتراضى
   </div>
   <div class="card-body">
-    <h5 class="card-title"> مدينة نصر </h5>
-    <p class="card-text">30 محمود عباس متفرع من مصطفى النحاس مدينة نصر القاهرة</p>
+    <!-- <h5 class="card-title"> مدينة نصر </h5>
+            <p class="card-text">30 محمود عباس متفرع من مصطفى النحاس مدينة نصر القاهرة</p> -->
+    <p class="card-text" *ngFor="let item of defaultAddresses">{{item.addrees}}</p>
+
   </div>
 </div>
-    <div class="card">
-  <div class="card-header">
-    العنوان العمل
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"> التجمع الخامس  </h5>
-    <p class="card-text">66 ش التسعين الرئيسى بجوار مول كيرو فيستفيل ستى </p>
-    <a href="#" class="btn btn-success"> تعيين كعنوان افتراضي  </a>
-  </div>
-</div>
+    <div *ngFor="let item of addressList; let i = index;" class="card">
+      <div class="card-header">
+        العنوان {{i + 2}}
+        </div>
+        <div class="card-body">
+        <!-- <h5 class="card-title"> التجمع الخامس  </h5>
+                <p class="card-text">66 ش التسعين الرئيسى بجوار مول كيرو فيستفيل ستى </p> -->
+        <p class="card-text">{{item.addrees}}</p>
+        <a (click)="updateUserAddress(item)" class="btn btn-success"> تعيين كعنوان افتراضي </a>
+        </div>
+        </div>
 
    </div>
 </section>
