@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IProduct } from '../../interface/iproduct';
+import { IProduct, IProductItem } from '../../interface/iproduct';
 import { WishListService } from '../../services/wish-list.service';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { ProductsService } from '../../services/products.service';
   styleUrl: './wish-list.component.scss'
 })
 export class WishListComponent {
-  WishListItems?: IProduct[];
+  WishListItems?: IProductItem[];
   constructor(
     private _wishlistService: WishListService,
     private _cartService: ShapingCartService,
@@ -26,7 +26,7 @@ export class WishListComponent {
 
     this._productsService.getMostPopular().subscribe({
       next: (result) => {
-        this.WishListItems = result;
+        this.WishListItems = result.data;
       },
       error: (err) => {
         console.log(err);

@@ -1,10 +1,13 @@
-<!-- <section class="product-details ">
+<section class="product-details ">
   <div class="container">
     <nav aria-label="breadcrumb " class="py-3">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a class="text-success" routerLink="/">Home</a></li>
-        <li class="breadcrumb-item"><a class="text-success" >{{productDetails?.category?.name}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{productDetails?.title}}</li>
+      <ol class="breadcrumb ">
+        <li class="breadcrumb-item">
+          <a class="text-success px-2" routerLink="/">الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a class="text-success px-2" >{{productDetails?.categoryName}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{productDetails?.productName}}</li>
       </ol>
     </nav>
 
@@ -14,7 +17,7 @@
     <div class="row">
       <div class="col-lg-5">
         <div class="image">
-          <img [src]="productDetails?.images![0]" alt="" class="w-100 object-fit-contain">
+          <!-- <img [src]="productDetails?.images![0]" alt="" class="w-100 object-fit-contain"> -->
 
           <div id="carouselExampleAutoplaying" class="carousel slide mb-5" data-bs-ride="carousel">
 
@@ -39,30 +42,30 @@
       </div>
       <div class="col-lg-7">
         <div class="content">
-          <small class=" text-success">{{productDetails?.category?.name}}</small>
-          <h1 class="fw-bold mb-0">{{productDetails?.title}}</h1>
+          <small class=" text-success">{{productDetails?.categoryName}}</small>
+          <h1 class="fw-bold mb-0">{{productDetails?.productName}}</h1>
           <div class="rating mb-3">
             <ng-container>
               <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-regular fa-star text-warning " [ngClass]="{
-                'fa-solid ': star <= productDetails?.ratingsAverage!
+                'fa-solid ': star <= productDetails!.rating
               }"></i>
             </ng-container>
-            <span class="ms-2">{{productDetails?.ratingsAverage}}</span>
-              <span class="ms-2 text-success">({{productDetails?.ratingsQuantity}} reviews)</span>
+            <span class="ms-2">{{productDetails?.rating}}</span>
+              <span class="ms-2 text-success">({{productDetails?.rating}} reviews)</span>
           </div>
           <div class="price ">
             <span class="h5 fw-bold">
-              ${{productDetails?.price | number:'1.0-0'}}
+
               <span >{{ productDetails?.price | number:'1.0-0'}}
                 <svg id="prefix__Layer_1" data-name="Layer 1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39"><defs></defs><path class="prefix__cls-1" d="M699.62 1113.02c-20.06 44.48-33.32 92.75-38.4 143.37l424.51-90.24c20.06-44.47 33.31-92.75 38.4-143.37l-424.51 90.24zM1085.73 895.8c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.33v-135.2l292.27-62.11c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.27V66.13c-50.67 28.45-95.67 66.32-132.25 110.99v403.35l-132.25 28.11V0c-50.67 28.44-95.67 66.32-132.25 110.99v525.69l-295.91 62.88c-20.06 44.47-33.33 92.75-38.42 143.37l334.33-71.05v170.26l-358.3 76.14c-20.06 44.47-33.32 92.75-38.4 143.37l375.04-79.7c30.53-6.35 56.77-24.4 73.83-49.24l68.78-101.97v-.02c7.14-10.55 11.3-23.27 11.3-36.97V743.77l132.25-28.11v270.4l424.53-90.28z"/></svg>
               </span>
               <small class="fw-normal ms-1">
-                <del class="text-secondary">
+                <del class="text-secondary opacity-50">
 
                   <span >{{ productDetails?.price | number:'1.0-0'}}
                     <svg id="prefix__Layer_1" data-name="Layer 1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39"><defs></defs><path class="prefix__cls-1" d="M699.62 1113.02c-20.06 44.48-33.32 92.75-38.4 143.37l424.51-90.24c20.06-44.47 33.31-92.75 38.4-143.37l-424.51 90.24zM1085.73 895.8c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.33v-135.2l292.27-62.11c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.27V66.13c-50.67 28.45-95.67 66.32-132.25 110.99v403.35l-132.25 28.11V0c-50.67 28.44-95.67 66.32-132.25 110.99v525.69l-295.91 62.88c-20.06 44.47-33.33 92.75-38.42 143.37l334.33-71.05v170.26l-358.3 76.14c-20.06 44.47-33.32 92.75-38.4 143.37l375.04-79.7c30.53-6.35 56.77-24.4 73.83-49.24l68.78-101.97v-.02c7.14-10.55 11.3-23.27 11.3-36.97V743.77l132.25-28.11v270.4l424.53-90.28z"/></svg>
                   </span>
-                  ${{ (productDetails?.price! + ((productDetails?.price! * 20) / 100)) | number:'1.0-0' }}</del></small></span>
+                  </del></small></span>
 
                 </div>
           <div class="description py-3">
@@ -81,19 +84,14 @@
           </div>
           <p>
             <span class="w-25 d-inline-block">العلامه التجرية :</span>
-            <strong>{{productDetails?.brand?.name}}</strong>
+            <strong>{{productDetails?.brandName}}</strong>
 
           </p>
 
-          <p>
-            <span class="w-25 d-inline-block">الكمية المتاحة :</span>
-            <strong>            {{productDetails?.quantity}}
-            </strong>
 
-          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
- -->
+

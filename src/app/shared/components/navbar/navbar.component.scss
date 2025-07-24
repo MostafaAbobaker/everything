@@ -1,22 +1,89 @@
 @import '../../../../assets/scss/abstracts/';
 .navbar {
   padding-block: 0;
-  padding-top: rem(4px);
+  padding-top: 4px;
   .navbar-nav {
-    gap: rem(20px);
+    gap: 20px;
     .nav-link {
       &.active {
         font-weight: bold;
         background-color: $main-color;
         background: linear-gradient(to top, #0d345e 0%, #34bf57 100%);
 
-        padding-inline: rem(16px);
+        padding-inline: 16px;
         border-start-start-radius: 10px;
         border-start-end-radius: 10px;
         box-shadow: -1px -2px 8px rgba(0, 0, 0, 0.5),
           inset 0px 5px 7px rgba(255, 255, 255, 0.3);
         /* box-shadow: -1px -2px 8px rgba(0, 0, 0, 0.5); */
       }
+
     }
+    .sub-menu {
+        position: absolute;
+        top: 100%;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        /* background-color: #fff; */
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: all 0.3s ease-in-out;
+        z-index: 22;
+        box-shadow: 0 0 10px rgba(0,0,0, .2);
+        &:has(.container) {
+          inset-inline-start: 0;
+          .container {
+            padding-inline-start: 60px;
+
+          }
+        }
+        // display: none;
+        .h6{
+          text-wrap: nowrap;
+          font-weight: 600;
+          // color: $main-color;
+          // text-align: center;
+          display: block;
+          padding: 10px;
+          border-bottom: 1px solid #212529bf;
+          margin-bottom: 10px;
+        }
+        .sub-content{
+          overflow: hidden;
+        }
+        .container {
+          background-color: #fff;
+          padding: 16px ;
+          box-shadow: 0 .5rem 1rem #00000026, inset 0 -1px #ffffff26;;
+        }
+        li {
+          a {
+            color: #404553;
+            font-weight: 400;
+            border:none;
+            display: block;
+            text-wrap: nowrap;
+            padding: 10px ;
+            line-height: 1;
+            position: relative;
+
+            cursor: pointer;
+            &::before {
+              content: '-';
+              inset-inline-start: 0;
+              position: absolute;
+            }
+            &:hover{
+              color:$secondary-color
+            }
+            &.active {
+              background-color: #fff;
+            }
+          }
+        }
+        &.show {
+          grid-template-rows: 1fr;
+        }
+      }
   }
 }

@@ -1,44 +1,45 @@
 <div class="card position-relative">
   <div class="favorite cursor-pointer position-absolute top-0 start-0 m-2 z-1">
-    <i class="fa-heart fs-4  " [class]="product.isInFavourite? 'fa-solid text-danger':'fa-regular text-black-50'"></i>
+    <i class="fa-heart fs-4  " [class]="isInFavorite? 'fa-solid text-danger':'fa-regular text-black-50'"></i>
   </div>
   <a [routerLink]="['/product/', product.id]">
     <div class="image-item">
       <img
-        [src]="imagePath + product.productImageForWeb"
+        [src]="imagePath + product.image"
         class="w-100 object-fit-contain rounded-0"
         alt="..."
         height="200px"
       />
     </div>
     <div class="card-body pb-1">
-      <!-- <small class=" text-secondary">{{ product.category.name }}</small> -->
+      <small class=" text-secondary">{{ product.categoryName }}</small>
 
-      <h6 class="card-title line-clamp-2">{{ product.nameAr }}</h6>
+      <h6 class="card-title line-clamp-2 fw-bold">{{ product.productName }}</h6>
       <div class="rating py-2">
         <ng-container>
-          <!-- <i
+        <i
           *ngFor="let star of [1, 2, 3, 4, 5]"
           class="fa-regular fa-star "
           [ngClass]="{
-            'fa-solid text-warning': star <= product.ratingsAverage
+            'fa-solid text-warning': star <= product.rating
           }"
-        ></i> -->
-          <i
-            *ngFor="let star of [1, 2, 3, 4, 5]"
-            class="fa-regular fa-star"
-          ></i>
-        </ng-container>
+        ></i>
+      </ng-container>
 
         <!-- <i class="fa fa-star"></i> -->
 
         <!-- {{ product.ratingsAverage }} -->
       </div>
-      <div class="price fw-bold text-end">
+      <div class="price fw-bold text-end d-flex justify-content-end">
+        <del class="d-flex justify-content-end align-items-center opacity-50 me-2">
+          {{ product.oldPrice| number : "1.0-0" }}
+          <img src="../../../../assets/imgs/Saudi_Riyal.svg" alt=""   style="width: 20px; height: 20px;"/>
+        </del>
         <span class="d-flex justify-content-end align-items-center">
           {{ product.price | number : "1.0-0" }}
           <img src="../../../../assets/imgs/Saudi_Riyal.svg" alt=""  class="ms-1" style="width: 20px; height: 20px;"/>
         </span>
+
       </div>
     </div>
   </a>

@@ -17,3 +17,15 @@ export interface IProduct {
 
 
 }
+
+export interface IProductItem {
+  id: number
+  productName: string
+  categoryId: number
+  categoryName: string
+  price: number
+  oldPrice: number
+  image: string
+  isStook: boolean
+  rating: number
+}

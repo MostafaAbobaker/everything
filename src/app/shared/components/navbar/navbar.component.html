@@ -1,25 +1,62 @@
 <app-header></app-header>
 
 <nav class="navbar navbar-expand-lg bg-secondary navbar-dark ">
-  <div class="container">
+  <div class="container ">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ps-0 mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent">
+      <ul class="navbar-nav ps-0 mb-2 mb-lg-0 ">
         <li class="nav-item">
           <a class="nav-link  py-3"  routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">الصفحة الرئيسية</a>
         </li>
         <li class="nav-item">
           <a class="nav-link py-3" routerLink="allProducts" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">جميع المنتجات</a>
         </li>
-        <li class="nav-item">
+       <!--  <li class="nav-item">
           <a class="nav-link py-3" routerLink="categories" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> فئات</a>
         </li>
         <li class="nav-item">
           <a class="nav-link py-3" routerLink="brands" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> العلامات التجارية</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link py-3" href="#"> العروض</a>
-        </li>
+        </li> -->
+        @for(itemMenu of menuItems; track itemMenu.id ; let i = $index) {
+          @if(i < 7) {
+            <li class="nav-item" (mouseenter)="getDetailsService(itemMenu.id, itemMenu.name)"
+            (mouseleave)="getDetailsService(0,'')">
+              <a class="nav-link py-3" [routerLink]="['/category/', itemMenu.id]"> {{itemMenu.name}}</a>
+              @if(itemMenu.secondLevels.length > 0) {
+
+                <div class="sub-menu " [class.show]="
+                  activeSubMenu === itemMenu.name && isShowMenu === false
+                ">
+                  <div class="sub-content">
+                    <div class="container">
+                      <div class="row">
+                        @for(itemSecondLevel of itemMenu.secondLevels; track itemSecondLevel.id) {
+
+                          <div class="col-lg-3">
+                            <a class="h6 fw-blod " [routerLink]="['/category/', itemSecondLevel.id]">{{itemSecondLevel.name}}</a>
+                                <ul class="list-group list-group-flush list-unstyled m-0 p-0">
+                                  @for(itemThreeLevel of itemSecondLevel.threeLevels; track itemThreeLevel.id) {
+                                     <li >
+                                    <a class="list-group-item list-group-item-action "
+                                    [routerLink]="['/category/', itemThreeLevel.id]">{{itemThreeLevel.name}}</a>
+                                  </li>
+                                  }
+
+
+                                  </ul>
+                          </div>
+                        }
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              }
+            </li>
+
+          }
+        }
 
 
       </ul>

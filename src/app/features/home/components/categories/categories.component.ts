@@ -17,7 +17,7 @@ export class CategoriesComponent implements OnInit {
     this.getCategories()
   }
   getCategories() {
-    this._categoriesService.getCategories().subscribe({
+    this._categoriesService.getCategories(1, 1000).subscribe({
       next: (data) => {
         this.CategoriesData = data.data;
 

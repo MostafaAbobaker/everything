@@ -9,8 +9,8 @@ export class CategoriesService {
 
   constructor(private _http:HttpClient) { }
 
-  getCategories():Observable<any> {
-    return this._http.get('Category/GetCategory');
+  getCategories(pNum:number, pSize: number):Observable<any> {
+    return this._http.get(`Category/GetCategory?PageNumber=${pNum}&PageSize=${pSize}`);
   }
   /* getLastCategories():Observable<any> {
     return this._http.get('Category/GetCategory');

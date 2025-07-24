@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { IProduct } from '../../interface/iproduct';
+import { IProduct, IProductItem } from '../../interface/iproduct';
 
 interface PageEvent {
     first: number;
@@ -14,15 +14,15 @@ interface PageEvent {
   styleUrl: './all-products.component.scss'
 })
 export class AllProductsComponent implements OnInit{
-  allProducts:IProduct[] = [];
-  originalProductList: IProduct[] = [];
+  allProducts:IProductItem[] = [];
+  originalProductList: IProductItem[] = [];
   stateSorting: string = 'الأكثر رواجاً'; // Default sorting state
 
-
+page : number = 1
 first: number = 0;
 
 rows: number = 10;
-
+totalRecords: number = 0;
 
 
 
@@ -32,12 +32,24 @@ constructor(private _productsService:ProductsService){}
   }
   getAllProducts() {
 
-    this._productsService.getNewProducts().subscribe({
+    this._productsService.getNewProducts(this.first,this.rows ).subscribe({
       next:(res)=>{
-        this.allProducts =res
+        this.allProducts =res.data
         this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+      console.log(res);
+        this.page= res.pageSize;
+        this.totalRecords =  res.totalCount;
+      /*
+
+        first :    0
+        page      :        0
+        pageCount     :        1
+        rows     :         20
+      */
+
       },
-      error:(err)=>{alert(err)}
+      error:(err)=>{console.log(err);
+      }
     })
   }
 
@@ -58,7 +70,11 @@ constructor(private _productsService:ProductsService){}
   }
 
 onPageChange(event: any) {
+  console.log('Page changed:', event);
+    this.page = event.page ; // Adjusting for 0-based index
     this.first = event.first;
     this.rows = event.rows;
+
+    this.getAllProducts()
 }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IResponse } from '../interface/IResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,23 @@ import { Observable } from 'rxjs';
 export class ProductsService {
 
   constructor(private _http: HttpClient) { }
+  getAllProducts(page:number,size:number):Observable<any>{
+    return this._http.get(`api/ProductWeb/GetNewProduct?pageNumber=${page}&PageSize=${size}`)
+  }
 
-  getNewProducts():Observable<any> {
-    return this._http.get('Product/GetNewProduct');
+  getNewProducts(page:number,size:number):Observable<IResponse> {
+    return this._http.get<IResponse>(`api/ProductWeb/GetNewProduct?pageNumber=${page}&pageSize=${size}`);
   }
-  getMostPopular():Observable<any> {
-    return this._http.get('Product/GetMostPopular');
+  getMostPopular():Observable<IResponse> {
+    return this._http.get<IResponse>(`api/ProductWeb/GetMostPopular`);
   }
-  getBestSeller():Observable<any> {
-    return this._http.get('Product/GetBestSeller');
+  getBestSeller():Observable<IResponse> {
+    return this._http.get<IResponse>(`api/ProductWeb/GetBestSeller`);
   }
   getFeatured():Observable<any> {
-    return this._http.get('Product/GetFeaterd');
+    return this._http.get('/api/ProductWeb/GetFeaterd');
   }
-  getProductDetails(id:string):Observable<any> {
-    return this._http.get(`products/${id}`)
+  getProductDetails(id:number):Observable<any> {
+    return this._http.get(`api/ProductWeb/GetProductDetails?productId=${id}`)
   }
 }

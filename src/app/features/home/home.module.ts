@@ -21,6 +21,7 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { SharedModule } from '../../shared/shared.module';
 import { FilterComponent } from './components/filter/filter.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { TreeModule } from 'primeng/tree';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { PaginatorModule } from 'primeng/paginator';
     CarouselModule,
     HttpClientModule,
     FormsModule,
-    PaginatorModule
+    PaginatorModule,
+    TreeModule
   ]
 })
 export class HomeModule { }

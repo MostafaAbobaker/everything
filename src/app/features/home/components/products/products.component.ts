@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductsService } from '../../services/products.service';
-import { IProduct } from '../../interface/iproduct';
+import {  IProductItem } from '../../interface/iproduct';
 
 @Component({
   selector: 'app-products',
@@ -9,10 +9,10 @@ import { IProduct } from '../../interface/iproduct';
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent implements OnInit{
-  NewProductsData :IProduct[] = []
-  MostPopularData :IProduct[] = []
-  BestSellerData :IProduct[] = []
-  FeaturedData :IProduct[] = []
+  NewProductsData :IProductItem[] = []
+  MostPopularData :IProductItem[] = []
+  BestSellerData :IProductItem[] = []
+  FeaturedData :IProductItem[] = []
    constructor(private _productsService:ProductsService) { }
   ngOnInit(): void {
     this.getNewProducts()
@@ -22,19 +22,24 @@ export class ProductsComponent implements OnInit{
   }
 
   getNewProducts() {
-    this._productsService.getNewProducts().subscribe({
+
+    this._productsService.getNewProducts(1,1000).subscribe({
       next: (data) => {
-        this.NewProductsData = data;
+
+        this.NewProductsData = data.data;
+        console.log('New Products Data:', this.NewProductsData);
+
       },
       error: (error) => {
         console.log(error);
       }
     })
+
   }
   getMostPopular() {
     this._productsService.getMostPopular().subscribe({
       next: (data) => {
-        this.MostPopularData = data
+        this.MostPopularData = data.data
       },
       error: (error) => {
         console.log(error);
@@ -44,7 +49,7 @@ export class ProductsComponent implements OnInit{
   getBestSeller() {
     this._productsService.getBestSeller().subscribe({
       next: (data) => {
-        this.BestSellerData = data
+        this.BestSellerData = data.data
         /* console.log(this.BestSellerData);
         console.log(data); */
 

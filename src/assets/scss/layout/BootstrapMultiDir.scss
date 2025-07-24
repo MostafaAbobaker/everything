@@ -315,3 +315,8 @@
   border-end-start-radius: 0;
   border-end-end-radius: $radius;
 }
+[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+  float: right;
+  padding-right: unset;
+  padding-inline-end: .5rem;
+}

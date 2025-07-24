@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IProduct } from '../../interface/iproduct';
+import { IProduct, IProductItem } from '../../interface/iproduct';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
@@ -8,9 +8,9 @@ import { environment } from '../../../../../environments/environment';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit {
-
+  isInFavorite:boolean= false
   imagePath = environment.imagePath;
-  @Input() product!: IProduct
+  @Input() product!: IProductItem
   ngOnInit(): void {
 
   }

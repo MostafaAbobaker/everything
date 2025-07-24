@@ -11,5 +11,34 @@ html[dir=rtl] {
   padding-right: unset !important;
   padding-inline-start: 0.75rem;
   padding-inline-end: 0 !important;
+  display: inline-block;
+  margin-inline-start: 10px;
 }
 }
+
+.card-body .p-tree {
+  border: none;
+}
+
+html[dir=rtl]
+.p-tree .p-tree-container .p-treenode .p-treenode-content  svg {
+  transform: scaleX(-1);
+}
+.filter .card-body  .p-tree  .p-tree-container
+{
+  gap: 0;
+  padding: 0;
+  width: 100%;
+}
+.p-tree  , .p-tree .p-tree-container .p-treenode{
+  padding: 0;
+}
+.p-tree .p-tree-container .p-treenode .p-treenode-content {
+  padding: 5px;
+}
+.p-tree .p-treenode-children {
+  padding: 0;
+  padding-inline-start: 10px;
+}
+
+

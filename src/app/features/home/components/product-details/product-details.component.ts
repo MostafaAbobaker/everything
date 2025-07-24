@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
-import { IProduct } from '../../interface/iproduct';
+import { IProductDetails } from '../../interface/iproduct-details';
 
 @Component({
   selector: 'app-product-details',
@@ -11,7 +11,7 @@ import { IProduct } from '../../interface/iproduct';
 export class ProductDetailsComponent {
   productUrl:string |null  = null
   errorMassage!:string
-  productDetails ?:IProduct
+  productDetails ?:IProductDetails
   inputQuantity: number = 1
   constructor(
     private _activatedRoute:ActivatedRoute ,
@@ -23,24 +23,28 @@ export class ProductDetailsComponent {
   }
   ngOnInit(): void {
 
-    if(this.productUrl != null) {
-      console.log('Helloooooooo');
+    this.getProductDetails()
 
-      this._productsService.getProductDetails(this.productUrl).subscribe({
+  }
+
+getProductDetails() {
+  if(this.productUrl != null) {
+      console.log('Helloooooooo', this.productUrl);
+
+      this._productsService.getProductDetails(+this.productUrl).subscribe({
         next:(result) => {
-          this.productDetails = result.data
+          this.productDetails = result.data[0]
+          console.log('Product Details:', this.productDetails);
+
 
         },
         error:(err) => {
-          this.errorMassage = err.error.message
+          this.errorMassage = err.message
 
         }
       })
     }
-
-  }
-
-
+}
 
 
 }
