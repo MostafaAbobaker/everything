@@ -37,9 +37,23 @@ export class AuthService {
   getAllUserAddress(userId: string): Observable<any> {
     return this._http.get('Accounts/get-all-address/' + userId);
   }
-
+  addAddress(form: object): Observable<any> {
+    return this._http.post('Accounts/Add-User-Address', form)
+  }
   UpdateUserAddress(form: object): Observable<any> {
     return this._http.put('Accounts/Update-User-Address', form)
+  }
+  deleteUserAddress(addressId: number): Observable<any> {
+    return this._http.delete('Accounts/Delete-User-Address/' + addressId);
+  }
+  UpdateUserProfile(form: object): Observable<any> {
+    return this._http.post('Accounts/update-user-profile', form)
+  }
+  getUserProfile(userId: string): Observable<any> {
+    return this._http.get('Accounts/get-user-profile?userId=' + userId);
+  }
+  getRegions(): Observable<any> {
+    return this._http.get('Accounts/get-all-region')
   }
   logout() {
     // localStorage.removeItem('token');
