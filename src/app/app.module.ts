@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import {  HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./shared/shared.module";
 import { globalInterceptor } from './shared/interceptor/global.interceptor';
 import { ToastrModule } from 'ngx-toastr';
-import { FormControl } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,7 @@ import { FormControl } from '@angular/forms';
     BrowserAnimationsModule,
     SharedModule,
     ToastrModule.forRoot(), // ToastrModule added
-    FormControl
+
 ],
   providers: [
     provideHttpClient(withFetch()), // Enable fetch APIs
