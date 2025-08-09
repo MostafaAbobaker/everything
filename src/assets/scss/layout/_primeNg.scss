@@ -42,3 +42,11 @@ html[dir=rtl]
 }
 
 
+.p-checkbox-label {
+    margin-left: unset;
+    margin-inline-start: 0.5rem;
+}
+.p-checkbox .p-checkbox-box.p-highlight {
+      border-color: $main-color;
+    background: $main-color;
+}

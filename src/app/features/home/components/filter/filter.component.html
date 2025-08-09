@@ -27,10 +27,15 @@
             <ul class="p-0 m-0 list-unstyled">
               @for(Brand of BrandsData; track Brand.id) {
                 <li class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" [id]="Brand.id">
+                  <p-checkbox
+                    [(ngModel)]="brandList"
+                    [label]="Brand.name"
+                    name="group"
+                    [value]="Brand" />
+                  <!-- <input class="form-check-input" type="checkbox" value="" [id]="Brand.id" [(ngModel)]="brandList" [checked]="brandList.includes(Brand.id)">
                   <label class="form-check-label" [for]="Brand.id">
                     {{Brand.nameAr}}
-                  </label>
+                  </label> -->
                 </li>
               }
             </ul>

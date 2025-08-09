@@ -18,6 +18,7 @@ export class FilterComponent implements OnInit {
   files!: IMenu[];
   selectedFile!: IMenu;
   rawCategories: IMenu[] = []; // افترض إن عندك قائمة من IMenu هنا
+  brandList:number[] = []
   constructor(
     private _categoriesService:MenuService,
     private _brandsService:BrandsService
@@ -62,36 +63,21 @@ export class FilterComponent implements OnInit {
 
 
   return categories.map((menu: IMenu) => ({
-    /* label: menu.name, // أو menu.nameAr لو عايز عربي
+    label: menu.label, // أو menu.nameAr لو عايز عربي
     data: menu,
     children: menu.secondLevels?.map((second: SecondLevel) => ({
-      label: second.name,
+      label: second.label,
       data: second,
-      children: second.threeLevels?.map((third: ThreeLevel) => ({
-        label: third.name,
+      children: second.thirdLevels?.map((third: ThreeLevel) => ({
+        label: third.label,
         data: third,
         leaf: true
       })) || [],
-    })) || [], */
+    })) || [],
   }))
 
   ;
 }
 
-  /* nodeExpand(event: any) {
-        this.messageService.add({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
-    }
 
-    nodeCollapse(event: any) {
-        this.messageService.add({ severity: 'warn', summary: 'Node Collapsed', detail: event.node.label });
-    }
-
-    nodeSelect(event: any) {
-        this.messageService.add({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
-    }
-
-    nodeUnselect(event: any) {
-        this.messageService.add({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
-    } */
-  /* Prime ng */
 }

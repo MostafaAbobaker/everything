@@ -34,7 +34,7 @@ export class HeaderComponent {
   getProductSearch() {
     this._router.navigate(['/allProducts']);
    /* this._productSearchService.getProductsSearch(this.searchInput).subscribe({
-
+n
    }) */
   }
 }

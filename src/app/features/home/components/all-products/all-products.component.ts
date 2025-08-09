@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { IProduct, IProductItem } from '../../interface/iproduct';
+import { PaginatorState } from 'primeng/paginator';
+import { log } from 'console';
 
 interface PageEvent {
     first: number;
@@ -26,26 +28,20 @@ totalRecords: number = 0;
 
 
 
+
 constructor(private _productsService:ProductsService){}
   ngOnInit(): void {
     this.getAllProducts();
   }
   getAllProducts() {
-
-    this._productsService.getNewProducts(this.first,this.rows ).subscribe({
+    debugger
+    this._productsService.getNewProducts(this.page, this.rows ).subscribe({
       next:(res)=>{
         this.allProducts =res.data
         this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-      console.log(res);
-        this.page= res.pageSize;
+        console.log(res);
         this.totalRecords =  res.totalCount;
-      /*
 
-        first :    0
-        page      :        0
-        pageCount     :        1
-        rows     :         20
-      */
 
       },
       error:(err)=>{console.log(err);
@@ -69,12 +65,15 @@ constructor(private _productsService:ProductsService){}
     }
   }
 
-onPageChange(event: any) {
-  console.log('Page changed:', event);
-    this.page = event.page ; // Adjusting for 0-based index
-    this.first = event.first;
-    this.rows = event.rows;
 
-    this.getAllProducts()
-}
+
+
+
+    onPageChange(event: PaginatorState) {
+      console.log(event);
+        this.page = (event.page?? 0) + 1 ;
+        this.first = event.first ?? 0;
+        this.rows = event.rows ?? 10;
+        this.getAllProducts()
+    }
 }
