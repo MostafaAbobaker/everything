@@ -23,7 +23,7 @@ export class ProductsService {
     return this._http.get<IResponse>(`api/ProductWeb/GetBestSeller`);
   }
   getFeatured():Observable<any> {
-    return this._http.get('/api/ProductWeb/GetFeaterd');
+    return this._http.get('api/ProductWeb/GetFeaterd');
   }
   getProductDetails(id:number):Observable<any> {
     return this._http.get(`api/ProductWeb/GetProductDetails?productId=${id}`)

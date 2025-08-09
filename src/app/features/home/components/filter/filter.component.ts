@@ -13,7 +13,7 @@ import { TreeNode } from 'primeng/api';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent implements OnInit {
-  categoriesList:TreeNode[]  = [];
+  categoriesList:IMenu[]  = [];
   BrandsData:IBrand []=[]
   files!: IMenu[];
   selectedFile!: IMenu;
@@ -32,9 +32,9 @@ export class FilterComponent implements OnInit {
   }
 
   getCategories() {
-    this._categoriesService.getMenuItems().subscribe({
+    this._categoriesService.getFilterMenu().subscribe({
       next: (data) => {
-        this.categoriesList = this.convertToTreeNodes(data) ;
+        this.categoriesList = data.data ;
         console.log();
 
 
@@ -62,7 +62,7 @@ export class FilterComponent implements OnInit {
 
 
   return categories.map((menu: IMenu) => ({
-    label: menu.name, // أو menu.nameAr لو عايز عربي
+    /* label: menu.name, // أو menu.nameAr لو عايز عربي
     data: menu,
     children: menu.secondLevels?.map((second: SecondLevel) => ({
       label: second.name,
@@ -72,7 +72,7 @@ export class FilterComponent implements OnInit {
         data: third,
         leaf: true
       })) || [],
-    })) || [],
+    })) || [], */
   }))
 
   ;

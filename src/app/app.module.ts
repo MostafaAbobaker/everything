@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./shared/shared.module";
 import { globalInterceptor } from './shared/interceptor/global.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { FormControl } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     SharedModule,
     ToastrModule.forRoot(), // ToastrModule added
-
+    FormControl
 ],
   providers: [
     provideHttpClient(withFetch()), // Enable fetch APIs

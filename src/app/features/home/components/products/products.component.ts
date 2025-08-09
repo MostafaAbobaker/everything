@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit{
   getBestSeller() {
     this._productsService.getBestSeller().subscribe({
       next: (data) => {
-        this.BestSellerData = data.data
+        this.BestSellerData = data.data ? data.data : [];
         /* console.log(this.BestSellerData);
         console.log(data); */
 
@@ -62,7 +62,7 @@ export class ProductsComponent implements OnInit{
   getFeatured() {
     this._productsService.getFeatured().subscribe({
       next: (data) => {
-        this.FeaturedData = data
+        this.FeaturedData = data.data
       },
       error: (error) => {
         console.log(error);

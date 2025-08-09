@@ -19,10 +19,11 @@ export class ShapingCartComponent {
     this.getCartItems();
   }
   getCartItems() {
+
     this._productsService.getMostPopular().subscribe({
       next:(result) => {
-        console.log(result);
-        this.cartItems = result;
+        console.log('Add To cart',result);
+        this.cartItems = result.data;
         console.log(this.cartItems);
 
         },
