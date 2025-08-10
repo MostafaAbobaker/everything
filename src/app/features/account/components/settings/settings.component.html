@@ -1,22 +1,48 @@
 <section class="settings-page py-5 bg-white">
   <div class="container">
-    <h4 class="fw-bold mb-3"> إعدادات الحساب
+    <h4 class="fw-bold mb-3">إعدادات الحساب</h4>
+    <p class="text-muted">تفاصيل الحساب</p>
+    <form class="form p-0 w-100" (ngSubmit)="UpdateUserProfile()" [formGroup]="userProfileForm">
+    
+      <div class="mb-3">
+        <label for="fullName" class="form-label">الاسم</label>
+        <input type="text" id="fullName" class="form-control" formControlName="fullName" placeholder="الاسم">
+        </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">البريد الإلكترونى</label>
+      <input type="email" id="email" class="form-control" readonly formControlName="email" placeholder="البريد الإلكترونى">
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">التليفون</label>
+      <input type="text" id="phone" class="form-control" readonly formControlName="phone" placeholder="التليفون">
+    </div>
+    
+    <div class="mb-3">
+      <label for="regionName" class="form-label">المنطقة</label>
+      <input type="text" id="regionName" class="form-control" formControlName="regionName" readonly placeholder="المنطقة">
+    </div>
 
-    </h4>
-    <p>تفاصيل الحساب
-</p>
-   <div class="mb-3">
-  <label for="" class="form-label">الاسم </label>
-  <input type="text" class="form-control" id="" placeholder="الاسم">
-</div>
-  <div class="mb-3">
-  <label for="" class="form-label">البريد الاكترونى </label>
-  <input type="email" class="form-control" id="" placeholder="الاسم">
-</div>
-  <div class="mb-3">
-  <label for="" class="form-label"> التليفون </label>
-  <input type="text" class="form-control" id="" placeholder="التليفون">
-</div>
-<button class="btn btn-success"><i class="fas fa-save fa-fw me-2"></i> حفظ </button>
+      <div class="mb-3">
+        <label for="shippingPrice" class="form-label">سعر الشحن</label>
+        <input type="number" id="shippingPrice" class="form-control" formControlName="shippingPrice" readonly
+          placeholder="سعر الشحن">
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">الجنس</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="male" value="Male" formControlName="gender">
+            <label class="form-check-label" for="male">ذكر</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="female" value="Female" formControlName="gender">
+            <label class="form-check-label" for="female">أنثى</label>
+          </div>
+          </div>
+          <button class="btn btn-success" type="submit" [disabled]="userProfileForm.invalid">
+            <i class="fas fa-save fa-fw me-2"></i> حفظ
+          </button>
+          
+          </form>
   </div>
 </section>

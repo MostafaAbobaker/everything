@@ -44,8 +44,8 @@ export class RegisterComponent {
         error: (err) => {
           // this.apiErrorMessage = err.error.message;
 
-          console.error('Registration failed', err);
-          this.errorMessage = err.error
+          console.error('Registration failed', err.error.message);
+          this.errorMessage = err.error.message
         }
       });
     }
