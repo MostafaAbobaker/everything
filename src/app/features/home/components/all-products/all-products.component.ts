@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { IProduct, IProductItem } from '../../interface/iproduct';
+import {  IProductItem } from '../../interface/iproduct';
 import { PaginatorState } from 'primeng/paginator';
-import { log } from 'console';
 
 interface PageEvent {
     first: number;
@@ -16,6 +15,9 @@ interface PageEvent {
   styleUrl: './all-products.component.scss'
 })
 export class AllProductsComponent implements OnInit{
+
+
+
   allProducts:IProductItem[] = [];
   originalProductList: IProductItem[] = [];
   stateSorting: string = 'الأكثر رواجاً'; // Default sorting state
@@ -75,5 +77,15 @@ constructor(private _productsService:ProductsService){}
         this.first = event.first ?? 0;
         this.rows = event.rows ?? 10;
         this.getAllProducts()
+    }
+
+    filterByBrand(event:any) {
+      console.log(event);
+
+      /* if (brandIds && brandIds.length > 0) {
+        this.allProducts = this.originalProductList.filter(product => brandIds.includes(product.brandId));
+      } else {
+        this.allProducts = [...this.originalProductList];
+      } */
     }
 }

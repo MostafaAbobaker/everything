@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { ICategory, ILastCategory } from '../../interface/icategory';
 import { BrandsService } from '../../services/brands.service';
@@ -6,6 +6,7 @@ import { IBrand } from '../../interface/ibrand';
 import { MenuService } from '../../../../shared/services/menu.service';
 import { IMenu, SecondLevel, ThreeLevel } from '../../../../shared/interface/imenu';
 import { TreeNode } from 'primeng/api';
+import EventEmitter from 'node:events';
 
 @Component({
   selector: 'app-filter',
@@ -13,23 +14,21 @@ import { TreeNode } from 'primeng/api';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent implements OnInit {
+
+  @Output() brandSelected = new EventEmitter<number[]>();
+
+
   categoriesList:IMenu[]  = [];
   BrandsData:IBrand []=[]
   files!: IMenu[];
   selectedFile!: IMenu;
   rawCategories: IMenu[] = []; // افترض إن عندك قائمة من IMenu هنا
   brandList:number[] = []
-  constructor(
-    private _categoriesService:MenuService,
-    private _brandsService:BrandsService
-  ) { }
+  constructor(private _categoriesService:MenuService, private _brandsService:BrandsService  ) { }
+
   ngOnInit(): void {
         this.getCategories();
         this.getBrands();
-
-        // افترض إن عندك قائمة من IMenu اسمها rawCategories
-
-
   }
 
   getCategories() {
@@ -37,14 +36,13 @@ export class FilterComponent implements OnInit {
       next: (data) => {
         this.categoriesList = data.data ;
         console.log();
-
-
       },
       error: (error) => {
         alert(error);
       }
     });
   }
+
   getBrands() {
     this._brandsService.getBrands().subscribe({
       next:(res)=>{
@@ -78,6 +76,9 @@ export class FilterComponent implements OnInit {
 
   ;
 }
-
+  onBrandChange() {
+    // this.brandSelected.emit(this.BrandsData);
+        this.brandSelected.emit(this.brandList);
+  }
 
 }

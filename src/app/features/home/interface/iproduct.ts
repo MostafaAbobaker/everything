@@ -22,6 +22,7 @@ export interface IProductItem {
   id: number
   productName: string
   categoryId: number
+  brandId: number
   categoryName: string
   price: number
   oldPrice: number

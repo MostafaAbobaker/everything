@@ -4,16 +4,7 @@
             <h5 class="fw-bold">الفئات</h5>
           </div>
           <div class="card-body">
-            <!-- <ul class="p-0 m-0 list-unstyled">
-              @for(category of categoriesList; track category.id) {
-                <li class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" [id]="category.id">
-                  <label class="form-check-label" [for]="category.id">
-                    {{category.nameAr}}
-                  </label>
-                </li>
-              }
-            </ul> -->
+
 
               <p-tree  [value]="categoriesList" />
 
@@ -31,11 +22,8 @@
                     [(ngModel)]="brandList"
                     [label]="Brand.name"
                     name="group"
-                    [value]="Brand" />
-                  <!-- <input class="form-check-input" type="checkbox" value="" [id]="Brand.id" [(ngModel)]="brandList" [checked]="brandList.includes(Brand.id)">
-                  <label class="form-check-label" [for]="Brand.id">
-                    {{Brand.nameAr}}
-                  </label> -->
+                    [value]="Brand.id" (onChange)="onBrandChange()" />
+
                 </li>
               }
             </ul>

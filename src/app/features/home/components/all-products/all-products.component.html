@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row g-3">
       <div class="col-lg-3">
-        <app-filter></app-filter>
+        <app-filter (brandSelected)="filterByBrand($event)"></app-filter>
       </div>
       <div class="col-lg-9">
         <div class="d-flex justify-content-between align-items-center mb-3">
