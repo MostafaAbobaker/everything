@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { ICategory, ILastCategory } from '../../interface/icategory';
 import { BrandsService } from '../../services/brands.service';
@@ -13,6 +13,8 @@ import { TreeNode } from 'primeng/api';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent implements OnInit {
+  @Output() brandSelect = new EventEmitter<number[]>()
+
   categoriesList:IMenu[]  = [];
   BrandsData:IBrand []=[]
   files!: IMenu[];
@@ -79,5 +81,8 @@ export class FilterComponent implements OnInit {
   ;
 }
 
+brandItemSelect() {
+  this.brandSelect.emit(this.brandList)
+}
 
 }

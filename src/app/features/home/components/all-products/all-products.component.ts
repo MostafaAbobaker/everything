@@ -3,6 +3,7 @@ import { ProductsService } from '../../services/products.service';
 import { IProduct, IProductItem } from '../../interface/iproduct';
 import { PaginatorState } from 'primeng/paginator';
 import { log } from 'console';
+import { BrandsService } from '../../services/brands.service';
 
 interface PageEvent {
     first: number;
@@ -29,7 +30,7 @@ totalRecords: number = 0;
 
 
 
-constructor(private _productsService:ProductsService){}
+constructor(private _productsService:ProductsService , private _brandsService:BrandsService){}
   ngOnInit(): void {
     this.getAllProducts();
   }
@@ -76,4 +77,28 @@ constructor(private _productsService:ProductsService){}
         this.rows = event.rows ?? 10;
         this.getAllProducts()
     }
+
+    getSelectBrand(event:any){
+      console.log(event);
+      debugger
+      if(event.length> 0) {
+        this._brandsService.getBrandsFilter(event[0]).subscribe({
+          next:(res) => {
+            console.log(res);
+            this.allProducts = res.data;
+            this.totalRecords =  res.totalCount;
+          },
+          error:(err) => {
+            console.log(err);
+
+          }
+
+        })
+
+      } else {
+        this.getAllProducts()
+      }
+    }
+
+
 }

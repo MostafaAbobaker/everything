@@ -31,8 +31,9 @@
                     [(ngModel)]="brandList"
                     [label]="Brand.name"
                     name="group"
-                    [value]="Brand" />
-                  <!-- <input class="form-check-input" type="checkbox" value="" [id]="Brand.id" [(ngModel)]="brandList" [checked]="brandList.includes(Brand.id)">
+                    [value]="Brand.id"
+                    (click)="brandItemSelect()"/>
+                 <!--  <input class="form-check-input" type="checkbox" [value]="Brand.name" [id]="Brand.id" [(ngModel)]="brandList" (change)="test()">
                   <label class="form-check-label" [for]="Brand.id">
                     {{Brand.nameAr}}
                   </label> -->
