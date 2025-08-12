@@ -42,8 +42,14 @@ export class WishListComponent {
     }); */
   }
 
-  addToCart(product_id: string) {
-    this._cartService.addCartItem(product_id).subscribe({
+  addToCart(product: IProductItem) {
+    let cartItem = {
+      "userId": localStorage.getItem('everything-userId') || '',
+      "productId": product.id,
+      "quantity": 1,
+      "featuresId": 0
+    };
+    this._cartService.AddToCart(cartItem).subscribe({
       next: (result) => {
         this._cartService.CartItemNumber.next(result.numOfCartItems);
         this.toastr.success(result.message, 'Add Product', {

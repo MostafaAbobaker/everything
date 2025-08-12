@@ -10,23 +10,11 @@ export class ShapingCartService {
 
   CartItemNumber= new BehaviorSubject<number>(0);
   CartItemProduct= new BehaviorSubject<IProduct[]>([])
-  constructor(private _http:HttpClient) {
-    this.showCart()
+  constructor(private _http: HttpClient) {
 
   }
 
-  showCart() {
-    this.getCartItems().subscribe({
-      next:(result) => {
-        this.CartItemProduct.next(result.data.products);
 
-        this.CartItemNumber.next(result.numOfCartItems);
-      }
-    })
-  }
-  getCartItems(): Observable<any> {
-    return this._http.get('cart')
-  }
   addCartItem(product_id:string): Observable<any> {
     return this._http.post('cart',
       {productId: product_id}
@@ -42,9 +30,20 @@ export class ShapingCartService {
       )
   }
 
-  deleteCart(): Observable<any> {
-    return this._http.delete('cart'
-      )
+
+  AddToCart(form: object): Observable<any> {
+    return this._http.post('api/Cart/AddToCart', form)
+  }
+  GetAllItemsCartByUserId(userId: string): Observable<any> {
+    return this._http.get(`api/Cart/GetAllItemsCartByUserId?userId=${userId}`)
+  }
+
+  RemoveAllItemsFromCart(userId: string): Observable<any> {
+    return this._http.post(`api/Cart/RemoveAllItemsFromCart?userId=${userId}`, {})
+  }
+
+  RemoveItemFromCart(form: object): Observable<any> {
+    return this._http.post('api/Cart/RemoveItemFromCart', form)
   }
 
   shippingAddress(id:any , form:object): Observable<any> {

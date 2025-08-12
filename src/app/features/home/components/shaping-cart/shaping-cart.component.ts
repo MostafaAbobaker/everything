@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ShapingCartService } from '../../services/shaping-cart.service';
-import { ProductComponent } from '../product/product.component';
-import { ProductsService } from '../../services/products.service';
+import { IcartItem } from '../../interface/icart-item';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shaping-cart',
@@ -9,59 +9,129 @@ import { ProductsService } from '../../services/products.service';
   styleUrl: './shaping-cart.component.scss'
 })
 export class ShapingCartComponent {
-  cartItems?: any;
+  cartItems: IcartItem[] = [];
+  totalCartPrice: number = 0;
   apiErrorMassage: string = '';
-  constructor(private _cartService:ShapingCartService
-    ,private _productsService:ProductsService
+  constructor(private _cartService: ShapingCartService,
+    private _shapingCartService: ShapingCartService,
+    private toastr: ToastrService
   ) { }
   ngOnInit(): void {
 
     this.getCartItems();
   }
   getCartItems() {
-    this._productsService.getMostPopular().subscribe({
+    debugger
+    this._cartService.GetAllItemsCartByUserId(localStorage.getItem('everything-userId') || '').subscribe({
       next:(result) => {
         console.log(result);
-        this.cartItems = result;
-        console.log(this.cartItems);
-
+        this.cartItems = result.data;
+        this.totalCartPrice = this.cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
         },
       error:(err) => {  console.log(err ); this.apiErrorMassage = err.error.message}
     });
-    /* this._cartService.getCartItems().subscribe({
-      next:(result) => {
-        this.cartItems = result.data;
-        console.log(this.cartItems);
-
-        },
-      error:(err) => {  console.log(err ); this.apiErrorMassage = err.error.message}
-    }); */
   }
-  /*  updateCartItem(id:string,count:number){
-    this._cartService.updateCartItem(id,count).subscribe({
-      next:(result) => {
-        console.log(result);
-        this.cartItems = result.data;
+  RemoveAllItemsFromCart() {
+    this._cartService.RemoveAllItemsFromCart(localStorage.getItem('everything-userId') || '').subscribe({
+      next: (result) => {
+        this.toastr.info(result.message, 'All Products Removed from Cart', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
+        this.getCartItems();
       },
-      error:(err) => {  console.log(err) }
+      error: (err) => {
+        this.toastr.error(err.message, 'error', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
+      }
     });
   }
-  removeCartItem(id:string){
-    this._cartService.removeCartItem(id).subscribe({
-      next:(result) => {
-        console.log(result);
-        this.cartItems = result.data;
+  RemoveItemFromCart(cartItem: IcartItem) {
+    let cartObj = {
+      "userId": localStorage.getItem('everything-userId') || '',
+      "productId": cartItem.productId,
+      "quantity": cartItem.quantity,
+      "featuresId": cartItem.featuresId
+    };
+    this._cartService.RemoveItemFromCart(cartObj).subscribe({
+      next: (result) => {
+        this.toastr.info(result.message, 'Product Removed from Cart', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
+        this.getCartItems();
       },
-      error:(err) => {  console.log(err) }
+      error: (err) => {
+        this.toastr.error(err.message, 'error', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
+      }
     });
   }
-  deleteCart(){
-    this._cartService.deleteCart().subscribe({
-      next:(result) => {
-        console.log(result);
-        this.cartItems = null;
+  addToCart(cartItem: IcartItem) {
+    debugger
+    let cartObj = {
+      "userId": localStorage.getItem('everything-userId') || '',
+      "productId": cartItem.productId,
+      "quantity": 1,
+      "featuresId": cartItem.featuresId
+    };
+    this._shapingCartService.AddToCart(cartObj).subscribe({
+      next: (result) => {
+        this.toastr.success(result.message, 'Product Added to Cart', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'increasing',
+        });
+        this.getCartItems();
       },
-      error:(err) => {  console.log(err) }
+      error: (err) => {
+        this.toastr.error(err.message, 'error', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
+      },
     });
-  } */
+  }
+  minusItemFromCart(cartItem: IcartItem) {
+    let cartObj = {
+      "userId": localStorage.getItem('everything-userId') || '',
+      "productId": cartItem.productId,
+      "quantity": 1,
+      "featuresId": cartItem.featuresId
+    };
+    this._cartService.RemoveItemFromCart(cartObj).subscribe({
+      next: (result) => {
+        this.toastr.info(result.message, 'Product Removed from Cart', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
+        this.getCartItems();
+      },
+      error: (err) => {
+        this.toastr.error(err.message, 'error', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
+      }
+    });
+  }
 }
