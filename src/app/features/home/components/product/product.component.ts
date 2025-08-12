@@ -35,12 +35,22 @@ export class ProductComponent implements OnInit {
     this._shapingCartService.AddToCart(cartItem).subscribe({
       next: (result) => {
         debugger
-          this.toastr.success(result.message, 'Product Added to Cart', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'increasing',
-        });
+        if (result.succeeded) {
+          this.toastr.success(result.message, 'Success', {
+            closeButton: true,
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'increasing',
+          });
+        }
+        else {
+          this.toastr.warning(result.message, 'warning', {
+            closeButton: true,
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'increasing',
+          });
+        }
       },
       error: (err) => {
         console.log(err);

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IProduct } from '../interface/iproduct';
+import { IcartItem } from '../interface/icart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +40,19 @@ export class ShapingCartService {
   }
 
   RemoveAllItemsFromCart(userId: string): Observable<any> {
-    return this._http.post(`api/Cart/RemoveAllItemsFromCart?userId=${userId}`, {})
+    return this._http.delete(`api/Cart/RemoveAllProductsFromCart?userId=${userId}`, {})
   }
 
-  RemoveItemFromCart(form: object): Observable<any> {
-    return this._http.post('api/Cart/RemoveItemFromCart', form)
+  RemoveItemFromCart(form: IcartItem): Observable<any> {
+    return this._http.delete(`api/Cart/RemoveProductFromCartById?productId=${form.productId}&userId=${form.userId}`, {})
+  }
+
+  IncreaseQuantityOfItemInCart(form: object): Observable<any> {
+    return this._http.post('api/Cart/IncreaseQuantityOfItemInCart', form)
+  }
+
+  DecreaseQuantityOfItemFromCart(form: object): Observable<any> {
+    return this._http.post('api/Cart/DecreaseQuantityOfItemFromCart', form)
   }
 
   shippingAddress(id:any , form:object): Observable<any> {

@@ -34,7 +34,7 @@ export class ShapingCartComponent {
   RemoveAllItemsFromCart() {
     this._cartService.RemoveAllItemsFromCart(localStorage.getItem('everything-userId') || '').subscribe({
       next: (result) => {
-        this.toastr.info(result.message, 'All Products Removed from Cart', {
+        this.toastr.error(result.message, 'All Products Removed from Cart', {
           closeButton: true,
           timeOut: 3000,
           progressBar: true,
@@ -53,15 +53,9 @@ export class ShapingCartComponent {
     });
   }
   RemoveItemFromCart(cartItem: IcartItem) {
-    let cartObj = {
-      "userId": localStorage.getItem('everything-userId') || '',
-      "productId": cartItem.productId,
-      "quantity": cartItem.quantity,
-      "featuresId": cartItem.featuresId
-    };
-    this._cartService.RemoveItemFromCart(cartObj).subscribe({
+    this._cartService.RemoveItemFromCart(cartItem).subscribe({
       next: (result) => {
-        this.toastr.info(result.message, 'Product Removed from Cart', {
+        this.toastr.error(result.message, 'Product Removed from Cart', {
           closeButton: true,
           timeOut: 3000,
           progressBar: true,
@@ -79,22 +73,15 @@ export class ShapingCartComponent {
       }
     });
   }
-  addToCart(cartItem: IcartItem) {
-    debugger
+  IncreaseQuantityInCart(cartItem: IcartItem) {
     let cartObj = {
       "userId": localStorage.getItem('everything-userId') || '',
       "productId": cartItem.productId,
       "quantity": 1,
       "featuresId": cartItem.featuresId
     };
-    this._shapingCartService.AddToCart(cartObj).subscribe({
+    this._shapingCartService.IncreaseQuantityOfItemInCart(cartObj).subscribe({
       next: (result) => {
-        this.toastr.success(result.message, 'Product Added to Cart', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'increasing',
-        });
         this.getCartItems();
       },
       error: (err) => {
@@ -107,21 +94,15 @@ export class ShapingCartComponent {
       },
     });
   }
-  minusItemFromCart(cartItem: IcartItem) {
+  DecreaseQuantityFromCart(cartItem: IcartItem) {
     let cartObj = {
       "userId": localStorage.getItem('everything-userId') || '',
       "productId": cartItem.productId,
       "quantity": 1,
       "featuresId": cartItem.featuresId
     };
-    this._cartService.RemoveItemFromCart(cartObj).subscribe({
+    this._cartService.DecreaseQuantityOfItemFromCart(cartObj).subscribe({
       next: (result) => {
-        this.toastr.info(result.message, 'Product Removed from Cart', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'decreasing',
-        });
         this.getCartItems();
       },
       error: (err) => {
