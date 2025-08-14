@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { IcartItem } from '../../interface/icart-item';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-shaping-cart',
@@ -9,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './shaping-cart.component.scss'
 })
 export class ShapingCartComponent {
+  imagePath = environment.imagePath;
   cartItems: IcartItem[] = [];
   totalCartPrice: number = 0;
   apiErrorMassage: string = '';
