@@ -58,21 +58,26 @@ export class FilterComponent implements OnInit {
     })
   }
 
+test() {
+    console.log('this Categories List =>>',this.convertToTreeNodes(this.categoriesList));
 
+}
   /* Prime ng */
 
   convertToTreeNodes(categories: IMenu[]): TreeNode[] {
 
 
   return categories.map((menu: IMenu) => ({
+
+
     label: menu.label, // أو menu.nameAr لو عايز عربي
-    data: menu,
+    icon:'pi pi-user',
     children: menu.secondLevels?.map((second: SecondLevel) => ({
       label: second.label,
-      data: second,
+      icon:'pi pi-user',
       children: second.thirdLevels?.map((third: ThreeLevel) => ({
         label: third.label,
-        data: third,
+        icon:'pi pi-user',
         leaf: true
       })) || [],
     })) || [],
