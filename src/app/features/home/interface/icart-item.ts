@@ -7,5 +7,6 @@ export interface IcartItem {
     "productName": string,
     "userId": string,
     "featuresId": number,
-    "addedDate": string
+    "addedDate": string,
+    "productImage":string
 }
