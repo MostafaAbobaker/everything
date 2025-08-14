@@ -22,6 +22,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { FilterComponent } from './components/filter/filter.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { TreeModule } from 'primeng/tree';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { TreeModule } from 'primeng/tree';
     HttpClientModule,
     FormsModule,
     PaginatorModule,
-    TreeModule
+    TreeModule,
+    CheckboxModule
   ]
 })
 export class HomeModule { }

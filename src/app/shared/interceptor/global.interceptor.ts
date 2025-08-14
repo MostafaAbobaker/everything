@@ -15,7 +15,7 @@ export const globalInterceptor: HttpInterceptorFn = (req, next) => {
   // const token = localStorage.getItem('userToken');
 
   const token = typeof window !== 'undefined' ? localStorage.getItem('everything-token') : null;
-  debugger
+
   // Clone the request and add token if it exists
   if (token) {
 

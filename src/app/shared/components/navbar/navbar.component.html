@@ -17,28 +17,28 @@
         <li class="nav-item">
           <a class="nav-link py-3" routerLink="brands" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> العلامات التجارية</a>
         </li> -->
-        @for(itemMenu of menuItems; track itemMenu.id ; let i = $index) {
+        @for(itemMenu of menuItems; track itemMenu.key ; let i = $index) {
           @if(i < 7) {
-            <li class="nav-item" (mouseenter)="getDetailsService(itemMenu.id, itemMenu.name)"
+            <li class="nav-item" (mouseenter)="getDetailsService(itemMenu.key, itemMenu.label)"
             (mouseleave)="getDetailsService(0,'')">
-              <a class="nav-link py-3" [routerLink]="['/category/', itemMenu.id]"> {{itemMenu.name}}</a>
+              <a class="nav-link py-3" [routerLink]="['/category/', itemMenu.key]"> {{itemMenu.label}}</a>
               @if(itemMenu.secondLevels.length > 0) {
 
                 <div class="sub-menu " [class.show]="
-                  activeSubMenu === itemMenu.name && isShowMenu === false
+                  activeSubMenu === itemMenu.label && isShowMenu === false
                 ">
                   <div class="sub-content">
                     <div class="container">
                       <div class="row">
-                        @for(itemSecondLevel of itemMenu.secondLevels; track itemSecondLevel.id) {
+                        @for(itemSecondLevel of itemMenu.secondLevels; track itemSecondLevel.key) {
 
                           <div class="col-lg-3">
-                            <a class="h6 fw-blod " [routerLink]="['/category/', itemSecondLevel.id]">{{itemSecondLevel.name}}</a>
+                            <a class="h6 fw-blod " [routerLink]="['/category/', itemSecondLevel.key]">{{itemSecondLevel.label}}</a>
                                 <ul class="list-group list-group-flush list-unstyled m-0 p-0">
-                                  @for(itemThreeLevel of itemSecondLevel.threeLevels; track itemThreeLevel.id) {
+                                  @for(itemThreeLevel of itemSecondLevel.thirdLevels; track itemThreeLevel.key) {
                                      <li >
                                     <a class="list-group-item list-group-item-action "
-                                    [routerLink]="['/category/', itemThreeLevel.id]">{{itemThreeLevel.name}}</a>
+                                    [routerLink]="['/category/', itemThreeLevel.key]">{{itemThreeLevel.label}}</a>
                                   </li>
                                   }
 
