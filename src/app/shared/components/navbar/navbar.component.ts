@@ -22,10 +22,12 @@ export class NavbarComponent implements OnInit {
     this._menuService.getMenuItems().subscribe({
       next:(result) => {
 
-        this.menuItems = result;
-        console.log('Menu Items:', this.menuItems.length);
+        this.menuItems = result.data;
+        console.log('Menu Items:', this.menuItems);
       },
       error:(err) => {
+        console.log(err);
+
         alert('Error fetching menu items' + err);
       }
     })

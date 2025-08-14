@@ -6,6 +6,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { NotFound404Component } from './components/not-found404/not-found404.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,8 +19,10 @@ import { RouterModule } from '@angular/router';
     HeaderComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],exports: [
     NavbarComponent,
     FooterComponent,

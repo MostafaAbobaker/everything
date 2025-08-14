@@ -5,15 +5,13 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService {
+export class ProductSearchService {
 
   constructor(private _http:HttpClient) { }
-  getMenuItems(): Observable<any> {
-    return this._http.get('api/CategoryWeb/GetNavBarMenu');
+
+  getProductsSearch(name: string):Observable<any> {
+    return this._http.get(`api/ProductWeb/GetAllProductsByName?SearchTerm=${name}`)
   }
 
-  getFilterMenu(): Observable<any> {
-    return this._http.get('api/CategoryWeb/GetsMenu');
-  }
 
 }

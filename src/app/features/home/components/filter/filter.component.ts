@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { ICategory, ILastCategory } from '../../interface/icategory';
 import { BrandsService } from '../../services/brands.service';
@@ -13,11 +13,14 @@ import { TreeNode } from 'primeng/api';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent implements OnInit {
-  categoriesList:TreeNode[]  = [];
+  @Output() brandSelect = new EventEmitter<number[]>()
+
+  categoriesList:IMenu[]  = [];
   BrandsData:IBrand []=[]
   files!: IMenu[];
   selectedFile!: IMenu;
   rawCategories: IMenu[] = []; // افترض إن عندك قائمة من IMenu هنا
+  brandList:number[] = []
   constructor(
     private _categoriesService:MenuService,
     private _brandsService:BrandsService
@@ -32,9 +35,9 @@ export class FilterComponent implements OnInit {
   }
 
   getCategories() {
-    this._categoriesService.getMenuItems().subscribe({
+    this._categoriesService.getFilterMenu().subscribe({
       next: (data) => {
-        this.categoriesList = this.convertToTreeNodes(data) ;
+        this.categoriesList = data.data ;
         console.log();
 
 
@@ -55,21 +58,26 @@ export class FilterComponent implements OnInit {
     })
   }
 
+test() {
+    console.log('this Categories List =>>',this.convertToTreeNodes(this.categoriesList));
 
+}
   /* Prime ng */
 
   convertToTreeNodes(categories: IMenu[]): TreeNode[] {
 
 
   return categories.map((menu: IMenu) => ({
-    label: menu.name, // أو menu.nameAr لو عايز عربي
-    data: menu,
+
+
+    label: menu.label, // أو menu.nameAr لو عايز عربي
+    icon:'pi pi-user',
     children: menu.secondLevels?.map((second: SecondLevel) => ({
-      label: second.name,
-      data: second,
-      children: second.threeLevels?.map((third: ThreeLevel) => ({
-        label: third.name,
-        data: third,
+      label: second.label,
+      icon:'pi pi-user',
+      children: second.thirdLevels?.map((third: ThreeLevel) => ({
+        label: third.label,
+        icon:'pi pi-user',
         leaf: true
       })) || [],
     })) || [],
@@ -78,20 +86,8 @@ export class FilterComponent implements OnInit {
   ;
 }
 
-  /* nodeExpand(event: any) {
-        this.messageService.add({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
-    }
+brandItemSelect() {
+  this.brandSelect.emit(this.brandList)
+}
 
-    nodeCollapse(event: any) {
-        this.messageService.add({ severity: 'warn', summary: 'Node Collapsed', detail: event.node.label });
-    }
-
-    nodeSelect(event: any) {
-        this.messageService.add({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
-    }
-
-    nodeUnselect(event: any) {
-        this.messageService.add({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
-    } */
-  /* Prime ng */
 }
