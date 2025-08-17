@@ -15,12 +15,14 @@ import { TreeNode } from 'primeng/api';
 export class FilterComponent implements OnInit {
   @Output() brandSelect = new EventEmitter<number[]>()
 
-  categoriesList:IMenu[]  = [];
+
+  categoriesList:TreeNode[]  = [];
   BrandsData:IBrand []=[]
   files!: IMenu[];
-  selectedFile!: IMenu;
+  selectedFile!: IMenu ;
   rawCategories: IMenu[] = []; // افترض إن عندك قائمة من IMenu هنا
-  brandList:number[] = []
+  brandList:number[] = [];
+
   constructor(
     private _categoriesService:MenuService,
     private _brandsService:BrandsService
@@ -35,9 +37,9 @@ export class FilterComponent implements OnInit {
   }
 
   getCategories() {
-    this._categoriesService.getMenuItems().subscribe({
+    this._categoriesService.getFilterMenu().subscribe({
       next: (data) => {
-        this.categoriesList = data ;
+        this.categoriesList = this.convertToTreeNodes(data) ;
         console.log();
 
 
@@ -80,6 +82,9 @@ export class FilterComponent implements OnInit {
 
 brandItemSelect() {
   this.brandSelect.emit(this.brandList)
+  console.log(this.brandList);
+
 }
+
 
 }

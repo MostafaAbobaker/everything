@@ -15,7 +15,8 @@
               }
             </ul> -->
 
-              <p-tree  [value]="convertToTreeNodes(categoriesList)" />
+              <p-tree  [value]="categoriesList" selectionMode="single"
+    [(selection)]="selectedFile"/>
 
           </div>
         </div>

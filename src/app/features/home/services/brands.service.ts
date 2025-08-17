@@ -12,7 +12,7 @@ export class BrandsService {
   getBrands():Observable<any> {
     return this._http.get('Brands/GetBrandList');
   }
-  getBrandsFilter(id:number):Observable<any> {
+  getBrandsFilter(id:number[]):Observable<any> {
     return this._http.get(`api/ProductWeb/GetProductsByBrandIds?BrandIds=${id}`);
   }
 }

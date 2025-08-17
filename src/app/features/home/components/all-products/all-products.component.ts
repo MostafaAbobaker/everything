@@ -107,11 +107,11 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
         this.getAllProducts()
     }
 
-    getSelectBrand(event:any){
+    getSelectBrand(event:number[]){
       console.log(event);
-      debugger
+
       if(event.length> 0) {
-        this._brandsService.getBrandsFilter(event[0]).subscribe({
+        this._brandsService.getBrandsFilter(event).subscribe({
           next:(res) => {
             console.log(res);
             this.allProducts = res.data;

@@ -9,11 +9,11 @@ export class MenuService {
 
   constructor(private _http:HttpClient) { }
   getMenuItems(): Observable<any> {
-    return this._http.get('Category/GettMenu');
+    return this._http.get('api/CategoryWeb/GetNavBarMenu');
   }
 
   getFilterMenu(): Observable<any> {
-    return this._http.get('api/CategoryWeb/GetsMenu');
+    return this._http.get('Category/GettMenu');
   }
 
 }

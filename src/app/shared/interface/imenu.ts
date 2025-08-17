@@ -30,6 +30,7 @@ export interface IMenu {
   subCount: number
   imageUrl: string
   iconUrl: string
+  hassub: number
   secondLevels: SecondLevel[]
 }
 
