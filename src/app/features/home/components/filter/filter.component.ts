@@ -35,9 +35,9 @@ export class FilterComponent implements OnInit {
   }
 
   getCategories() {
-    this._categoriesService.getFilterMenu().subscribe({
+    this._categoriesService.getMenuItems().subscribe({
       next: (data) => {
-        this.categoriesList = data.data ;
+        this.categoriesList = data ;
         console.log();
 
 
@@ -58,33 +58,25 @@ export class FilterComponent implements OnInit {
     })
   }
 
-test() {
-    console.log('this Categories List =>>',this.convertToTreeNodes(this.categoriesList));
 
-}
   /* Prime ng */
 
-  convertToTreeNodes(categories: IMenu[]): TreeNode[] {
-
-
+ convertToTreeNodes(categories: IMenu[]): TreeNode[] {
   return categories.map((menu: IMenu) => ({
-
-
-    label: menu.label, // أو menu.nameAr لو عايز عربي
-    icon:'pi pi-user',
+    label: menu.name,
+    key: menu.id.toString(),
     children: menu.secondLevels?.map((second: SecondLevel) => ({
-      label: second.label,
-      icon:'pi pi-user',
-      children: second.thirdLevels?.map((third: ThreeLevel) => ({
-        label: third.label,
-        icon:'pi pi-user',
+      label: second.name,
+      key: second.id.toString(),
+      children: second.threeLevels?.map((third: ThreeLevel) => ({
+        label: third.name,
+        key: third.id.toString(),
         leaf: true
       })) || [],
     })) || [],
-  }))
-
-  ;
+  }));
 }
+
 
 brandItemSelect() {
   this.brandSelect.emit(this.brandList)

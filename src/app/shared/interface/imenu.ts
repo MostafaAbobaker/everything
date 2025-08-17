@@ -1,4 +1,4 @@
-export interface IMenu {
+/* export interface IMenu {
   key: number
   label: string
   parentId: number
@@ -16,6 +16,32 @@ export interface ThreeLevel {
   key: number
   label: string
   parentId: any
+} */
+
+
+
+
+export interface IMenu {
+  id: number
+  name: string
+  nameAr: string
+  levelNumber: number
+  parentId: number
+  subCount: number
+  imageUrl: string
+  iconUrl: string
+  secondLevels: SecondLevel[]
 }
 
+export interface SecondLevel {
+  id: number
+  name: string
+  nameAr: string
+  threeLevels: ThreeLevel[]
+}
 
+export interface ThreeLevel {
+  id: number
+  name: string
+  nameAr: string
+}

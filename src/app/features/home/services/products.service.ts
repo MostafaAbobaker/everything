@@ -12,6 +12,13 @@ export class ProductsService {
   getAllProducts(page:number,size:number):Observable<any>{
     return this._http.get(`api/ProductWeb/GetNewProduct?pageNumber=${page}&PageSize=${size}`)
   }
+  getProductsByCategory(id:number , page:number,size:number):Observable<any>{
+    return this._http.get(`api/ProductWeb/GetProductsByCategoryId?CategoryId=${id}&pageNumber=${page}&PageSize=${size}`)
+  }
+
+  getProductsByName(name:string , page:number,size:number):Observable<any>{
+    return this._http.get(`api/ProductWeb/GetAllProductsByName?SearchTerm=${name}&pageNumber=${page}&PageSize=${size}`)
+  }
 
   getNewProducts(page:number,size:number):Observable<IResponse> {
     return this._http.get<IResponse>(`api/ProductWeb/GetNewProduct?pageNumber=${page}&pageSize=${size}`);

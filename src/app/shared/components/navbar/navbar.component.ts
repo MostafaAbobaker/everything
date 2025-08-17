@@ -1,7 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
-import { IMenu } from '../../interface/imenu';
+ interface IMenu {
+  key: number
+  label: string
+  parentId: number
+  secondLevels: SecondLevel[]
+}
 
+ interface SecondLevel {
+  key: number
+  label: string
+  parentId: any
+  thirdLevels: ThreeLevel[]
+}
+
+ interface ThreeLevel {
+  key: number
+  label: string
+  parentId: any
+}
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

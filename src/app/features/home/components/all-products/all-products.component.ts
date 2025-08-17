@@ -4,6 +4,7 @@ import { IProduct, IProductItem } from '../../interface/iproduct';
 import { PaginatorState } from 'primeng/paginator';
 import { log } from 'console';
 import { BrandsService } from '../../services/brands.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface PageEvent {
     first: number;
@@ -28,26 +29,54 @@ rows: number = 10;
 totalRecords: number = 0;
 
 
+productUrl:string |null = '' ;
 
-
-constructor(private _productsService:ProductsService , private _brandsService:BrandsService){}
+constructor(private _productsService:ProductsService , private _brandsService:BrandsService,
+  private _activatedRoute:ActivatedRoute
+){
+}
   ngOnInit(): void {
+    this._activatedRoute.paramMap.subscribe(params => {
+      this.productUrl = params.get('id')
+    });
+
     this.getAllProducts();
   }
+
+
+
   getAllProducts() {
-    debugger
-    this._productsService.getNewProducts(this.page, this.rows ).subscribe({
-      next:(res)=>{
-        this.allProducts =res.data
-        this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-        console.log(res);
-        this.totalRecords =  res.totalCount;
+    if(this.productUrl?.includes('id')) {
+      let id = this.productUrl.replace('id','')
+      this._productsService.getProductsByCategory(+id,this.page, this.rows ).subscribe({
+        next:(res)=>{
+          this.allProducts =res.data
+          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+          console.log(res);
+          this.totalRecords =  res.totalCount;
 
 
-      },
-      error:(err)=>{console.log(err);
-      }
-    })
+        },
+        error:(err)=>{console.log(err);
+        }
+      })
+
+    } else if(this.productUrl?.includes('search')){
+      let name = this.productUrl.replace('search', '');
+      this._productsService.getProductsByName(name,this.page, this.rows ).subscribe({
+        next:(res)=>{
+          this.allProducts =res.data
+          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+          console.log(res);
+          this.totalRecords =  res.totalCount;
+
+
+        },
+        error:(err)=>{console.log(err);
+        }
+      })
+    }
+
   }
 
 
