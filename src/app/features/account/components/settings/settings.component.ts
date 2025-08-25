@@ -3,6 +3,7 @@ import { AuthService } from '../../../../auth/services/auth.service';
 import { Iuser } from '../../interface/iuser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -11,7 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SettingsComponent {
 
-  constructor(private _authService: AuthService,    private toastr: ToastrService,) { }
+  constructor(private _authService: AuthService, private toastr: ToastrService,
+    private _router: Router
+  ) { }
 
   userProfileForm: FormGroup = new FormGroup({
     fullName: new FormControl(null, [Validators.required]),
@@ -28,6 +31,10 @@ export class SettingsComponent {
   getUserProfile(): void {
 
     const userId = localStorage.getItem('everything-userId') || '';
+    if (!userId) {
+      this._router.navigate(['/auth/login']);
+      return;
+    }
     this._authService.getUserProfile(userId).subscribe({
       next: (result) => {
         this.userProfileForm.patchValue(result);

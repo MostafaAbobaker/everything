@@ -10,3 +10,9 @@ export interface IcartItem {
     "addedDate": string,
     "productImage":string
 }
+
+
+export interface PaymentOrder {
+    "orderPaymentMethod": number,
+    "userId": string,
+}
