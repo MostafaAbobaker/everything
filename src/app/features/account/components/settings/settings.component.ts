@@ -40,7 +40,6 @@ export class SettingsComponent {
         this.userProfileForm.patchValue(result);
       },
       error: (err) => {
-        console.log(err);
       },
     });
 
@@ -66,7 +65,6 @@ export class SettingsComponent {
         });
       },
       error: (err) => {
-        console.log(err);
       },
     });
 

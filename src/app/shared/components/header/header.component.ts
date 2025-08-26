@@ -32,7 +32,10 @@ export class HeaderComponent {
 
 
   getProductSearch() {
-    this._router.navigate(['/allProducts']);
+    if(this.searchInput) {
+
+      this._router.navigate(['/allProducts','search'+ this.searchInput]);
+    }
    /* this._productSearchService.getProductsSearch(this.searchInput).subscribe({
 n
    }) */

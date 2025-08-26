@@ -20,7 +20,7 @@ export class ForgetPasswordComponent {
   forgotPassword() {
     if(this.ForgotPasswordForm.valid) {
       this._authService.forgotPassword(this.ForgotPasswordForm.value).subscribe({
-        next:(data)=>{console.log(data)
+        next:(data)=>{
           this.verifyCode = true;
         },
         error:(err) => {this.apiErrorMassage = err.error.message}

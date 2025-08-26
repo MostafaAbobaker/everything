@@ -4,6 +4,7 @@ import { IProduct, IProductItem } from '../../interface/iproduct';
 import { PaginatorState } from 'primeng/paginator';
 import { log } from 'console';
 import { BrandsService } from '../../services/brands.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface PageEvent {
     first: number;
@@ -28,26 +29,50 @@ rows: number = 10;
 totalRecords: number = 0;
 
 
+productUrl:string |null = '' ;
 
-
-constructor(private _productsService:ProductsService , private _brandsService:BrandsService){}
+constructor(private _productsService:ProductsService , private _brandsService:BrandsService,
+  private _activatedRoute:ActivatedRoute
+){
+}
   ngOnInit(): void {
+    this._activatedRoute.paramMap.subscribe(params => {
+      this.productUrl = params.get('id')
+    });
+
     this.getAllProducts();
   }
+
+
+
   getAllProducts() {
-    debugger
-    this._productsService.getNewProducts(this.page, this.rows ).subscribe({
-      next:(res)=>{
-        this.allProducts =res.data
-        this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-        console.log(res);
-        this.totalRecords =  res.totalCount;
+    if(this.productUrl?.includes('id')) {
+      let id = this.productUrl.replace('id','')
+      this._productsService.getProductsByCategory(+id,this.page, this.rows ).subscribe({
+        next:(res)=>{
+          this.allProducts =res.data
+          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+          this.totalRecords =  res.totalCount;
+        },
+        error:(err)=>{
+
+        }
+      })
+
+    } else if(this.productUrl?.includes('search')){
+      let name = this.productUrl.replace('search', '');
+      this._productsService.getProductsByName(name,this.page, this.rows ).subscribe({
+        next:(res)=>{
+          this.allProducts =res.data
+          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+          this.totalRecords =  res.totalCount;
 
 
-      },
-      error:(err)=>{console.log(err);
-      }
-    })
+        },
+        error:(err)=>{}
+      })
+    }
+
   }
 
 
@@ -71,25 +96,21 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
 
 
     onPageChange(event: PaginatorState) {
-      console.log(event);
         this.page = (event.page?? 0) + 1 ;
         this.first = event.first ?? 0;
         this.rows = event.rows ?? 10;
         this.getAllProducts()
     }
 
-    getSelectBrand(event:any){
-      console.log(event);
-      debugger
+    getSelectBrand(event:number[]){
+
       if(event.length> 0) {
-        this._brandsService.getBrandsFilter(event[0]).subscribe({
+        this._brandsService.getBrandsFilter(event).subscribe({
           next:(res) => {
-            console.log(res);
             this.allProducts = res.data;
             this.totalRecords =  res.totalCount;
           },
           error:(err) => {
-            console.log(err);
 
           }
 
@@ -99,6 +120,20 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
         this.getAllProducts()
       }
     }
-
+    getSelectCategory(event:number) {
+      debugger
+      if(event> 0) {
+        this._productsService.getProductsByCategory(event,this.page, this.rows ).subscribe({
+        next:(res)=>{
+          debugger
+          this.allProducts =res.data
+          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+          this.totalRecords =  res.totalCount;
+        },
+        error:(err)=>{
+        }
+      })
+      }
+    }
 
 }

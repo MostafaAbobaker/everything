@@ -27,11 +27,9 @@ export class ProductsComponent implements OnInit{
       next: (data) => {
 
         this.NewProductsData = data.data;
-        console.log('New Products Data:', this.NewProductsData);
 
       },
       error: (error) => {
-        console.log(error);
       }
     })
 
@@ -42,7 +40,6 @@ export class ProductsComponent implements OnInit{
         this.MostPopularData = data.data
       },
       error: (error) => {
-        console.log(error);
       }
     })
   }
@@ -50,12 +47,9 @@ export class ProductsComponent implements OnInit{
     this._productsService.getBestSeller().subscribe({
       next: (data) => {
         this.BestSellerData = data.data ? data.data : [];
-        /* console.log(this.BestSellerData);
-        console.log(data); */
 
       },
       error: (error) => {
-        console.log(error);
       }
     })
   }
@@ -65,7 +59,6 @@ export class ProductsComponent implements OnInit{
         this.FeaturedData = data.data
       },
       error: (error) => {
-        console.log(error);
       }
     })
   }
