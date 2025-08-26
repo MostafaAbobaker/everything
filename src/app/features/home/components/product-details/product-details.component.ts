@@ -97,6 +97,9 @@ getProductDetails() {
         },
       });
     }
-
+    changeOption(name:ProductProperty) {
+      console.log(name);
+      this.defaultValue = name
+    }
 
 }
