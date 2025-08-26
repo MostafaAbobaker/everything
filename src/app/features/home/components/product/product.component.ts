@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
     private toastr: ToastrService,
     private _router: Router
   ) { }
-  
+
   isInFavorite:boolean= false
   imagePath = environment.imagePath;
   @Input() product!: IProductItem

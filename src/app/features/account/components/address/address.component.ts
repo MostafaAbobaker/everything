@@ -39,7 +39,6 @@ export class AddressComponent {
           this.defaultAddresses = result.filter((item: any) => item.isdefault);
         },
         error: (err) => {
-          console.log(err);
         },
       });
     }
@@ -58,7 +57,6 @@ export class AddressComponent {
         });
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }
@@ -68,7 +66,6 @@ export class AddressComponent {
         this.regionsOptions = result;
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }
@@ -89,7 +86,6 @@ export class AddressComponent {
         });
       },
       error: (err) => {
-        console.log(err);
       },
     });
   };
@@ -105,7 +101,6 @@ export class AddressComponent {
         });
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }

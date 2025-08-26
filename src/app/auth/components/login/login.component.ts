@@ -29,10 +29,9 @@ export class LoginComponent {
   })
 
   login() {
-    console.log(this.loginForm);
     if(this.loginForm.valid) {
       this.destroyLogin = this._authService.loginForm(this.loginForm.value).subscribe({
-        next:(data) => {console.log(data);
+        next:(data) => {
           this._router.navigate(['/home']);
           // this._authService.isLogged.next(true);
           localStorage.setItem('everything-token', data.token);
@@ -40,12 +39,11 @@ export class LoginComponent {
           localStorage.setItem('everything-userId', data.userId);
 
 
-          // console.log('Done Login' , localStorage.getItem('token'));
 
         },
-        error:(err) => {console.log(err.error.message);
+        error:(err) => {
           // this.apiErrorMassage = err.error.message;
-          alert(err.error.message)
+
         }
 
       })
@@ -53,8 +51,7 @@ export class LoginComponent {
   }
 
   ngOnDestroy(): void {
-    /* this.destroyLogin?.unsubscribe()
-    console.log('Done Destroy' , this.destroyLogin); */
+    //  this.destroyLogin?.unsubscribe()
 
   }
 }

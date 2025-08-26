@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
-import { IProductDetails } from '../../interface/iproduct-details';
-import { IProductItem } from '../../interface/iproduct';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { IProductDetails, ProductProperty } from '../../interface/iproduct-details';
+import { IProductItem } from '../../interface/iproduct';
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -15,6 +16,9 @@ export class ProductDetailsComponent {
   errorMassage!:string
   productDetails ?:IProductDetails
   inputQuantity: number = 1
+
+  defaultValue!:ProductProperty
+
   constructor(
     private _activatedRoute:ActivatedRoute ,
     private _productsService: ProductsService,
@@ -32,14 +36,14 @@ export class ProductDetailsComponent {
 
   }
 
+
 getProductDetails() {
   if(this.productUrl != null) {
-      console.log('Helloooooooo', this.productUrl);
 
       this._productsService.getProductDetails(+this.productUrl).subscribe({
+      // this._productsService.getProductDetails(267).subscribe({
         next:(result) => {
-          this.productDetails = result.data;
-          console.log('Product Details:', this.productDetails);
+          this.productDetails = result.data
 
 
         },
@@ -50,7 +54,7 @@ getProductDetails() {
       })
     }
   }
-  
+
   addToCart(product: IProductDetails|undefined) {
       debugger
       if (!localStorage.getItem('everything-userId')) {
@@ -92,6 +96,10 @@ getProductDetails() {
           });
         },
       });
+    }
+    changeOption(name:ProductProperty) {
+      console.log(name);
+      this.defaultValue = name
     }
 
 }

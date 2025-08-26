@@ -12,7 +12,7 @@
 </a>
  -->
 
-<a class="category-item" [routerLink]="['/categories', category.id]">
+<a class="category-item" [routerLink]="['/allProducts', 'id'+category.id]">
   <div class="image">
     <img
       [src]="imagePath + category.imageUrl"

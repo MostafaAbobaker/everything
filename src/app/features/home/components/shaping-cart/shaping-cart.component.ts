@@ -25,11 +25,10 @@ export class ShapingCartComponent {
     debugger
     this._cartService.GetAllItemsCartByUserId(localStorage.getItem('everything-userId') || '').subscribe({
       next:(result) => {
-        console.log(result);
         this.cartItems = result.data;
         this.totalCartPrice = this.cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
         },
-      error:(err) => {  console.log(err ); this.apiErrorMassage = err.error.message}
+      error:(err) => {   this.apiErrorMassage = err.error.message}
     });
   }
   RemoveAllItemsFromCart() {

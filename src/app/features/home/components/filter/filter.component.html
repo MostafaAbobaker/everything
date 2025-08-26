@@ -4,18 +4,119 @@
             <h5 class="fw-bold">الفئات</h5>
           </div>
           <div class="card-body">
-            <!-- <ul class="p-0 m-0 list-unstyled">
-              @for(category of categoriesList; track category.id) {
-                <li class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" [id]="category.id">
-                  <label class="form-check-label" [for]="category.id">
-                    {{category.nameAr}}
-                  </label>
+
+            <!-- <ul class="p-0 m-0 list-unstyled parent-ul">
+              @for(parent of categoriesList; track parent.id) {
+                <li >
+                  @if(parent.secondLevels.length> 0 ) {
+                  <div class="list-of d-flex align-items-center">
+                    <span (click)="getMenuShow(parent.name, parent.id, 'parent')"><i class="fa-solid  fa-fw" [class]="activeParentId === parent.id?'fa-folder-minus':'fa-folder-plus'"></i></span>
+                    <a [routerLink]="['/allProducts', 'id' + parent.id]">{{ parent.name }}</a>
+                  </div>
+                  <div class="sub-menu" [class.show]="activeParentId === parent.id">
+                    <Ul class="second-ul">
+                     @for (childSecond of parent.secondLevels; track childSecond.id) {
+                    <li >
+                      @if(childSecond.threeLevels.length > 0) {
+                        <div class="list-of d-flex align-items-center">
+                          <span (click)="getMenuShow(childSecond.name, childSecond.id, 'second')"><i class="fa-regular fa-square-plus fa-fw" [class]="activeSecondId === childSecond.id?' fa-square-minus':''"></i></span>
+                          <a [routerLink]="['/allProducts', 'id' + childSecond.id]">{{ childSecond.name }}</a>
+                        </div>
+                        <div class="sub-menu" [class.show]="activeSecondId === childSecond.id">
+                          <ul class="three-ul">
+                            @for (childThree of childSecond.threeLevels; track childThree.id) {
+                            <li >
+                              <a
+                                [routerLink]="['/allProducts', 'id' + childThree.id]"
+                                (click)="getMenuShow(childThree.name, childThree.id, 'third')">
+                                {{ childThree.name }}
+                              </a>
+                            </li>
+                            }
+                          </ul>
+                        </div>
+                      } @else {
+
+                        <a
+                          [routerLink]="['/allProducts', 'id' + childSecond.id]"
+                          >
+                          {{ childSecond.name }}
+                        </a>
+                      }
+
+
+                    </li>
+                    }
+                    </Ul>
+                  </div>
+                } @else {
+                  <a
+                          [routerLink]="['/allProducts', 'id' + parent.id]"
+                          (click)="getMenuShow(parent.name, parent.id, 'third')">
+                          {{ parent.name }}
+                        </a>
+                }
                 </li>
               }
             </ul> -->
+            <ul class="p-0 m-0 list-unstyled parent-ul">
+              @for(parent of categoriesList; track parent.key) {
+                <li >
+                  @if(parent.secondLevels.length> 0 ) {
+                    <!-- المستوى الأول -->
+                  <div class="list-of d-flex align-items-center">
+                    <span (click)="getMenuShow(parent.label, parent.key, 'parent')"><i class="fa-solid  fa-fw" [class]="activeParentId === parent.key?'fa-folder-minus':'fa-folder-plus'"></i></span>
+                    <a (click)="categoryItemSelect(parent.key)">{{ parent.label }}</a>
+                  </div>
+                  <div class="sub-menu" [class.show]="activeParentId === parent.key">
+                    <Ul class="second-ul">
+                    <!-- المستوى الثاني -->
+                     @for (childSecond of parent.secondLevels; track childSecond.key) {
+                    <li >
+                      @if(childSecond.thirdLevels.length > 0) {
+                        <div class="list-of d-flex align-items-center">
+                          <span (click)="getMenuShow(childSecond.label, childSecond.key, 'second')"><i class="fa-regular  fa-fw" [class]="activeSecondId === childSecond.key?' fa-square-minus':'fa-square-plus'"></i></span>
+                          <a (click)="categoryItemSelect(childSecond.key)">{{ childSecond.label }}</a>
+                        </div>
+                        <div class="sub-menu" [class.show]="activeSecondId === childSecond.key">
+                          <ul class="three-ul">
+                            @for (childThree of childSecond.thirdLevels; track childThree.key) {
+                            <li >
+                              <a (click)="categoryItemSelect(childThree.key)">
+                                {{ childThree.label }}
+                              </a>
+                            </li>
+                            }
+                          </ul>
+                        </div>
+                      } @else {
+                                              <!-- المستوى الثاني بدون ثالث -->
 
-              <p-tree  [value]="convertToTreeNodes(categoriesList)" />
+                        <a
+                          [routerLink]="['/allProducts', 'id' + childSecond.key]"
+                          >
+                          {{ childSecond.label }}
+                        </a>
+                      }
+
+
+                    </li>
+                    }
+                    </Ul>
+                  </div>
+                } @else {
+                  <a
+                          [routerLink]="['/allProducts', 'id' + parent.key]"
+                          (click)="getMenuShow(parent.label, parent.key, 'third')">
+                          {{ parent.label }}
+                        </a>
+                }
+                </li>
+              }
+            </ul>
+
+              <!-- <p-tree  [value]="categoriesList" selectionMode="single"
+    [(selection)]="selectedFile" /> -->
 
           </div>
         </div>
@@ -47,18 +148,23 @@
             <h5 class="fw-bold">التصنيفات</h5>
           </div>
           <div class="card-body">
-            @for(rating of [5,4,3,2,1]; track $index) {
-                <li class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" [id]="$index">
-                  <label class="form-check-label" [for]="$index">
-                    @for (star of [].constructor(rating); track $index) {
-                      <i class="fa-solid fa-star text-primary"></i>
-                      } @for (star of [].constructor(5 - rating); track $index) {
-                      <i class="fa-regular fa-star text-primary"></i>
-                      }
-                  </label>
-                </li>
-              }
+              @for(rating of [5,4,3,2,1]; track $index) {
+                  <li class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" [id]="$index">
+                    <label class="form-check-label" [for]="$index">
+
+
+                        @for (star of [].constructor(rating); track $index) {
+                          <i class="fa-solid fa-star text-primary"></i>
+                          } @for (star of [].constructor(5 - rating); track $index) {
+                          <i class="fa-regular fa-star text-primary"></i>
+                          }
+
+                    </label>
+                  </li>
+                }
+
+
           </div>
         </div>
 </aside>

@@ -47,7 +47,7 @@
               type="search"
               class="form-control px-3"
               [(ngModel)]="searchInput"
-              placeholder="البحث عن المنتجات..."  (click)="getProductSearch()"/>
+              placeholder="البحث عن المنتجات..."  (keyup)="getProductSearch()"/>
             <span class="input-group-text btn-secondary text-white cursor-pointer">
               <i class="fa-solid fa-magnifying-glass"></i>
             </span>

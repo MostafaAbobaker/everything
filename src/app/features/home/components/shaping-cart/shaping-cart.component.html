@@ -35,7 +35,7 @@
                   <div class="col-2">
                     <div class="quantity input-group input-group-sm text-center">
                       <button class=" input-group-text"><i class="fa-solid fa-plus" (click)="IncreaseQuantityInCart(cartItem)"></i> </button>
-                      <input type="number" class="form-control text-center" [(ngModel)]="cartItem.quantity" readonly>
+                      <input type="number" class="form-control text-center px-0 rounded-0" [(ngModel)]="cartItem.quantity" readonly>
                       <button class=" input-group-text" (click)="DecreaseQuantityFromCart(cartItem)"><i
                           class="fa-solid fa-minus "></i></button>
                     </div>

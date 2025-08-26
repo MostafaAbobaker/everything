@@ -24,7 +24,6 @@ export class OtpEmailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.idUser);
 
     this.startTimer();
   }
@@ -59,29 +58,24 @@ export class OtpEmailComponent implements OnInit {
       "userId": this.idUser,
       "otp": this.otpForm.get('otp')?.value
     };
-    console.log(otpData); */
 debugger
   this.otpForm.value.userId = this.idUser
     this._authService.checkOTP(this.otpForm.value).subscribe({
       next: (response) => {
         this.successMessage = 'تم التحقق بنجاح';
         this.errorMessage = '';
-        console.log(response);
 
       },
       error: (error) => {
         this.errorMessage = error.error.message || 'حدث خطأ في التحقق';
         this.successMessage = '';
-        console.log(error);
       },
 
     });
     /* this._authService.checkOTP(this.otpForm.value).subscribe({
         next: (response) => {
-          console.log('OTP verification response:', response);
         },
         error: (error) => {
-          console.log(error);
 
           this.errorMessage = error.error.message || 'حدث خطأ أثناء التحقق من رمز OTP.';
         }
