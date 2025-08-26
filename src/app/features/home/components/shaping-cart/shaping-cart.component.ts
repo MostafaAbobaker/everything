@@ -19,7 +19,6 @@ export class ShapingCartComponent {
     private toastr: ToastrService
   ) { }
   ngOnInit(): void {
-
     this.getCartItems();
   }
   getCartItems() {

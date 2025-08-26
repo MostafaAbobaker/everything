@@ -11,7 +11,6 @@ export interface IcartItem {
     "productImage":string
 }
 
-
 export interface PaymentOrder {
     "orderPaymentMethod": number,
     "userId": string,

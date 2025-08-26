@@ -20,7 +20,6 @@ export class ProductComponent implements OnInit {
   imagePath = environment.imagePath;
   @Input() product!: IProductItem
   ngOnInit(): void {
-
   }
   addWish(id: string) {
 
@@ -70,5 +69,4 @@ export class ProductComponent implements OnInit {
       },
     });
   }
-
 }

@@ -15,7 +15,6 @@ export class ShapingCartService {
 
   }
 
-
   addCartItem(product_id:string): Observable<any> {
     return this._http.post('cart',
       {productId: product_id}
