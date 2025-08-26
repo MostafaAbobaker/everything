@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
-import { IProductDetails, ProductProperty } from '../../interface/iproduct-details';
 import { ShapingCartService } from '../../services/shaping-cart.service';
-import { IProductItem } from '../../interface/iproduct';
 import { ToastrService } from 'ngx-toastr';
+import { IProductDetails, ProductProperty } from '../../interface/iproduct-details';
+import { IProductItem } from '../../interface/iproduct';
 
 @Component({
   selector: 'app-product-details',
@@ -21,9 +21,10 @@ export class ProductDetailsComponent {
 
   constructor(
     private _activatedRoute:ActivatedRoute ,
-    private _productsService:ProductsService,
+    private _productsService: ProductsService,
     private _shapingCartService: ShapingCartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _router: Router
   ) {
     this._activatedRoute.paramMap.subscribe(params => {
       this.productUrl = params.get('id')
@@ -52,44 +53,53 @@ getProductDetails() {
         }
       })
     }
-}
-changeOption(name:ProductProperty) {
-  console.log(name);
-  this.defaultValue = name
-}
-
-addToCart(product: IProductDetails) {
-    debugger
-    let cartItem = {
-      "userId": localStorage.getItem('everything-userId') || '',
-      "productId": product.id,
-      "quantity": 1,
-      "featuresId": 0
-    };
-    this._shapingCartService.AddToCart(cartItem).subscribe({
-      next: (result) => {
-        debugger
-        if (result.succeeded) {
-          this.toastr.success(result.message, 'Success', {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-          });
-        }
-        else {
-          this.toastr.warning(result.message, 'warning', {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-          });
-        }
-      },
-      error: (err) => {
-      },
-    });
   }
 
+  addToCart(product: IProductDetails|undefined) {
+      debugger
+      if (!localStorage.getItem('everything-userId')) {
+        this._router.navigate(['/auth/login']);
+        return;
+      }
+      let cartItem = {
+        "userId": localStorage.getItem('everything-userId') || '',
+        "productId": product?.id,
+        "quantity": 1,
+        "featuresId": 0
+      };
+      this._shapingCartService.AddToCart(cartItem).subscribe({
+        next: (result) => {
+          debugger
+          if (result.succeeded) {
+            this.toastr.success(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+          }
+          else {
+            this.toastr.warning(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+          }
+        },
+        error: (err) => {
+          this.toastr.error(err.message, '', {
+            closeButton: true,
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'decreasing',
+          });
+        },
+      });
+    }
+    changeOption(name:ProductProperty) {
+      console.log(name);
+      this.defaultValue = name
+    }
 
 }

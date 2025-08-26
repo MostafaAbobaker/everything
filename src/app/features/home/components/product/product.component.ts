@@ -3,6 +3,7 @@ import { IProduct, IProductItem } from '../../interface/iproduct';
 import { environment } from '../../../../../environments/environment';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -10,7 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private _shapingCartService: ShapingCartService, private toastr: ToastrService) { }
+  constructor(private _shapingCartService: ShapingCartService,
+    private toastr: ToastrService,
+    private _router: Router
+  ) { }
 
   isInFavorite:boolean= false
   imagePath = environment.imagePath;
@@ -26,6 +30,10 @@ export class ProductComponent implements OnInit {
   }
   addToCart(product: IProductItem) {
     debugger
+    if (!localStorage.getItem('everything-userId')) {
+      this._router.navigate(['/auth/login']);
+      return;
+    }
     let cartItem = {
       "userId": localStorage.getItem('everything-userId') || '',
       "productId": product.id,
@@ -53,6 +61,12 @@ export class ProductComponent implements OnInit {
         }
       },
       error: (err) => {
+        this.toastr.error(err.message, '', {
+          closeButton: true,
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+        });
       },
     });
   }
