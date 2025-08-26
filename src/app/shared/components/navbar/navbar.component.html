@@ -21,7 +21,7 @@
           @if(i < 7) {
             <li class="nav-item" (mouseenter)="getDetailsService(itemMenu.key, itemMenu.label)"
             (mouseleave)="getDetailsService(0,'')">
-              <a class="nav-link py-3" [routerLink]="['/category/', itemMenu.key]"> {{itemMenu.label}}</a>
+              <a class="nav-link py-3" [routerLink]="['/allProducts/', 'id'+itemMenu.key]"> {{itemMenu.label}}</a>
               @if(itemMenu.secondLevels.length > 0) {
 
                 <div class="sub-menu " [class.show]="
@@ -33,12 +33,12 @@
                         @for(itemSecondLevel of itemMenu.secondLevels; track itemSecondLevel.key) {
 
                           <div class="col-lg-3">
-                            <a class="h6 fw-blod " [routerLink]="['/category/', itemSecondLevel.key]">{{itemSecondLevel.label}}</a>
+                            <a class="h6 fw-blod " [routerLink]="['/allProducts/', 'id'+itemSecondLevel.key]">{{itemSecondLevel.label}}</a>
                                 <ul class="list-group list-group-flush list-unstyled m-0 p-0">
                                   @for(itemThreeLevel of itemSecondLevel.thirdLevels; track itemThreeLevel.key) {
                                      <li >
                                     <a class="list-group-item list-group-item-action "
-                                    [routerLink]="['/category/', itemThreeLevel.key]">{{itemThreeLevel.label}}</a>
+                                    [routerLink]="['/allProducts/', 'id'+itemThreeLevel.key]">{{itemThreeLevel.label}}</a>
                                   </li>
                                   }
 

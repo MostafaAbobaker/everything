@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductComponent implements OnInit {
 
   constructor(private _shapingCartService: ShapingCartService, private toastr: ToastrService) { }
-  
+
   isInFavorite:boolean= false
   imagePath = environment.imagePath;
   @Input() product!: IProductItem
@@ -53,7 +53,6 @@ export class ProductComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }

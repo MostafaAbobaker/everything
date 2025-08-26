@@ -22,7 +22,6 @@ export class BrandsComponent {
         this.BrandsData = res.data
       },
       error:(err)=>{
-        console.log(err);
       }
     })
   }

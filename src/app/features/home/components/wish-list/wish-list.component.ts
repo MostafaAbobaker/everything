@@ -29,7 +29,6 @@ export class WishListComponent {
         this.WishListItems = result.data;
       },
       error: (err) => {
-        console.log(err);
       },
     });
     /* this._wishlistService.getWishlistItems().subscribe({
@@ -37,7 +36,6 @@ export class WishListComponent {
         this.WishListItems = result.data;
       },
       error: (err) => {
-        console.log(err);
       },
     }); */
   }
@@ -60,16 +58,13 @@ export class WishListComponent {
         });
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }
   deleteItemWishList(id: string) {
     this._wishlistService.removeWishlistItem(id).subscribe({
       next: (res) => {
-        console.log('Delete Item', res);
         this.showWishlist();
-        console.log('+===+=>', res.data.length);
         this.toastr.info(res.message, 'Deleted', {
           closeButton: true,
           timeOut: 3000,
@@ -80,7 +75,6 @@ export class WishListComponent {
         // this.WishListItems = data.data;
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }

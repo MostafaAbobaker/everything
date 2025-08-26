@@ -35,7 +35,6 @@ export class RegisterComponent {
       });
       this._authService.registerFrom(formData).subscribe({
         next: (data) => {
-          console.log('Registration successful' , data);
           this.userId = data.userId; // Assuming the API returns userId
           this.registered =false ;
           this.otpEmail =true;

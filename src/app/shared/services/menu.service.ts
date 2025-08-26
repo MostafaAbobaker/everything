@@ -13,7 +13,7 @@ export class MenuService {
   }
 
   getFilterMenu(): Observable<any> {
-    return this._http.get('Category/GettMenu');
+    return this._http.get('api/CategoryWeb/GetsMenu');
   }
 
 }

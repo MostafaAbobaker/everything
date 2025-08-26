@@ -20,7 +20,6 @@ export class ChangePasswordComponent {
   })
 
   updatePassword() {
-    console.log(this.updatePasswordForm);
     if (this.updatePasswordForm.valid) {
       this._authService.updatePassword(this.updatePasswordForm.value).subscribe({
         next: (result) => {
@@ -32,7 +31,6 @@ export class ChangePasswordComponent {
           });
         },
         error: (err) => {
-          console.log(err.error.message);
           this.toastr.warning(err.error.message, 'error ', {
             closeButton: true,
             timeOut: 3000,

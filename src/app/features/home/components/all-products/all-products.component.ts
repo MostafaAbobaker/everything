@@ -52,12 +52,10 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
         next:(res)=>{
           this.allProducts =res.data
           this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-          console.log(res);
           this.totalRecords =  res.totalCount;
-
-
         },
-        error:(err)=>{console.log(err);
+        error:(err)=>{
+
         }
       })
 
@@ -67,13 +65,11 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
         next:(res)=>{
           this.allProducts =res.data
           this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-          console.log(res);
           this.totalRecords =  res.totalCount;
 
 
         },
-        error:(err)=>{console.log(err);
-        }
+        error:(err)=>{}
       })
     }
 
@@ -100,7 +96,6 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
 
 
     onPageChange(event: PaginatorState) {
-      console.log(event);
         this.page = (event.page?? 0) + 1 ;
         this.first = event.first ?? 0;
         this.rows = event.rows ?? 10;
@@ -108,17 +103,14 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
     }
 
     getSelectBrand(event:number[]){
-      console.log(event);
 
       if(event.length> 0) {
         this._brandsService.getBrandsFilter(event).subscribe({
           next:(res) => {
-            console.log(res);
             this.allProducts = res.data;
             this.totalRecords =  res.totalCount;
           },
           error:(err) => {
-            console.log(err);
 
           }
 
@@ -128,6 +120,20 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
         this.getAllProducts()
       }
     }
-
+    getSelectCategory(event:number) {
+      debugger
+      if(event> 0) {
+        this._productsService.getProductsByCategory(event,this.page, this.rows ).subscribe({
+        next:(res)=>{
+          debugger
+          this.allProducts =res.data
+          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+          this.totalRecords =  res.totalCount;
+        },
+        error:(err)=>{
+        }
+      })
+      }
+    }
 
 }

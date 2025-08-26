@@ -1,4 +1,4 @@
-/* export interface IMenu {
+export interface IMenu {
   key: number
   label: string
   parentId: number
@@ -16,12 +16,12 @@ export interface ThreeLevel {
   key: number
   label: string
   parentId: any
-} */
+}
 
 
 
 
-export interface IMenu {
+/* export interface IMenu {
   id: number
   name: string
   nameAr: string
@@ -45,4 +45,4 @@ export interface ThreeLevel {
   id: number
   name: string
   nameAr: string
-}
+} */
