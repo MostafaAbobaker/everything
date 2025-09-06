@@ -9,7 +9,6 @@ export interface IcartItem {
   featuresId: number;
   addedDate: string;
   productImage: string;
-  productsId: string;
 }
 
 export interface PaymentOrder {
@@ -20,7 +19,14 @@ export interface PaymentOrder {
 export interface Order {
   orderDate: string;
   orderId: number;
-  orderItems: IcartItem[];
+  orderItems: OrderItem[];
   totalPrice: number;
   orderStatus: number;
+}
+
+export interface OrderItem {
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+  itemName:string;
 }
