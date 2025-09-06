@@ -3,7 +3,7 @@ import { ShapingCartService } from '../../services/shaping-cart.service';
 import { IcartItem, PaymentOrder } from '../../interface/icart-item';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../../environments/environment';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-shaping-cart',
   templateUrl: './shaping-cart.component.html',
@@ -16,21 +16,28 @@ export class ShapingCartComponent {
   apiErrorMassage: string = '';
   constructor(private _cartService: ShapingCartService,
     private _shapingCartService: ShapingCartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _router: Router
   ) { }
   ngOnInit(): void {
-
     this.getCartItems();
   }
   getCartItems() {
     debugger
-    this._cartService.GetAllItemsCartByUserId(localStorage.getItem('everything-userId') || '').subscribe({
-      next:(result) => {
-        this.cartItems = result.data;
-        this.totalCartPrice = this.cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
+    this._cartService
+      .GetItemsCartNotPurchased(localStorage.getItem('everything-userId') || '')
+      .subscribe({
+        next: (result) => {
+          this.cartItems = result.data;
+          this.totalCartPrice = this.cartItems.reduce(
+            (sum, item) => sum + item.totalPrice,
+            0
+          );
         },
-      error:(err) => {   this.apiErrorMassage = err.error.message}
-    });
+        error: (err) => {
+          this.apiErrorMassage = err.error.message;
+        },
+      });
   }
   RemoveAllItemsFromCart() {
     this._cartService.RemoveAllItemsFromCart(localStorage.getItem('everything-userId') || '').subscribe({
@@ -187,6 +194,8 @@ export class ShapingCartComponent {
             progressAnimation: 'increasing',
           });
           this.getCartItems();
+          this._router.navigate(['/account/orders']);
+        return;
         }
         else {
           this.toastr.warning(result.message, '', {

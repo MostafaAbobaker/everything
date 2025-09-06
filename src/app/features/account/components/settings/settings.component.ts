@@ -4,7 +4,6 @@ import { Iuser } from '../../interface/iuser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -15,7 +14,6 @@ export class SettingsComponent {
   constructor(private _authService: AuthService, private toastr: ToastrService,
     private _router: Router
   ) { }
-
   userProfileForm: FormGroup = new FormGroup({
     fullName: new FormControl(null, [Validators.required]),
     gender: new FormControl(null, [Validators.required]),

@@ -21,7 +21,6 @@ export class ProductComponent implements OnInit {
 
   @Input() product!: IProductItem
   ngOnInit(): void {
-
   }
   addWish(id: string) {
 
@@ -75,5 +74,4 @@ export class ProductComponent implements OnInit {
     this._router.navigate(['/login'])
   }
   }
-
 }
