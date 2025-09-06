@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IProduct } from '../interface/iproduct';
-import { IcartItem } from '../interface/icart-item';
+import { IcartItem, PaymentOrder } from '../interface/icart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +59,9 @@ export class ShapingCartService {
     return this._http.post(`orders/checkout-session/${id}?url=http://localhost:4200`,
       {shippingAddress: form}
     )
+  }
+  CreateOrder(_paymentOrder: PaymentOrder): Observable<any> {
+    return this._http.post(`api/OrderWeb/CreateOrder?userId=${_paymentOrder.userId}&orderPaymentMethod=${_paymentOrder.orderPaymentMethod}`, {})
   }
 
 }
