@@ -23,7 +23,7 @@ export const globalInterceptor: HttpInterceptorFn = (req, next) => {
       url: `${baseUrl}${req.url}`,
       setHeaders: {
         Authorization: `Bearer ${token}`,
-        'accept-language': 'ar', // Default language
+        'lang': 'ar', // Default language
       }
     });
   } else {
@@ -31,7 +31,7 @@ export const globalInterceptor: HttpInterceptorFn = (req, next) => {
     req = req.clone({
       url: `${baseUrl}${req.url}`,
       setHeaders: {
-        'accept-language': 'ar', // Default language
+        'lang': 'ar', // Default language
       }
     });
   }

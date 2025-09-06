@@ -3,6 +3,7 @@ import { IProduct, IProductItem } from '../../interface/iproduct';
 import { environment } from '../../../../../environments/environment';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -10,10 +11,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private _shapingCartService: ShapingCartService, private toastr: ToastrService) { }
+  isLogin:boolean = localStorage.getItem('everything-token')? true : false
+
+  constructor(private _shapingCartService: ShapingCartService, private toastr: ToastrService ,private _router:Router) { }
 
   isInFavorite:boolean= false
   imagePath = environment.imagePath;
+
+
   @Input() product!: IProductItem
   ngOnInit(): void {
 
@@ -25,6 +30,7 @@ export class ProductComponent implements OnInit {
     return false
   }
   addToCart(product: IProductItem) {
+    if(this.isLogin) {
     debugger
     let cartItem = {
       "userId": localStorage.getItem('everything-userId') || '',
@@ -55,6 +61,9 @@ export class ProductComponent implements OnInit {
       error: (err) => {
       },
     });
+  }else {
+    this._router.navigate(['/login'])
+  }
   }
 
 }

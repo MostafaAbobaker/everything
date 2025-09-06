@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router} from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { IProductDetails, ProductProperty } from '../../interface/iproduct-details';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { IProductItem } from '../../interface/iproduct';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-product-details',
@@ -14,16 +15,19 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductDetailsComponent {
   productUrl:string |null  = null
   errorMassage!:string
-  productDetails ?:IProductDetails
+  productDetails :IProductDetails = {} as IProductDetails
   inputQuantity: number = 1
-
+  imagePath = environment.imagePath;
   defaultValue!:ProductProperty
+
+  isLogin:boolean = localStorage.getItem('everything-token')? true : false
 
   constructor(
     private _activatedRoute:ActivatedRoute ,
     private _productsService:ProductsService,
     private _shapingCartService: ShapingCartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _router:Router
   ) {
     this._activatedRoute.paramMap.subscribe(params => {
       this.productUrl = params.get('id')
@@ -43,6 +47,7 @@ getProductDetails() {
       // this._productsService.getProductDetails(267).subscribe({
         next:(result) => {
           this.productDetails = result.data
+          console.log(this.productDetails);
 
 
         },
@@ -60,6 +65,7 @@ changeOption(name:ProductProperty) {
 
 addToCart(product: IProductDetails) {
     debugger
+    if(this.isLogin) {
     let cartItem = {
       "userId": localStorage.getItem('everything-userId') || '',
       "productId": product.id,
@@ -89,6 +95,9 @@ addToCart(product: IProductDetails) {
       error: (err) => {
       },
     });
+    } else {
+      this._router.navigate(['/login'])
+    }
   }
 
 
