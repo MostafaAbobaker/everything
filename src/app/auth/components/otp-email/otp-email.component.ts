@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-otp-email',
@@ -16,7 +17,7 @@ export class OtpEmailComponent implements OnInit {
   resendDisabled: boolean = true;
 
   @Input() idUser: string = '';
-  constructor(private fb: FormBuilder, private _authService: AuthService) {
+  constructor(private fb: FormBuilder, private _authService: AuthService,private _router: Router) {
     this.otpForm = this.fb.group({
       userId: [this.idUser],
       otp: ['', Validators.required],
@@ -52,7 +53,7 @@ export class OtpEmailComponent implements OnInit {
   }
 
   submitOtp() {
-/*
+
      if (this.otpForm.valid) {
     const otpData = {
       "userId": this.idUser,
@@ -64,7 +65,7 @@ debugger
       next: (response) => {
         this.successMessage = 'تم التحقق بنجاح';
         this.errorMessage = '';
-
+        this._router.navigate(['/login']);
       },
       error: (error) => {
         this.errorMessage = error.error.message || 'حدث خطأ في التحقق';
@@ -81,4 +82,5 @@ debugger
         }
       }); */
   }
+}
 }

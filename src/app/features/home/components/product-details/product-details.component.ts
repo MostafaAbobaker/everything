@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router} from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../../../environments/environment';
 import { IProductDetails, ProductProperty } from '../../interface/iproduct-details';
 import { IProductItem } from '../../interface/iproduct';
 
@@ -14,17 +15,19 @@ import { IProductItem } from '../../interface/iproduct';
 export class ProductDetailsComponent {
   productUrl:string |null  = null
   errorMassage!:string
-  productDetails ?:IProductDetails
+  productDetails :IProductDetails = {} as IProductDetails
   inputQuantity: number = 1
-
+  imagePath = environment.imagePath;
   defaultValue!:ProductProperty
+
+  isLogin:boolean = localStorage.getItem('everything-token')? true : false
 
   constructor(
     private _activatedRoute:ActivatedRoute ,
     private _productsService: ProductsService,
     private _shapingCartService: ShapingCartService,
     private toastr: ToastrService,
-    private _router: Router
+    private _router:Router
   ) {
     this._activatedRoute.paramMap.subscribe(params => {
       this.productUrl = params.get('id')
@@ -44,6 +47,7 @@ getProductDetails() {
       // this._productsService.getProductDetails(267).subscribe({
         next:(result) => {
           this.productDetails = result.data
+          console.log(this.productDetails);
 
 
         },
@@ -53,7 +57,10 @@ getProductDetails() {
         }
       })
     }
-  }
+}
+
+
+
 
   addToCart(product: IProductDetails|undefined) {
       debugger

@@ -8,33 +8,41 @@
         [src]="imagePath + product.image"
         class="w-100 object-fit-contain rounded-0"
         alt="..."
-        height="200px"
+
+        style="min-height: 200px; max-height: 200px;"
       />
     </div>
     <div class="card-body pb-1">
       <small class=" text-secondary">{{ product.categoryName }}</small>
 
       <h6 class="card-title line-clamp-2 fw-bold">{{ product.productName }}</h6>
-
+      <div class="d-flex justify-content-between flex-wrap">
       <div class="rating py-2">
         @if(product.rating) {
 
-          <ng-container>
           <i
             *ngFor="let star of [1, 2, 3, 4, 5]"
             class="fa-regular fa-star "
             [ngClass]="{
               'fa-solid text-warning': star <= product.rating
             }"
-          ></i>
-        </ng-container>
+          >
+        </i>
+
+      } @else {
+        <i
+            *ngFor="let star of [1, 2, 3, 4, 5]"
+            class="fa-regular fa-star "
+
+          >
+        </i>
       }
 
         <!-- <i class="fa fa-star"></i> -->
 
         <!-- {{ product.ratingsAverage }} -->
       </div>
-      <div class="price fw-bold text-end d-flex justify-content-end">
+      <div class="price fw-bold text-end d-flex justify-content-end ms-auto">
         <del class="d-flex justify-content-end align-items-center opacity-50 me-2">
           {{ product.oldPrice| number : "1.0-0" }}
           <img src="../../../../assets/imgs/Saudi_Riyal.svg" alt=""   style="width: 20px; height: 20px;"/>
@@ -43,6 +51,7 @@
           {{ product.price | number : "1.0-0" }}
           <img src="../../../../assets/imgs/Saudi_Riyal.svg" alt=""  class="ms-1" style="width: 20px; height: 20px;"/>
         </span>
+      </div>
       </div>
     </div>
   </a>

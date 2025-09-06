@@ -6,8 +6,8 @@
           <a class="text-success px-2" routerLink="/">الرئيسية</a>
         </li>
         <li class="breadcrumb-item">
-          <a class="text-success px-2" [routerLink]="['/allProducts', 'id'+productDetails?.categoryId]">{{productDetails?.categoryName}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{productDetails?.productName}}</li>
+          <a class="text-success px-2" [routerLink]="['/allProducts', 'id'+productDetails.categoryId]">{{productDetails.categoryName}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{productDetails.productName}}</li>
       </ol>
     </nav>
   </div>
@@ -16,13 +16,18 @@
     <div class="row">
       <div class="col-lg-5">
         <div class="image">
-          <!-- <img [src]="productDetails?.image" alt="" class="w-100 object-fit-contain"> -->
-          <img src="../../../../../assets/imgs/product-img-1.jpg" alt="" class="w-100 object-fit-contain">
+          @if(productDetails.image) {
+
+            <img [src]="imagePath + productDetails.image" alt="" class="w-100 object-fit-contain">
+          } @else {
+
+            <img src="../../../../../assets/imgs/simple.jpg" alt="" class="w-100 object-fit-contain">
+          }
 
           <div id="carouselExampleAutoplaying" class="carousel slide mb-5" data-bs-ride="carousel">
 
             <div class="carousel-inner">
-              <!-- <div class="carousel-item " *ngFor="let image of productDetails?.images!; let i = index" [ngClass]="{'active': i == 0}">
+              <!-- <div class="carousel-item " *ngFor="let image of productDetails.images!; let i = index" [ngClass]="{'active': i == 0}">
                 <img [src]="image" class="d-block w-100 object-fit-contain" height="350">
               </div> -->
               <div class="carousel-item">
@@ -33,7 +38,7 @@
               </div>
             </div>
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleAutoplaying" *ngFor="let image of productDetails?.images!; let i = index" [attr.data-bs-slide-to]="i" [ngClass]="{'active': i == 0}" [attr.aria-current]="i == 0 ? true: false" [attr.aria-label]="i + 1"><img [src]="image" class="d-block w-100 " ></button>
+              <button type="button" data-bs-target="#carouselExampleAutoplaying" *ngFor="let image of productDetails.images!; let i = index" [attr.data-bs-slide-to]="i" [ngClass]="{'active': i == 0}" [attr.aria-current]="i == 0 ? true: false" [attr.aria-label]="i + 1"><img [src]="image" class="d-block w-100 " ></button>
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
@@ -42,38 +47,39 @@
       </div>
       <div class="col-lg-7">
         <div class="content">
-          <small class=" text-success">{{productDetails?.categoryName}}</small>
-          <h1 class="fw-bold mb-0">{{productDetails?.productName}}</h1>
+          <small class=" text-success">{{productDetails.categoryName}}</small>
+          <h1 class="fw-bold mb-0">{{productDetails.productName}}</h1>
           <div class="rating mb-3">
-            @if(productDetails!.rating) {
-              <ng-container>
+            @if(productDetails!.rating > 0) {
                 <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-regular fa-star text-warning " [ngClass]="{
                   'fa-solid ': star <= productDetails!.rating
                 }"></i>
-              </ng-container>
 
-              <span class="ms-2">{{productDetails?.rating}}</span>
-                <span class="ms-2 text-success">({{productDetails?.rating}} reviews)</span>
+
+              <span class="ms-2">{{productDetails.rating}}</span>
+                <span class="ms-2 text-success">({{productDetails.rating}} reviews)</span>
+      } @else {
+        <i *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-regular fa-star text-warning "></i>
       }
-          </div>
+          </div>z
           <div class="price ">
             <span class="h5 fw-bold">
 
-              <span >{{ (productDetails?.price || 0) + (defaultValue?.unitPrice || 0)  | number:'1.0-0'}}
+              <span >{{ (productDetails.price || 0) + (defaultValue?.unitPrice || 0)  | number:'1.0-0'}}
 
                 <svg id="prefix__Layer_1" data-name="Layer 1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39"><defs></defs><path class="prefix__cls-1" d="M699.62 1113.02c-20.06 44.48-33.32 92.75-38.4 143.37l424.51-90.24c20.06-44.47 33.31-92.75 38.4-143.37l-424.51 90.24zM1085.73 895.8c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.33v-135.2l292.27-62.11c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.27V66.13c-50.67 28.45-95.67 66.32-132.25 110.99v403.35l-132.25 28.11V0c-50.67 28.44-95.67 66.32-132.25 110.99v525.69l-295.91 62.88c-20.06 44.47-33.33 92.75-38.42 143.37l334.33-71.05v170.26l-358.3 76.14c-20.06 44.47-33.32 92.75-38.4 143.37l375.04-79.7c30.53-6.35 56.77-24.4 73.83-49.24l68.78-101.97v-.02c7.14-10.55 11.3-23.27 11.3-36.97V743.77l132.25-28.11v270.4l424.53-90.28z"/></svg>
               </span>
               <small class="fw-normal ms-1 fs-6">
                 <del class="text-secondary opacity-50">
 
-                  <span >{{ (productDetails?.oldPrice || 0) + (defaultValue?.unitPrice || 0)| number:'1.0-0'}}
+                  <span >{{ (productDetails.oldPrice || 0) + (defaultValue?.unitPrice || 0)| number:'1.0-0'}}
                     <svg id="prefix__Layer_1" data-name="Layer 1" width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39"><defs></defs><path class="prefix__cls-1" d="M699.62 1113.02c-20.06 44.48-33.32 92.75-38.4 143.37l424.51-90.24c20.06-44.47 33.31-92.75 38.4-143.37l-424.51 90.24zM1085.73 895.8c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.33v-135.2l292.27-62.11c20.06-44.47 33.32-92.75 38.4-143.37l-330.68 70.27V66.13c-50.67 28.45-95.67 66.32-132.25 110.99v403.35l-132.25 28.11V0c-50.67 28.44-95.67 66.32-132.25 110.99v525.69l-295.91 62.88c-20.06 44.47-33.33 92.75-38.42 143.37l334.33-71.05v170.26l-358.3 76.14c-20.06 44.47-33.32 92.75-38.4 143.37l375.04-79.7c30.53-6.35 56.77-24.4 73.83-49.24l68.78-101.97v-.02c7.14-10.55 11.3-23.27 11.3-36.97V743.77l132.25-28.11v270.4l424.53-90.28z"/></svg>
                   </span>
                   </del></small></span>
 
                 </div>
           <div class="description py-3">
-            <p>{{productDetails?.description}}</p>
+            <p>{{productDetails.description}}</p>
           </div>
           <div class="d-flex justify-content-between align-items-center w-100 border-top border-bottom py-3 mb-4">
             <div class="quantity  col-3  ">
@@ -84,6 +90,7 @@
               </div>
             </div>
             <div class="action  col text-end">
+
               <button class="btn btn-success me-2 px-4" (click)="addToCart(productDetails!)"><i class="fa-solid fa-cart-arrow-down me-1"></i> إضف الى السلة</button>
               <button class="favorite btn  me-2 btn-outline-danger"  ><i class="fas fa-heart "></i></button>
             </div>
@@ -91,7 +98,7 @@
           </div>
           <p>
             <span class="w-25 d-inline-block">العلامه التجرية :</span>
-            <strong>{{productDetails?.brandName}}</strong>
+            <strong>{{productDetails.brandName}}</strong>
 
           </p>
           <div class="d-flex justify-content-evenly align-items-center w-100 border-top border-bottom py-3 mb-4">
@@ -113,12 +120,12 @@
           </div>
           <label for="" class="d-block mb-3">خصائص المنتج : </label>
           <div class=" d-flex " style="gap: 16px;">
-            @for(item of productDetails?.productProperties ;track item; let i = $index) {
+            @for(item of productDetails.productProperties ;track item; let i = $index) {
                     <div class="form-check">
                         <input class="form-check-input input-radio" type="radio" name="radioDefault" [value]="'radioDefault'+i" [id]="'radioDefault'+i" [checked]="i == 0" (change)="changeOption(item)" >
                         <label class="form-check-label" [for]="'radioDefault'+i">
                           <div class="card text-center card-properties"
-                    [class.active]="item?.valueName == productDetails"
+
                     (click)="changeOption(item)">
                       <div class="card-header fw-bold">
                        {{item.valueName}}

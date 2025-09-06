@@ -11,13 +11,14 @@ import { Router } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private _shapingCartService: ShapingCartService,
-    private toastr: ToastrService,
-    private _router: Router
-  ) { }
+  isLogin:boolean = localStorage.getItem('everything-token')? true : false
+
+  constructor(private _shapingCartService: ShapingCartService, private toastr: ToastrService ,private _router:Router) { }
 
   isInFavorite:boolean= false
   imagePath = environment.imagePath;
+
+
   @Input() product!: IProductItem
   ngOnInit(): void {
   }
@@ -28,6 +29,7 @@ export class ProductComponent implements OnInit {
     return false
   }
   addToCart(product: IProductItem) {
+    if(this.isLogin) {
     debugger
     if (!localStorage.getItem('everything-userId')) {
       this._router.navigate(['/auth/login']);
@@ -68,5 +70,8 @@ export class ProductComponent implements OnInit {
         });
       },
     });
+  }else {
+    this._router.navigate(['/login'])
+  }
   }
 }
