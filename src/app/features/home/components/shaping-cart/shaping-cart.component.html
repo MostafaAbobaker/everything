@@ -20,7 +20,7 @@
 
             <div class="row-card d-flex border-bottom py-3 align-items-center" *ngFor="let cartItem of cartItems">
               <div class="image me-2">
-                <img [src]="imagePath + cartItem.productImage" [alt]="cartItem.productName" class="img-thumbnail" width="75"
+                <img [src]="imagePath + cartItem.productImage" [alt]="cartItem.productName.split(' ').slice(0,2).join(' ')" class="img-thumbnail" width="75"
                   height="75">
               </div>
               <div class="card-body    w-100">
