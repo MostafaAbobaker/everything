@@ -1,17 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { IProduct, IProductItem } from '../../interface/iproduct';
 import { environment } from '../../../../../environments/environment';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit {
+   private platformId = inject(PLATFORM_ID);
 
-  isLogin:boolean = localStorage.getItem('everything-token')? true : false
+
+  isLogin:boolean = false
 
   constructor(private _shapingCartService: ShapingCartService, private toastr: ToastrService ,private _router:Router) { }
 
@@ -21,6 +24,10 @@ export class ProductComponent implements OnInit {
 
   @Input() product!: IProductItem
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+
+      this.isLogin= localStorage.getItem('everything-token')? true : false
+    }
   }
   addWish(id: string) {
 
@@ -29,6 +36,7 @@ export class ProductComponent implements OnInit {
     return false
   }
   addToCart(product: IProductItem) {
+    if (isPlatformBrowser(this.platformId)) {
     if(this.isLogin) {
     debugger
     if (!localStorage.getItem('everything-userId')) {
@@ -72,6 +80,7 @@ export class ProductComponent implements OnInit {
     });
   }else {
     this._router.navigate(['/login'])
+  }
   }
   }
 }

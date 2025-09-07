@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Route, Router} from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { ShapingCartService } from '../../services/shaping-cart.service';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../../environments/environment';
 import { IProductDetails, ProductProperty } from '../../interface/iproduct-details';
 import { IProductItem } from '../../interface/iproduct';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -19,8 +20,10 @@ export class ProductDetailsComponent {
   inputQuantity: number = 1
   imagePath = environment.imagePath;
   defaultValue!:ProductProperty
+   private platformId = inject(PLATFORM_ID);
 
-  isLogin:boolean = localStorage.getItem('everything-token')? true : false
+
+  isLogin:boolean = false
 
   constructor(
     private _activatedRoute:ActivatedRoute ,
@@ -36,7 +39,10 @@ export class ProductDetailsComponent {
   ngOnInit(): void {
 
     this.getProductDetails()
+    if(isPlatformBrowser(this.platformId)) {
 
+      this.isLogin= localStorage.getItem('everything-token')? true : false
+    }
   }
 
 
@@ -64,6 +70,7 @@ getProductDetails() {
 
   addToCart(product: IProductDetails|undefined) {
       debugger
+      if(isPlatformBrowser(this.platformId)) {
       if (!localStorage.getItem('everything-userId')) {
         this._router.navigate(['/auth/login']);
         return;
@@ -103,6 +110,7 @@ getProductDetails() {
           });
         },
       });
+      }
     }
     changeOption(name:ProductProperty) {
       console.log(name);

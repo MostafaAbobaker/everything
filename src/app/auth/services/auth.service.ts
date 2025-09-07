@@ -8,7 +8,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
 
 
-  // isLogged = new BehaviorSubject<boolean>(localStorage.getItem('token')? true: false);
   constructor(private _http: HttpClient) {
 
   }
@@ -55,8 +54,5 @@ export class AuthService {
   getRegions(): Observable<any> {
     return this._http.get('Accounts/get-all-region')
   }
-  logout() {
-    // localStorage.removeItem('token');
-    // this.isLogged.next(false);
-  }
+
 }

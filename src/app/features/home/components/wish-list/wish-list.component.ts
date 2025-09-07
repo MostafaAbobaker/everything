@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { IProduct, IProductItem } from '../../interface/iproduct';
 import { WishListService } from '../../services/wish-list.service';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductsService } from '../../services/products.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-wish-list',
@@ -12,6 +13,8 @@ import { ProductsService } from '../../services/products.service';
 })
 export class WishListComponent {
   WishListItems?: IProductItem[];
+   private platformId = inject(PLATFORM_ID);
+
   constructor(
     private _wishlistService: WishListService,
     private _cartService: ShapingCartService,
@@ -41,25 +44,29 @@ export class WishListComponent {
   }
 
   addToCart(product: IProductItem) {
-    let cartItem = {
-      "userId": localStorage.getItem('everything-userId') || '',
-      "productId": product.id,
-      "quantity": 1,
-      "featuresId": 0
-    };
-    this._cartService.AddToCart(cartItem).subscribe({
-      next: (result) => {
-        this._cartService.CartItemNumber.next(result.numOfCartItems);
-        this.toastr.success(result.message, 'Add Product', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'increasing',
-        });
-      },
-      error: (err) => {
-      },
-    });
+    if (!isPlatformBrowser(this.platformId)) {
+
+      let cartItem = {
+        "userId": localStorage.getItem('everything-userId') || '',
+        "productId": product.id,
+        "quantity": 1,
+        "featuresId": 0
+      };
+      this._cartService.AddToCart(cartItem).subscribe({
+        next: (result) => {
+          this._cartService.CartItemNumber.next(result.numOfCartItems);
+          this.toastr.success(result.message, 'Add Product', {
+            closeButton: true,
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'increasing',
+          });
+        },
+        error: (err) => {
+        },
+      });
+    }
+
   }
   deleteItemWishList(id: string) {
     this._wishlistService.removeWishlistItem(id).subscribe({

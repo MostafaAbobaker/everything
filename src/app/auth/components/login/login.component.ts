@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   mailExample= 'meyorat307@ronete.com'
+   private platformId = inject(PLATFORM_ID);
 
   typePassword:boolean = true;
 
@@ -28,15 +30,20 @@ export class LoginComponent {
     password: new FormControl(null,[Validators.required]),
   })
 
+
+
   login() {
     if(this.loginForm.valid) {
       this.destroyLogin = this._authService.loginForm(this.loginForm.value).subscribe({
         next:(data) => {
           this._router.navigate(['/home']);
           // this._authService.isLogged.next(true);
-          localStorage.setItem('everything-token', data.token);
-          localStorage.setItem('everything-email', data.email);
-          localStorage.setItem('everything-userId', data.userId);
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem('everything-token', data.token);
+            localStorage.setItem('everything-email', data.email);
+            localStorage.setItem('everything-userId', data.userId);
+
+          }
 
 
 

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { ShapingCartService } from '../../services/shaping-cart.service';
 import { IcartItem, PaymentOrder } from '../../interface/icart-item';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../../environments/environment';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-shaping-cart',
   templateUrl: './shaping-cart.component.html',
@@ -14,6 +15,8 @@ export class ShapingCartComponent {
   cartItems: IcartItem[] = [];
   totalCartPrice: number = 0;
   apiErrorMassage: string = '';
+   private platformId = inject(PLATFORM_ID);
+
   constructor(private _cartService: ShapingCartService,
     private _shapingCartService: ShapingCartService,
     private toastr: ToastrService,
@@ -24,51 +27,57 @@ export class ShapingCartComponent {
   }
   getCartItems() {
     debugger
-    this._cartService
-      .GetItemsCartNotPurchased(localStorage.getItem('everything-userId') || '')
-      .subscribe({
-        next: (result) => {
-          this.cartItems = result.data;
-          this.totalCartPrice = this.cartItems.reduce(
-            (sum, item) => sum + item.totalPrice,
-            0
-          );
-        },
-        error: (err) => {
-          this.apiErrorMassage = err.error.message;
-        },
-      });
+    if(isPlatformBrowser(this.platformId)) {
+
+      this._cartService
+        .GetItemsCartNotPurchased(localStorage.getItem('everything-userId') || '')
+        .subscribe({
+          next: (result) => {
+            this.cartItems = result.data;
+            this.totalCartPrice = this.cartItems.reduce(
+              (sum, item) => sum + item.totalPrice,
+              0
+            );
+          },
+          error: (err) => {
+            this.apiErrorMassage = err.error.message;
+          },
+        });
+    }
   }
   RemoveAllItemsFromCart() {
-    this._cartService.RemoveAllItemsFromCart(localStorage.getItem('everything-userId') || '').subscribe({
-      next: (result) => {
-        if (result.succeeded) {
-          this.toastr.success(result.message, '', {
+    if(!isPlatformBrowser(this.platformId)) {
+
+      this._cartService.RemoveAllItemsFromCart(localStorage.getItem('everything-userId') || '').subscribe({
+        next: (result) => {
+          if (result.succeeded) {
+            this.toastr.success(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+            this.getCartItems();
+          }
+          else {
+            this.toastr.warning(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+          }
+        },
+        error: (err) => {
+          this.toastr.error(err.message, '', {
             closeButton: true,
             timeOut: 3000,
             progressBar: true,
-            progressAnimation: 'increasing',
-          });
-          this.getCartItems();
-        }
-        else {
-          this.toastr.warning(result.message, '', {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
+            progressAnimation: 'decreasing',
           });
         }
-      },
-      error: (err) => {
-        this.toastr.error(err.message, '', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'decreasing',
-        });
-      }
-    });
+      });
+    }
   }
   RemoveItemFromCart(cartItem: IcartItem) {
     this._cartService.RemoveItemFromCart(cartItem).subscribe({
@@ -102,6 +111,7 @@ export class ShapingCartComponent {
     });
   }
   IncreaseQuantityInCart(cartItem: IcartItem) {
+    if(!isPlatformBrowser(this.platformId)) {
     let cartObj = {
       "userId": localStorage.getItem('everything-userId') || '',
       "productId": cartItem.productId,
@@ -138,82 +148,89 @@ export class ShapingCartComponent {
         });
       },
     });
+    }
   }
   DecreaseQuantityFromCart(cartItem: IcartItem) {
-    let cartObj = {
-      "userId": localStorage.getItem('everything-userId') || '',
-      "productId": cartItem.productId,
-      "quantity": 1,
-      "featuresId": cartItem.featuresId
-    };
-    this._cartService.DecreaseQuantityOfItemFromCart(cartObj).subscribe({
-      next: (result) => {
-        if (result.succeeded) {
-          this.toastr.success(result.message, '', {
+    if(!isPlatformBrowser(this.platformId)) {
+      let cartObj = {
+        "userId": localStorage.getItem('everything-userId') || '',
+        "productId": cartItem.productId,
+        "quantity": 1,
+        "featuresId": cartItem.featuresId
+      };
+      this._cartService.DecreaseQuantityOfItemFromCart(cartObj).subscribe({
+        next: (result) => {
+          if (result.succeeded) {
+            this.toastr.success(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+            this.getCartItems();
+          }
+          else {
+            this.toastr.warning(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+          }
+        },
+        error: (err) => {
+          this.toastr.error(err.message, '', {
             closeButton: true,
             timeOut: 3000,
             progressBar: true,
-            progressAnimation: 'increasing',
-          });
-          this.getCartItems();
-        }
-        else {
-          this.toastr.warning(result.message, '', {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
+            progressAnimation: 'decreasing',
           });
         }
-      },
-      error: (err) => {
-        this.toastr.error(err.message, '', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'decreasing',
-        });
-      }
-    });
+      });
+
+    }
   }
 
   pay() {
-    debugger
-    let _paymentOrder: PaymentOrder = {
-      userId: localStorage.getItem('everything-userId') || '',
-      orderPaymentMethod:1
-    };
+    if(!isPlatformBrowser(this.platformId)) {
+      debugger
+      let _paymentOrder: PaymentOrder = {
+        userId: localStorage.getItem('everything-userId') || '',
+        orderPaymentMethod:1
+      };
 
-    this._cartService.CreateOrder(_paymentOrder).subscribe({
-      next: (result) => {
-        if (result.succeeded) {
-          this.toastr.success(result.message, '', {
+      this._cartService.CreateOrder(_paymentOrder).subscribe({
+        next: (result) => {
+          if (result.succeeded) {
+            this.toastr.success(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+            this.getCartItems();
+            this._router.navigate(['/account/orders']);
+          return;
+          }
+          else {
+            this.toastr.warning(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+          }
+        },
+        error: (err) => {
+          this.toastr.error(err.message, '', {
             closeButton: true,
             timeOut: 3000,
             progressBar: true,
-            progressAnimation: 'increasing',
-          });
-          this.getCartItems();
-          this._router.navigate(['/account/orders']);
-        return;
-        }
-        else {
-          this.toastr.warning(result.message, '', {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
+            progressAnimation: 'decreasing',
           });
         }
-      },
-      error: (err) => {
-        this.toastr.error(err.message, '', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'decreasing',
-        });
-      }
-    });
+      });
+
+    }
   }
 }

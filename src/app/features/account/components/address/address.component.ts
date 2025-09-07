@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Iaddress } from '../../interface/iaddress';
@@ -15,6 +15,7 @@ export class AddressComponent {
   addressList: Iaddress[] = [];
   defaultAddresses: Iaddress[] = [];
   regionsOptions: Iregion[] = [];
+
   constructor(
     private _authService: AuthService,
     private toastr: ToastrService,
@@ -31,16 +32,20 @@ export class AddressComponent {
     this.getUserAddress();
   }
   getUserAddress(): void {
+
     if (isPlatformBrowser(this.platformId)) {
-      const userId = localStorage.getItem('everything-userId') || '';
-      this._authService.getAllUserAddress(userId).subscribe({
-        next: (result) => {
-          this.addressList = result.filter((item: any) => item.isdefault == false);
-          this.defaultAddresses = result.filter((item: any) => item.isdefault);
-        },
-        error: (err) => {
-        },
-      });
+      if (isPlatformBrowser(this.platformId)) {
+
+        const userId = localStorage.getItem('everything-userId') || '';
+        this._authService.getAllUserAddress(userId).subscribe({
+          next: (result) => {
+            this.addressList = result.filter((item: any) => item.isdefault == false);
+            this.defaultAddresses = result.filter((item: any) => item.isdefault);
+          },
+          error: (err) => {
+          },
+        });
+      } else {}
     }
   }
   updateUserAddress(addressDetail: any): void {
@@ -71,23 +76,26 @@ export class AddressComponent {
   }
   addNewAddress(): void {
     debugger
-    this.addressForm.value.userId = localStorage.getItem('everything-userId') || '';
-    this.addressForm.value.maplat = '0';
-    this.addressForm.value.maplong = '0';
-    this.addressForm.value.isdefault = true;
-    this._authService.addAddress(this.addressForm.value).subscribe({
-      next: (result) => {
-        this.getUserAddress();
-        this.toastr.success(result.message, 'New Address Added', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'increasing',
-        });
-      },
-      error: (err) => {
-      },
-    });
+    if (isPlatformBrowser(this.platformId)) {
+
+      this.addressForm.value.userId = localStorage.getItem('everything-userId') || '';
+      this.addressForm.value.maplat = '0';
+      this.addressForm.value.maplong = '0';
+      this.addressForm.value.isdefault = true;
+      this._authService.addAddress(this.addressForm.value).subscribe({
+        next: (result) => {
+          this.getUserAddress();
+          this.toastr.success(result.message, 'New Address Added', {
+            closeButton: true,
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'increasing',
+          });
+        },
+        error: (err) => {
+        },
+      });
+    }
   };
   deleteAddress(addressId: number): void {
     this._authService.deleteUserAddress(addressId).subscribe({
