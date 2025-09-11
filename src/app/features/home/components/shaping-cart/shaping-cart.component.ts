@@ -111,47 +111,47 @@ export class ShapingCartComponent {
     });
   }
   IncreaseQuantityInCart(cartItem: IcartItem) {
-    if(!isPlatformBrowser(this.platformId)) {
-    let cartObj = {
-      "userId": localStorage.getItem('everything-userId') || '',
-      "productId": cartItem.productId,
-      "quantity": 1,
-      "featuresId": cartItem.featuresId
-    };
-    this._shapingCartService.IncreaseQuantityOfItemInCart(cartObj).subscribe({
-      next: (result) => {
-        if (result.succeeded) {
-          this.toastr.success(result.message, '', {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-          });
-          this.getCartItems();
-        }
-        else {
-          this.toastr.warning(result.message, '', {
-            closeButton: true,
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-          });
-        }
+    // if(!isPlatformBrowser(this.platformId)) {
+      let cartObj = {
+        "userId": localStorage.getItem('everything-userId') || '',
+        "productId": cartItem.productId,
+        "quantity": 1,
+        "featuresId": cartItem.featuresId
+      };
+      this._shapingCartService.IncreaseQuantityOfItemInCart(cartObj).subscribe({
+        next: (result) => {
+          if (result.succeeded) {
+            this.toastr.success(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+            this.getCartItems();
+          }
+          else {
+            this.toastr.warning(result.message, '', {
+              closeButton: true,
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+          }
 
-      },
-      error: (err) => {
-        this.toastr.error(err.message, '', {
-          closeButton: true,
-          timeOut: 3000,
-          progressBar: true,
-          progressAnimation: 'decreasing',
-        });
-      },
-    });
-    }
+        },
+        error: (err) => {
+          this.toastr.error(err.message, '', {
+            closeButton: true,
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'decreasing',
+          });
+        },
+      });
+    // }
   }
   DecreaseQuantityFromCart(cartItem: IcartItem) {
-    if(!isPlatformBrowser(this.platformId)) {
+    // if(!isPlatformBrowser(this.platformId)) {
       let cartObj = {
         "userId": localStorage.getItem('everything-userId') || '',
         "productId": cartItem.productId,
@@ -188,11 +188,11 @@ export class ShapingCartComponent {
         }
       });
 
-    }
+    // }
   }
 
   pay() {
-    if(!isPlatformBrowser(this.platformId)) {
+    // if(!isPlatformBrowser(this.platformId)) {
       debugger
       let _paymentOrder: PaymentOrder = {
         userId: localStorage.getItem('everything-userId') || '',
@@ -231,6 +231,6 @@ export class ShapingCartComponent {
         }
       });
 
-    }
+    // }
   }
 }

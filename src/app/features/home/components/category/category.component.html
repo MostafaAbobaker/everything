@@ -12,15 +12,15 @@
 </a>
  -->
 
-<a class="category-item" [routerLink]="['/allProducts', 'id'+category.id]">
+<a class="category-item" [routerLink]="['/allProducts', 'id'+category.key]">
   <div class="image">
     <img
       [src]="imagePath + category.imageUrl"
-      [alt]="category.nameAr"
-      [title]="category.nameAr"
+      [alt]="category.label"
+      [title]="category.label"
       class="w-100 h-100 object-fit-cover"
       height="200px"
     />
   </div>
-  <h6 class="text-center fw-bold py-3">{{ category.nameAr }}</h6>
+  <h6 class="text-center fw-bold py-3">{{ category.label }}</h6>
 </a>

@@ -95,12 +95,7 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
 
 
 
-    onPageChange(event: PaginatorState) {
-        this.page = (event.page?? 0) + 1 ;
-        this.first = event.first ?? 0;
-        this.rows = event.rows ?? 10;
-        this.getAllProducts()
-    }
+
 
     getSelectBrand(event:number[]){
 
@@ -135,5 +130,13 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
       })
       }
     }
+       onPageChange(event: PaginatorState) {
+        console.log(event);
 
+        debugger
+        this.page = (event.page?? 0) + 1 ;
+        this.first = event.first ?? 0;
+        this.rows = event.rows ?? 10;
+        this.getAllProducts()
+    }
 }
