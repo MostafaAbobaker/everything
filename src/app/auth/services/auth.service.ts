@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   forgotPassword(form:object): Observable<any> {
-    return this._http.post('auth/forgotPasswords', form)
+    return this._http.post('Accounts/forget-password', form);
   }
   checkOTP(form:any): Observable<any> {
     return this._http.post('Accounts/CheckOTP', form)

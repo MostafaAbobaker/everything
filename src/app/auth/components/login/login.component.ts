@@ -33,6 +33,7 @@ export class LoginComponent {
 
 
   login() {
+    debugger
     if(this.loginForm.valid) {
       this.destroyLogin = this._authService.loginForm(this.loginForm.value).subscribe({
         next:(data) => {
@@ -48,8 +49,9 @@ export class LoginComponent {
 
 
         },
-        error:(err) => {
-          // this.apiErrorMassage = err.error.message;
+        error: (err) => {
+          debugger
+           this.apiErrorMassage = err.error.message;
 
         }
 

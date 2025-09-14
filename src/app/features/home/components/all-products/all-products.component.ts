@@ -7,74 +7,70 @@ import { BrandsService } from '../../services/brands.service';
 import { ActivatedRoute } from '@angular/router';
 
 interface PageEvent {
-    first: number;
-    rows: number;
-    page: number;
-    pageCount: number;
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
 }
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
-  styleUrl: './all-products.component.scss'
+  styleUrl: './all-products.component.scss',
 })
-export class AllProductsComponent implements OnInit{
-  allProducts:IProductItem[] = [];
+export class AllProductsComponent implements OnInit {
+  allProducts: IProductItem[] = [];
   originalProductList: IProductItem[] = [];
   stateSorting: string = 'الأكثر رواجاً'; // Default sorting state
 
-page : number = 1
-first: number = 0;
+  page: number = 1;
+  first: number = 0;
 
-rows: number = 10;
-totalRecords: number = 0;
+  rows: number = 10;
+  totalRecords: number = 0;
 
+  productId: string | null = '';
 
-productUrl:string |null = '' ;
-
-constructor(private _productsService:ProductsService , private _brandsService:BrandsService,
-  private _activatedRoute:ActivatedRoute
-){
-}
+  constructor(
+    private _productsService: ProductsService,
+    private _brandsService: BrandsService,
+    private _activatedRoute: ActivatedRoute
+  ) {}
   ngOnInit(): void {
-    this._activatedRoute.paramMap.subscribe(params => {
-      this.productUrl = params.get('id')
+    this._activatedRoute.paramMap.subscribe((params) => {
+      this.productId = params.get('id');
+      this.getAllProducts();
     });
 
-    this.getAllProducts();
+
   }
-
-
 
   getAllProducts() {
-    if(this.productUrl?.includes('id')) {
-      let id = this.productUrl.replace('id','')
-      this._productsService.getProductsByCategory(+id,this.page, this.rows ).subscribe({
-        next:(res)=>{
-          this.allProducts =res.data
-          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-          this.totalRecords =  res.totalCount;
-        },
-        error:(err)=>{
-
-        }
-      })
-
-    } else if(this.productUrl?.includes('search')){
-      let name = this.productUrl.replace('search', '');
-      this._productsService.getProductsByName(name,this.page, this.rows ).subscribe({
-        next:(res)=>{
-          this.allProducts =res.data
-          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-          this.totalRecords =  res.totalCount;
-
-
-        },
-        error:(err)=>{}
-      })
+    if (this.productId?.includes('id')) {
+      let id = this.productId.replace('id', '');
+      this._productsService
+        .getProductsByCategory(+id, this.page, this.rows)
+        .subscribe({
+          next: (res) => {
+            this.allProducts = res.data;
+            this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+            this.totalRecords = res.totalCount;
+          },
+          error: (err) => {},
+        });
+    } else if (this.productId?.includes('search')) {
+      let name = this.productId.replace('search', '');
+      this._productsService
+        .getProductsByName(name, this.page, this.rows)
+        .subscribe({
+          next: (res) => {
+            this.allProducts = res.data;
+            this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+            this.totalRecords = res.totalCount;
+          },
+          error: (err) => {},
+        });
     }
-
   }
-
 
   sortProducts(type: string) {
     if (type === 'highLow') {
@@ -91,52 +87,42 @@ constructor(private _productsService:ProductsService , private _brandsService:Br
     }
   }
 
-
-
-
-
-
-
-    getSelectBrand(event:number[]){
-
-      if(event.length> 0) {
-        this._brandsService.getBrandsFilter(event).subscribe({
-          next:(res) => {
-            this.allProducts = res.data;
-            this.totalRecords =  res.totalCount;
-          },
-          error:(err) => {
-
-          }
-
-        })
-
-      } else {
-        this.getAllProducts()
-      }
-    }
-    getSelectCategory(event:number) {
-      debugger
-      if(event> 0) {
-        this._productsService.getProductsByCategory(event,this.page, this.rows ).subscribe({
-        next:(res)=>{
-          debugger
-          this.allProducts =res.data
-          this.originalProductList = [...this.allProducts]; // Store the original list for sorting
-          this.totalRecords =  res.totalCount;
+  getSelectBrand(event: number[]) {
+    if (event.length > 0) {
+      this._brandsService.getBrandsFilter(event).subscribe({
+        next: (res) => {
+          this.allProducts = res.data;
+          this.totalRecords = res.totalCount;
         },
-        error:(err)=>{
-        }
-      })
-      }
+        error: (err) => {},
+      });
+    } else {
+      this.getAllProducts();
     }
-       onPageChange(event: PaginatorState) {
-        console.log(event);
+  }
+  getSelectCategory(event: number) {
+    debugger;
+    if (event > 0) {
+      this._productsService
+        .getProductsByCategory(event, this.page, this.rows)
+        .subscribe({
+          next: (res) => {
+            debugger;
+            this.allProducts = res.data;
+            this.originalProductList = [...this.allProducts]; // Store the original list for sorting
+            this.totalRecords = res.totalCount;
+          },
+          error: (err) => {},
+        });
+    }
+  }
+  onPageChange(event: PaginatorState) {
+    console.log(event);
 
-        debugger
-        this.page = (event.page?? 0) + 1 ;
-        this.first = event.first ?? 0;
-        this.rows = event.rows ?? 10;
-        this.getAllProducts()
-    }
+    debugger;
+    this.page = (event.page ?? 0) + 1;
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? 10;
+    this.getAllProducts();
+  }
 }
