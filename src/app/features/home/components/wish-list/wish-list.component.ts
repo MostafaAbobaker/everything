@@ -5,6 +5,7 @@ import { ShapingCartService } from '../../services/shaping-cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductsService } from '../../services/products.service';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-wish-list',
@@ -14,7 +15,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class WishListComponent {
   WishListItems?: IProductItem[];
    private platformId = inject(PLATFORM_ID);
-
+  imagePath = environment.imagePath;
   constructor(
     private _wishlistService: WishListService,
     private _cartService: ShapingCartService,

@@ -76,10 +76,10 @@ getProductDetails() {
         return;
       }
       let cartItem = {
-        "userId": localStorage.getItem('everything-userId') || '',
-        "productId": product?.id,
-        "quantity": 1,
-        "featuresId": 0
+        userId: localStorage.getItem('everything-userId') || '',
+        productId: product?.id,
+        quantity: this.inputQuantity,
+        featuresId: 0,
       };
       this._shapingCartService.AddToCart(cartItem).subscribe({
         next: (result) => {
