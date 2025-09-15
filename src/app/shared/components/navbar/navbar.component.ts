@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
 
 
   getMenuItems() {
-
+debugger
     this._menuService.getMenuItems().subscribe({
       next:(result) => {
 

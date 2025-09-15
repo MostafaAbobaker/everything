@@ -1,0 +1,44 @@
+
+    .container {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .sad-paper {
+        font-size: 80px;
+        margin-bottom: 20px;
+    }
+
+
+    h1 {
+        font-size: 6rem;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 1.25rem;
+        margin: 10px 0 30px;
+    }
+
+
+    /* Responsive Breakpoints */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 4rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 3rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }

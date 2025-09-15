@@ -9,6 +9,7 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
 import { CategoriesPageComponent } from './components/categories-page/categories-page.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { authGuard } from '../../auth/Guards/auth.guard';
+import { NotFound404Component } from '../../shared/components/not-found404/not-found404.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent, children:[
@@ -22,7 +23,7 @@ const routes: Routes = [
     { path: 'wish-list',canActivate:[authGuard], component:WishListComponent},
     { path: 'account',loadChildren:() => import ('../account/account.module').then((m) => m.AccountModule)},
 
-
+    { path: '**', component: NotFound404Component }
   ] }, // Default route
 
 ];
