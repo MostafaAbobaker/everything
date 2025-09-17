@@ -1,44 +1,67 @@
+.container {
+    text-align: center;
+    padding: 20px;
+}
 
-    .container {
-        text-align: center;
-        padding: 20px;
-    }
-
-    .sad-paper {
-        font-size: 80px;
-        margin-bottom: 20px;
-    }
+.sad-paper {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
 
 
+h1 {
+    font-size: 6rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.25rem;
+    margin: 10px 0 30px;
+}
+
+a.button {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1rem;
+    color: #fff;
+    background: #4CAF50;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+a.button:hover {
+    background-color: #43a047;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
     h1 {
-        font-size: 6rem;
-        margin: 0;
-        font-weight: bold;
+        font-size: 4rem;
     }
 
     p {
-        font-size: 1.25rem;
-        margin: 10px 0 30px;
+        font-size: 1rem;
     }
 
+    a.button {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}
 
-    /* Responsive Breakpoints */
-    @media (max-width: 768px) {
-        h1 {
-            font-size: 4rem;
-        }
-
-        p {
-            font-size: 1rem;
-        }
+@media (max-width: 480px) {
+    h1 {
+        font-size: 3rem;
     }
 
-    @media (max-width: 480px) {
-        h1 {
-            font-size: 3rem;
-        }
-
-        p {
-            font-size: 0.9rem;
-        }
+    p {
+        font-size: 0.9rem;
     }
+
+    a.button {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+}
